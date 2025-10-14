@@ -58,6 +58,7 @@ import MyAccountOrdersPage from "./pages/dashboard/my-account-orders";
 import MyAccountAddressPage from "./pages/dashboard/my-account-address";
 import MyAccountEditPage from "./pages/dashboard/my-account-edit";
 import ScrollTopBehaviour from "./components/common/ScrollToTopBehaviour";
+import DealerDetails from "@/pages/product-detail/dealerDetails.jsx";
 
 function App() {
   const { pathname } = useLocation();
@@ -175,7 +176,9 @@ function App() {
               <Route path="home-10" element={<HomePage10 />} />
               <Route path="home-11" element={<HomePage11 />} />
 
-              <Route path="shop-default" element={<ShopDefaultPage />} />
+              <Route path="shop/:id/:title" element={<ShopFullwidthPage />} />
+              <Route path="shop" element={<ShopFullwidthPage />} />
+                {/*<Route path="shop-default" element={<ShopDefaultPage />} />*/}
               <Route
                 path="shop-right-sidebar"
                 element={<ShopRightSidebarPage />}
@@ -192,10 +195,15 @@ function App() {
               {/*  path="product-detail/:id"*/}
               {/*  element={<ProductDetailPage />}*/}
               {/*/>*/}
-                <Route
-                    path="product-detail/:id"
-                    element={<ProductInnerCircleZoomPage />}
-                />
+              <Route
+                  path="product-detail/:id"
+                  element={<ProductInnerCircleZoomPage />}
+              />
+              <Route
+                  path="dealer-detail/:id"
+                  element={<DealerDetails />}
+              />
+
               <Route
                 path="product-thumbs-right"
                 element={<ProductThumbsRightPage />}

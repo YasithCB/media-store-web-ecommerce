@@ -1,7 +1,7 @@
 import { useContextElement } from "@/context/Context";
 
 export default function AddToCompare({ productId, tooltipClass = "" }) {
-  const { addToCompareItem, isAddedtoCompareItem } = useContextElement();
+  const { addToCompareItem, isAddedToCompareItem } = useContextElement();
   return (
     <a
       href="#compare"
@@ -12,7 +12,7 @@ export default function AddToCompare({ productId, tooltipClass = "" }) {
       <span className="icon icon-compare1" />
       <span className="tooltip">
         {" "}
-        {isAddedtoCompareItem(productId) ? "Compared" : "Compare"}
+        {isAddedToCompareItem(productId) ? "Compared" : "Compare"}
       </span>
     </a>
   );

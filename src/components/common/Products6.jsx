@@ -8,11 +8,13 @@ import AddToQuickview from "./AddToQuickview";
 import AddToCompare from "./AddToCompare";
 import {getImageUrl} from "@/utlis/util.js";
 import {useEquipmentsTopRated} from "@/hooks/useEquipments.js";
+import LoadingDots from "@/components/custom/loadingDots.jsx";
+import React from "react";
 
 export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
     const { data, loading, error } = useEquipmentsTopRated();
 
-    if (loading) return <p>Loading top rated...</p>;
+    if (loading) return <LoadingDots />;
     if (error) return <p>Error: {error}</p>;
 
     console.log('Deal Of The Day')
@@ -71,7 +73,7 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
           >
             {data.map((product) => (
             // {products7.map((product) => (
-              <SwiperSlide className="swiper-slide" key={product.post_id}>
+              <SwiperSlide className="swiper-slide" key={product.id}>
                 <div
                   className={`card-product style-img-border ${
                     product.animation ? "wow " + product.animation : ""
@@ -80,7 +82,7 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
                 >
                   <div className="card-product-wrapper">
                     <Link
-                      to={`/product-detail/${product.post_id}`}
+                      to={`/product-detail/${product.id}`}
                       className="product-img"
                     >
                       <img

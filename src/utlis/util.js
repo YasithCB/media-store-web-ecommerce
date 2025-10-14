@@ -10,3 +10,14 @@ export const getImageUrl = (path) => {
     return `${BASEURL}/${cleanPath}`;
 };
 
+export const getFirstPhoto = (photos) => {
+    if (!photos) return null;
+    try {
+        const arr = typeof photos === 'string' ? JSON.parse(photos) : photos;
+        return Array.isArray(arr) && arr.length > 0 ? arr[0] : null;
+    } catch {
+        return null;
+    }
+};
+
+

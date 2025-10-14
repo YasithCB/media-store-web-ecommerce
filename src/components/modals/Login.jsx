@@ -1,68 +1,157 @@
-import React from "react";
+import React, {useState} from "react";
+import {login} from "@/api/auth.js";
+import {useContextElement} from "@/context/Context.jsx";
 
 export default function Login() {
-  return (
-    <div className="modal modalCentered fade modal-log" id="log">
-      <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [showLogin, setShowLogin] = useState(true);
+    const { setCurrentUser, setAuthToken, currentUser,  authToken, logout } = useContextElement();
+
+
+    const handleLogin = async (e) => {
+        e.preventDefault(); // prevent form reload
+        setError("");
+        setLoading(true);
+
+        try {
+            const res = await login({ email, password });
+
+            // Example: if your API returns token or user data
+            if (res?.['status'] === "success") {
+                // Store user object / token
+                localStorage.setItem("user", JSON.stringify(res['data']['user']));
+                localStorage.setItem("auth_token", res['data']['token']);
+
+                // ✅ set global values
+                setCurrentUser(res['data']['user']); // keep it as an object
+                setAuthToken(res['data']['token']);
+
+                // Reload home page
+                window.location.href = "/";
+            } else {
+                throw new Error(res.message || "Login failed");
+            }
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+    <>
+        { showLogin &&
+            <div className="modal modalCentered fade modal-log" id="log">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
           <span
-            className="icon icon-close btn-hide-popup"
-            data-bs-dismiss="modal"
+              className="icon icon-close "
+              data-bs-dismiss="modal"
+              onClick={() => setShowLogin(false)}
           />
-          <div className="modal-log-wrap list-file-delete">
-            <h5 className="title fw-semibold">Log In</h5>
-            <form action="#" className="form-log">
-              <div className="form-content">
-                <fieldset>
-                  <label className="fw-semibold body-md-2">
-                    {" "}
-                    Phone number *{" "}
-                  </label>
-                  <input type="text" placeholder="Your email" />
-                </fieldset>
-                <fieldset>
-                  <label className="fw-semibold body-md-2"> Password * </label>
-                  <input type="password" placeholder="Enter your password" />
-                </fieldset>
-                <a href="#" className="link text-end body-text-3">
-                  Forgot password ?
-                </a>
-              </div>
-              <button type="submit" className="tf-btn w-100 text-white">
-                Login
-              </button>
-              <p className="body-text-3 text-center">
-                Don't you have an account?
-                <a
-                  href="#register"
-                  data-bs-toggle="modal"
-                  className="text-primary"
-                >
-                  Register
-                </a>
-              </p>
-            </form>
-            <div className="orther-log text-center">
-              <span className="br-line bg-gray-5" />
-              <p className="caption text-main-2">Or login with</p>
+
+                        { currentUser ?
+                            (
+                                <div className="modal-log-wrap list-file-delete">
+                                    <h5 className="title fw-semibold">Welcome!</h5>
+                                    <div className="form-content text-center">
+                                        <p className="body-md-2">
+                                            Hello, <strong>{currentUser.name}</strong>
+                                        </p>
+                                        <button
+                                            className="tf-btn w-100 mt-3"
+                                            onClick={() => {
+                                                const confirmLogout = window.confirm("Are you sure you want to logout?");
+                                                if (confirmLogout) logout(); // only call logout if confirmed
+                                            }}
+                                        >
+                                            Logout
+                                        </button>
+
+                                    </div>
+                                </div>
+                            )
+                            :
+                            (
+                                <div className="modal-log-wrap list-file-delete">
+                                    <h5 className="title fw-semibold">Log In</h5>
+                                    <form onSubmit={handleLogin} className="form-log">
+                                        <div className="form-content">
+                                            <fieldset>
+                                                <label className="fw-semibold body-md-2">Email *</label>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Your email"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    required
+                                                />
+                                            </fieldset>
+
+                                            <fieldset>
+                                                <label className="fw-semibold body-md-2">Password *</label>
+                                                <input
+                                                    type="password"
+                                                    placeholder="Enter your password"
+                                                    value={password}
+                                                    onChange={(e) => setPassword(e.target.value)}
+                                                    required
+                                                />
+                                            </fieldset>
+
+                                            {error && <p className="text-danger">{error}</p>}
+
+                                            <a href="#" className="link text-end body-text-3">
+                                                Forgot password?
+                                            </a>
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            className="tf-btn w-100"
+                                            disabled={loading}
+                                        >
+                                            {loading ? "Logging in..." : "Login"}
+                                        </button>
+
+                                        <p className="body-text-3 text-center">
+                                            Don't you have an account?
+                                            <a href="#register" data-bs-toggle="modal" className="fw-bold ms-2">
+                                                Register
+                                            </a>
+                                        </p>
+                                    </form>
+                                    <div className="orther-log text-center">
+                                        <span className="br-line bg-gray-5" />
+                                        <p className="caption text-main-2">Or login with</p>
+                                    </div>
+                                    <ul className="list-log">
+                                        <li>
+                                            <a href="#" className="tf-btn-primary btn-line w-100">
+                                                <i className="icon icon-facebook-2 " />
+                                                <span className="body-md-2 fw-semibold">Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" className="tf-btn-primary btn-line w-100">
+                                                <i className="icon icon-google" />
+                                                <span className="body-md-2 fw-semibold">Google</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )
+
+                        }
+                    </div>
+                </div>
             </div>
-            <ul className="list-log">
-              <li>
-                <a href="#" className="tf-btn btn-line w-100">
-                  <i className="icon icon-facebook-2" />
-                  <span className="body-md-2 fw-semibold">Facebook</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="tf-btn btn-line w-100">
-                  <i className="icon icon-google" />
-                  <span className="body-md-2 fw-semibold">Google</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+        }
+    </>
   );
 }
+

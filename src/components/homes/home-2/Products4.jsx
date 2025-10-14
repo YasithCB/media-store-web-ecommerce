@@ -110,14 +110,14 @@ export default function Products4() {
             }}
           >
             {data.map((dealer) => (
-              <SwiperSlide className="swiper-slide" key={dealer.dealer_id}>
+              <SwiperSlide className="swiper-slide" key={dealer.id}>
                 <div
                   className={`card-product style-img-border wow ${dealer.animation}`}
                   data-wow-delay={dealer.wowDelay}
                 >
                   <div className="card-product-wrapper">
                     <Link
-                      to={`/product-detail/${dealer.dealer_id}`}
+                      to={`/dealer-detail/${dealer.id}`}
                       className="product-img"
                     >
                       <img
@@ -127,7 +127,6 @@ export default function Products4() {
                         width={dealer.width}
                         height={dealer.height}
                       />
-                        {console.log(getImageUrl(dealer.logo || ""))}
                       <img
                         className="img-hover lazyload"
                         src={getImageUrl(dealer.logo || "")}
@@ -140,24 +139,24 @@ export default function Products4() {
                       <li>
                         <AddToCart
                           tooltipClass="tooltip-left"
-                          productId={dealer.dealer_id}
+                          productId={dealer.id}
                         />
                       </li>
                       <li className="d-none d-sm-block wishlist">
                         <AddToWishlist
                           tooltipClass="tooltip-left"
-                          productId={dealer.dealer_id}
+                          productId={dealer.id}
                         />
                       </li>
                       <li>
                         <AddToQuickview
-                          productId={dealer.dealer_id}
+                          productId={dealer.id}
                           tooltipClass="tooltip-left"
                         />
                       </li>
                       <li className="d-none d-sm-block">
                         <AddToCompare
-                          productId={dealer.dealer_id}
+                          productId={dealer.id}
                           tooltipClass="tooltip-left"
                         />
                       </li>
@@ -170,7 +169,7 @@ export default function Products4() {
                           {dealer.subcategory_title}
                         </p>
                         <Link
-                          to={`/product-detail/${dealer.dealer_id}`}
+                          to={`/product-detail/${dealer.id}`}
                           className="name-product body-md-2 fw-semibold text-secondary link"
                         >
                           {dealer.title}

@@ -106,7 +106,7 @@ export default function Products2() {
               }}
             >
               {filtered.map((product) => (
-                <SwiperSlide className="swiper-slide" key={product.post_id}>
+                <SwiperSlide className="swiper-slide" key={product.id}>
                   <div
                     className={`card-product style-img-border wow ${product.animation}`}
                     data-wow-delay={product.wowDelay}
@@ -136,24 +136,24 @@ export default function Products2() {
                         <li>
                           <AddToCart
                             tooltipClass="tooltip-left"
-                            productId={product.post_id}
+                            productId={product.id}
                           />
                         </li>
                         <li className="d-none d-sm-block wishlist">
                           <AddToWishlist
                             tooltipClass="tooltip-left"
-                            productId={product.post_id}
+                            productId={product.id}
                           />
                         </li>
                         <li>
                           <AddToQuickview
-                            productId={product.post_id}
+                            productId={product.id}
                             tooltipClass="tooltip-left"
                           />
                         </li>
                         <li className="d-none d-sm-block">
                           <AddToCompare
-                            productId={product.post_id}
+                            productId={product.id}
                             tooltipClass="tooltip-left"
                           />
                         </li>
@@ -166,7 +166,7 @@ export default function Products2() {
                               {product.sub_category_title}
                           </p>
                           <Link
-                            to={`/product-detail/${product.post_id}`}
+                            to={`/product-detail/${product.id}`}
                             className="name-product body-md-2 fw-semibold text-secondary link"
                           >
                             {product.title}

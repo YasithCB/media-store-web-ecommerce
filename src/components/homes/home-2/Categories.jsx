@@ -41,12 +41,12 @@ export default function Categories() {
                 className="wg-cls hover-img type-abs wow fadeInUp"
                 data-wow-delay="0s"
               >
-                <Link to={`/shop-default`} className="img-style d-block">
+                <Link to={`/shop/${item.id}/${item.title}`} className="img-style d-block">
                   <img alt="" src={item.img} width={700} height={224} />
                 </Link>
                 <div className="content">
                   <h6 className="fw-normal">
-                    <Link to={`/shop-default`} className="link">
+                    <Link to={`/shop/${item.id}/${item.title}`} className="link">
                       {item.title}
                     </Link>
                   </h6>

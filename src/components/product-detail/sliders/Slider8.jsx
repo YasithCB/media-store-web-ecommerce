@@ -5,19 +5,13 @@ import PhotoSwipeLightbox from "photoswipe/lightbox";
 import Drift from "drift-zoom";
 import {getImageUrl} from "@/utlis/util.js";
 
-const productImages = [
-  { src: "/images/product/product-detail-1.jpg", color: "gray" },
-  { src: "/images/product/product-detail-2.jpg", color: "gray" },
-  { src: "/images/product/product-detail-3.jpg", color: "gray" },
-  { src: "/images/product/product-detail-4.jpg", color: "gray" },
-  { src: "/images/product/product-detail-5.jpg", color: "beige" },
-  { src: "/images/product/product-detail-6.jpg", color: "beige" },
-];
-
 export default function Slider8({imgList}) {
   const [swiperThumb, setSwiperThumb] = useState(null);
   const lightboxRef = useRef(null);
-  useEffect(() => {
+
+    const list = typeof imgList === "string" ? JSON.parse(imgList) : imgList;
+
+    useEffect(() => {
     // Initialize PhotoSwipeLightbox
     const lightbox = new PhotoSwipeLightbox({
       gallery: "#gallery-swiper-started",
@@ -35,6 +29,7 @@ export default function Slider8({imgList}) {
       lightbox.destroy();
     };
   }, []);
+
   useEffect(() => {
     // Function to initialize Drift
     // Function to check window width
@@ -76,7 +71,7 @@ export default function Slider8({imgList}) {
         thumbs={{ swiper: swiperThumb }}
         modules={[Thumbs]}
       >
-        {imgList.map((item, i) => (
+        {list.map((item, i) => (
           <SwiperSlide className="swiper-slide" data-color="gray">
             <a
               href={getImageUrl(item)}
@@ -125,24 +120,24 @@ export default function Slider8({imgList}) {
             },
           }}
         >
-          {imgList.map((item, index) => (
-            <SwiperSlide
-              key={index}
-              className="swiper-slide stagger-item"
-              // data-color={black}
-            >
-              <div className="item">
-                <img
-                  className="lazyload"
-                  data-src={getImageUrl(item)}
-                  alt=""
-                  src={getImageUrl(item)}
-                  width={652}
-                  height={652}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
+            {list.map((item, index) => (
+                <SwiperSlide
+                    key={index}
+                    className="swiper-slide stagger-item"
+                    // data-color={black}
+                >
+                    <div className="item">
+                        <img
+                            className="lazyload"
+                            data-src={getImageUrl(item)}
+                            alt=""
+                            src={getImageUrl(item)}
+                            width={652}
+                            height={652}
+                        />
+                    </div>
+                </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </>

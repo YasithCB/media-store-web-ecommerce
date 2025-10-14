@@ -1,15 +1,14 @@
 import BrandsSlider from "@/components/common/BrandsSlider";
-import RecentProducts from "@/components/common/RecentProducts";
 import Footer1 from "@/components/footers/Footer1";
 import Header4 from "@/components/headers/Header4";
 import Description from "@/components/product-detail/Description";
 import Details8 from "@/components/product-detail/Details8";
 import Relatedproducts from "@/components/product-detail/Relatedproducts";
-import SimilerProducts from "@/components/product-detail/SimilerProducts";
 import React from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, useLocation, useParams} from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import {usePostsById} from "@/hooks/usePosts.js";
+import LoadingDots from "@/components/custom/loadingDots.jsx";
 
 const metadata = {
   title: "Product Details || MediaStore - MultiMedia eCommerce Website",
@@ -19,7 +18,8 @@ export default function ProductInnerCircleZoomPage() {
     const { id } = useParams(); // 👈 catch ID from URL
     const { data, loading, error } = usePostsById(id);
 
-    if (loading) return <p>Loading Product Details...</p>;
+
+    if (loading) return <LoadingDots />;
     if (error) return <p>Error: {error}</p>;
 
     console.log("Fetched product:", data);

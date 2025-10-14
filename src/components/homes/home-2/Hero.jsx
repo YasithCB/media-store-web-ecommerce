@@ -9,8 +9,16 @@ import AddToCompare from "@/components/common/AddToCompare";
 
 import BannerImage1 from '/images/banner/banner-31.webp'
 import MainItem1 from '/images/item/camera-4.png'
+import {useEquipmentsTopRated} from "@/hooks/useEquipments.js";
+import LoadingDots from "@/components/custom/loadingDots.jsx";
+import {getImageUrl} from "@/utlis/util.js";
 
 export default function Hero() {
+    const { data, loading, error } = useEquipmentsTopRated();
+
+    if (loading) return <LoadingDots />;
+    if (error) return <p>Error: {error}</p>;
+
   return (
     <section
       className="has-bg-img"
@@ -53,9 +61,9 @@ export default function Hero() {
             </div>
           </div>
           <div className="other-item flex-xl-column flex-md-row">
-            {products6.map((product) => (
-              <div
-                className={`card-product style-row row-small-2 ${product.additionalClasses}`}
+            {data.slice(0, 2).map((product) => (
+                <div
+                className={`card-product style-row row-small-2 bg-white radius-8`}
                 key={product.id}
               >
                 <div className="card-product-wrapper">
@@ -65,7 +73,7 @@ export default function Hero() {
                   >
                     <img
                       className="img-product lazyload"
-                      src={product.imgSrc}
+                      src={getImageUrl(product.photos?.[0] || "")}
                       alt="image-product"
                       width={product.width}
                       height={product.height}
@@ -95,10 +103,14 @@ export default function Hero() {
                     <div className="group-btn">
                       <p className="price-wrap fw-medium">
                         <span className="new-price price-text fw-medium">
-                          ${product.price.toFixed(3)}
+                          {product.price != null && !isNaN(product.price)
+                              ? parseFloat(product.price).toFixed(2)
+                              : "N/A"}
                         </span>
                         <span className="old-price body-md-2 text-main-2">
-                          ${product.oldPrice.toFixed(3)}
+                           {product.price != null && !isNaN(product.price)
+                               ? parseFloat(product.price).toFixed(2)
+                               : "N/A"}
                         </span>
                       </p>
                       <ul className="list-product-btn flex-row">

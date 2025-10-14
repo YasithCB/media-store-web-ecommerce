@@ -30,20 +30,22 @@ export const categoryItems = [
 ];
 
 export const categories = [
-  { img: "/images/collection/cls-grid-1.jpg", title: "Top Dealers" },
+  { img: "/images/collection/cls-grid-1.jpg", title: "Top Dealers", id: "top-dealers" },
   {
     img: "/images/collection/cls-grid-2.jpg",
     title: "Equipments & Machinery",
+      id: 'equipments'
   },
-  { img: "/images/collection/cls-grid-3.jpg", title: "Used Items" },
-  { img: "/images/collection/cls-grid-4.jpg", title: "Rent Items" },
-  { img: "/images/collection/cls-grid-5.jpg", title: "Video & Camera Equipment" },
-  { img: "/images/collection/cls-grid-6.jpg", title: "Audio & Sound Equipment" },
+  { img: "/images/collection/cls-grid-3.jpg", title: "Used Items", id: 'used-items' },
+  { img: "/images/collection/cls-grid-4.jpg", title: "Rent Items" , id: 'rent-items'},
+  { img: "/images/collection/cls-grid-5.jpg", title: "Video & Camera Equipment", id: 'video-camera' },
+  { img: "/images/collection/cls-grid-6.jpg", title: "Audio & Sound Equipment", id: 'audio-sound' },
   {
     img: "/images/collection/cls-grid-7.jpg",
     title: "Job Seeking",
+      id: 'job-seeking'
   },
-  { img: "/images/collection/cls-grid-8.jpg", title: "Job Hiring" },
+  { img: "/images/collection/cls-grid-8.jpg", title: "Job Hiring", id: 'job-hiring' },
 ];
 
 export const categories2 = [

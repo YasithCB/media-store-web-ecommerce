@@ -6,15 +6,12 @@ import React from "react";
 import Categories from "@/components/homes/home-2/Categories";
 import Products1 from "@/components/common/Products6";
 import Banner from "@/components/homes/home-2/Banner";
-import Products2 from "@/components/homes/home-2/Products2";
 import Products3 from "@/components/homes/home-2/Products3";
 import Banner2 from "@/components/homes/home-2/Banner2";
 import Products4 from "@/components/homes/home-2/Products4";
 import Products5 from "@/components/common/Products2";
 import Collections from "@/components/homes/home-2/Collections";
-import RecentProducts from "@/components/common/RecentProducts";
 import Footer1 from "@/components/footers/Footer1";
-
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {

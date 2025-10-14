@@ -1,9 +1,15 @@
 import React from "react";
 import CurrencySelect from "../common/CurrencySelect";
 import LanguageSelect from "../common/LanguageSelect";
+import {getAuth} from "@/data/data.js";
+import MetaComponent from "@/components/common/MetaComponent.jsx";
+import Header2 from "@/components/headers/Header2.jsx";
+import {useContextElement} from "@/context/Context.jsx";
 
 export default function Topbar1({ parentClass = "tf-topbar line-bt" }) {
-  return (
+    const { currentUser } = useContextElement();
+
+    return (
     <div className={`${parentClass} bg-dark`}>
       <div className="container">
         <div className="row">
@@ -47,8 +53,13 @@ export default function Topbar1({ parentClass = "tf-topbar line-bt" }) {
                 className="tf-cur-item link"
               >
                 <i className="icon-user-3 text-cl-2" />
-                <span className="body-small text-cl-2">My account:</span>
-                <i className="icon-arrow-down text-cl-2" />
+                <span className="body-small text-cl-2">
+                    {currentUser ? (
+                        <p>Welcome, {currentUser['name']}</p>
+                    ) : (
+                        <p>Login</p>
+                    )}
+                </span>
               </a>
             </div>
           </div>

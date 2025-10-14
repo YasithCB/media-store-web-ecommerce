@@ -10,10 +10,12 @@ import AddToQuickview from "../common/AddToQuickview";
 import AddToCompare from "../common/AddToCompare";
 import {useEquipmentBySubCategoryId} from "@/hooks/useEquipments.js";
 import {getImageUrl} from "@/utlis/util.js";
+import {useDealersBySubCategoryId} from "@/hooks/useDealers.js";
+import LoadingDots from "@/components/custom/loadingDots.jsx";
 export default function Relatedproducts({categoryId, subCategoryId}) {
-    const { data, loading, error } = categoryId === 1 ? useEquipmentBySubCategoryId(subCategoryId) : null;
+    const { data, loading, error } = categoryId === 1 ? useEquipmentBySubCategoryId(subCategoryId) : useDealersBySubCategoryId(subCategoryId);
 
-    if (loading) return <p>Loading Video & Cameras...</p>;
+    if (loading) return <LoadingDots />;
     if (error) return <p>Error: {error}</p>;
 
     console.log(`Relatedproducts : ${subCategoryId}`)
@@ -60,85 +62,82 @@ export default function Relatedproducts({categoryId, subCategoryId}) {
           }}
           spaceBetween={15}
         >
-          {data.map((product) => (
-            <SwiperSlide className="swiper-slide" key={product.id}>
-              <div className="card-product">
-                <div className="card-product-wrapper">
-                  <Link
-                    to={`/product-detail/${product.post_id}`}
-                    className="product-img"
+          {data.map((dealer) => (
+              <SwiperSlide className="swiper-slide" key={dealer.id}>
+                  <div
+                      className={`card-product style-img-border wow ${dealer.animation}`}
+                      data-wow-delay={dealer.wowDelay}
                   >
-                    <img
-                      className="img-product lazyload"
-                      src={getImageUrl(product.photos[0])}
-                      alt={product.title}
-                      width={500}
-                      height={500}
-                    />
-                    <img
-                      className="img-hover lazyload"
-                      src={getImageUrl(product.photos[0])}
-                      alt={`${product.title} hover`}
-                      width={500}
-                      height={500}
-                    />
-                  </Link>
-                  <ul className="list-product-btn">
-                    <li>
-                      <AddToCart
-                        tooltipClass="tooltip-left"
-                        productId={product.post_id}
-                      />
-                    </li>
-                    <li className="d-none d-sm-block wishlist">
-                      <AddToWishlist
-                        tooltipClass="tooltip-left"
-                        productId={product.post_id}
-                      />
-                    </li>
-                    <li>
-                      <AddToQuickview
-                        productId={product.post_id}
-                        tooltipClass="tooltip-left"
-                      />
-                    </li>
-                    <li className="d-none d-sm-block">
-                      <AddToCompare
-                        productId={product.post_id}
-                        tooltipClass="tooltip-left"
-                      />
-                    </li>
-                  </ul>
-                </div>
-                <div className="card-product-info">
-                  <div className="box-title">
-                    <div className="d-flex flex-column">
-                      <p className="caption text-main-2 font-2">
-                        {product.sub_category_title}
-                      </p>
-                      <Link
-                        to={`/product-detail/${product.id}`}
-                        className="name-product body-md-2 fw-semibold text-secondary link"
-                      >
-                        {product.title}
-                      </Link>
-                    </div>
-                    <p className="price-wrap fw-medium">
-                      <span className="new-price price-text fw-medium mb-0">
-                        {product.price != null && !isNaN(product.price)
-                            ? parseFloat(product.price).toFixed(2)
-                            : "N/A"}
-                      </span>
-                      <span className="old-price body-md-2 text-main-2 fw-normal">
-                        {product.price != null && !isNaN(product.price)
-                            ? parseFloat(product.price).toFixed(2)
-                            : "N/A"}
-                      </span>
-                    </p>
+                      <div className="card-product-wrapper">
+                          <Link
+                              to={`/dealer-detail/${dealer.id}`}
+                              className="product-img"
+                          >
+                              <img
+                                  className="img-product lazyload"
+                                  src={getImageUrl(dealer.photos[0] || "")}
+                                  alt="image-product"
+                                  width={dealer.width}
+                                  height={dealer.height}
+                              />
+                              <img
+                                  className="img-hover lazyload"
+                                  src={getImageUrl(dealer.photos[0] || "")}
+                                  alt="image-product"
+                                  width={dealer.width}
+                                  height={dealer.height}
+                              />
+                          </Link>
+                          <ul className="list-product-btn">
+                              <li>
+                                  <AddToCart
+                                      tooltipClass="tooltip-left"
+                                      productId={dealer.id}
+                                  />
+                              </li>
+                              <li className="d-none d-sm-block wishlist">
+                                  <AddToWishlist
+                                      tooltipClass="tooltip-left"
+                                      productId={dealer.id}
+                                  />
+                              </li>
+                              <li>
+                                  <AddToQuickview
+                                      productId={dealer.id}
+                                      tooltipClass="tooltip-left"
+                                  />
+                              </li>
+                              <li className="d-none d-sm-block">
+                                  <AddToCompare
+                                      productId={dealer.id}
+                                      tooltipClass="tooltip-left"
+                                  />
+                              </li>
+                          </ul>
+                      </div>
+                      <div className="card-product-info">
+                          <div className="box-title">
+                              <div className="d-flex flex-column">
+                                  <p className="caption text-main-2 font-2">
+                                      {dealer.subcategory_title}
+                                  </p>
+                                  <Link
+                                      to={`/product-detail/${dealer.id}`}
+                                      className="name-product body-md-2 fw-semibold text-secondary link"
+                                  >
+                                      {dealer.title}
+                                  </Link>
+                              </div>
+                              <p className="caption text-main-2 font-2">
+                                  {dealer.description?.length > 150
+                                      ? dealer.description.substring(0, 150) + "..."
+                                      : dealer.description}
+                              </p>
+
+                          </div>
+                      </div>
                   </div>
-                </div>
-              </div>
-            </SwiperSlide>
+              </SwiperSlide>
           ))}
           <div className="d-flex d-lg-none sw-dot-default sw-pagination-products justify-content-center spd67" />
         </Swiper>

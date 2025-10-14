@@ -5,14 +5,15 @@ import React from "react";
 import AddToCart from "../common/AddToCart";
 import AddToWishlist from "../common/AddToWishlist";
 import AddToQuickview from "../common/AddToQuickview";
+import {getFirstPhoto, getImageUrl} from "@/utlis/util.js";
+import {StarRating} from "@/components/custom/starRating.jsx";
 
-export default function ProductCards3({ product }) {
+export default function ProductCards3({ item }) {
   const {
     addToWishlist,
-    isAddedtoWishlist,
+    isAddedToWishlist,
     addToCompareItem,
-    isAddedtoCompareItem,
-
+    isAddedToCompareItem,
     addProductToCart,
     isAddedToCartProducts,
   } = useContextElement();
@@ -20,10 +21,10 @@ export default function ProductCards3({ product }) {
   return (
     <div className="card-product">
       <div className="card-product-wrapper">
-        <Link to={`/product-detail/${product.id}`} className="product-img">
+        <Link to={`/product-detail/${item.id}`} className="product-img">
           <img
             className="img-product ls-is-cached lazyloaded"
-            src={product.imgSrc}
+            src={item.category_id === 2 ? getImageUrl(item.logo) : getImageUrl(getFirstPhoto(item.photos) || "")}
             data-=""
             alt="image-product"
             width={500}
@@ -31,7 +32,7 @@ export default function ProductCards3({ product }) {
           />
           <img
             className="img-hover ls-is-cached lazyloaded"
-            src={product.imgHover}
+            src={item.category_id === 2 ? getImageUrl(item.logo) : getImageUrl(getFirstPhoto(item.photos) || "")}
             data-=""
             alt="image-product"
             width={500}
@@ -40,19 +41,19 @@ export default function ProductCards3({ product }) {
         </Link>
         <ul className="list-product-btn top-0 end-0">
           <li>
-            <AddToCart productId={product.id} tooltipClass="tooltip-left" />
+            <AddToCart productId={item.id} tooltipClass="tooltip-left" />
           </li>
           <li className="wishlist">
-            <AddToWishlist productId={product.id} tooltipClass="tooltip-left" />
+            <AddToWishlist productId={item.id} tooltipClass="tooltip-left" />
           </li>
           <li>
             <AddToQuickview
-              productId={product.id}
+              productId={item.id}
               tooltipClass="tooltip-left"
             />
           </li>
         </ul>
-        {product.hotSale && (
+        {item.hotSale && (
           <div className="box-sale-wrap pst-default">
             <p className="small-text">Sale</p>
             <p className="title-sidebar-2">70%</p>
@@ -64,19 +65,23 @@ export default function ProductCards3({ product }) {
           <div>
             <p className="product-tag caption text-main-2 d-none">Headphone</p>
             <Link
-              to={`/product-detail/${product.id}`}
+              to={`/product-detail/${item.id}`}
               className="name-product body-md-2 fw-semibold text-secondary link"
             >
-              {product.title}
+              {item.title}
             </Link>
           </div>
           <p className="price-wrap fw-medium">
             <span className="new-price price-text fw-medium">
-              ${product.price.toFixed(3)}
+              AED {item.price != null && !isNaN(item.price)
+                  ? parseFloat(item.price).toFixed(2)
+                  : "N/A"}
             </span>
-            {product.oldPrice && (
+            {item.oldPrice && (
               <span className="old-price body-md-2 text-main-2">
-                ${product.oldPrice.toFixed(3)}
+                AED {item.price != null && !isNaN(item.price)
+                    ? parseFloat(item.price).toFixed(2)
+                    : "N/A"}
               </span>
             )}
           </p>
@@ -84,55 +89,44 @@ export default function ProductCards3({ product }) {
         <div className="box-infor-detail">
           <ul className="list-computer-memory">
             <li>
-              <p className="caption">RAM 8GB</p>
+              <p className="caption">{item.address_line1}</p>
             </li>
-            <li>
-              <p className="caption">SSD 512 GB</p>
-            </li>
+              {item.is_used === 1 && (
+                  <li>
+                      <p className="caption">Used</p>
+                  </li>
+              )}
+              {item.is_rent === 1 && (
+                  <li>
+                      <p className="caption">Rent</p>
+                  </li>
+              )}
           </ul>
           <ul className="list-infor-fearture">
             <li>
-              <p className="caption name-feature">Screen Size:</p>
-              <p className="caption property">13 Inches</p>
+              <p className="caption name-feature">Brand:</p>
+              <p className="caption property">{item.brand}</p>
             </li>
             <li>
-              <p className="caption name-feature">Operating System:</p>
-              <p className="caption property">Mac OS</p>
+              <p className="caption name-feature">Model:</p>
+              <p className="caption property">{item.model}</p>
             </li>
             <li>
-              <p className="caption name-feature">Graphics Card:</p>
-              <p className="caption property">Integrated</p>
-            </li>
-            <li>
-              <p className="caption name-feature">Processor Count:</p>
-              <p className="caption property">4</p>
+              <p className="caption name-feature">Condition:</p>
+              <p className="caption property">{item.item_condition}</p>
             </li>
           </ul>
-          <div className="star-review flex-wrap">
-            <ul className="list-star">
-              <li>
-                <i className="icon-star" />
-              </li>
-              <li>
-                <i className="icon-star" />
-              </li>
-              <li>
-                <i className="icon-star" />
-              </li>
-              <li>
-                <i className="icon-star text-main-4" />
-              </li>
-              <li>
-                <i className="icon-star text-main-4" />
-              </li>
-            </ul>
-            <p className="caption text-main-2">(74)</p>
-          </div>
+            { item.rating &&
+                <div className="star-review flex-wrap">
+                    <StarRating rating={item.rating} />
+                    <p className="caption text-main-2">{item.rating} ({Math.floor(Math.random() * 51) + 50})</p>
+                </div>
+            }
           <a
             href="#compare"
             data-bs-toggle="offcanvas"
             className="tf-btn-icon style-2"
-            onClick={() => addToCompareItem(product.id)}
+            onClick={() => addToCompareItem(item.id)}
           >
             <svg
               width={18}
@@ -151,7 +145,7 @@ export default function ProductCards3({ product }) {
             </svg>
             <span className="body-text-3 fw-normal">
               {" "}
-              {isAddedtoCompareItem(product.id) ? "Compared" : "Compare"}
+              {isAddedToCompareItem(item.id) ? "Compared" : "Compare"}
             </span>
           </a>
         </div>
@@ -161,10 +155,10 @@ export default function ProductCards3({ product }) {
           href="#shoppingCart"
           data-bs-toggle="offcanvas"
           className="tf-btn btn-line w-100"
-          onClick={() => addProductToCart(product.id)}
+          onClick={() => addProductToCart(item.id)}
         >
           <span>
-            {isAddedToCartProducts(product.id)
+            {isAddedToCartProducts(item.id)
               ? "Already Added"
               : "Add to Cart"}
           </span>
@@ -175,7 +169,7 @@ export default function ProductCards3({ product }) {
             href="#compare"
             data-bs-toggle="offcanvas"
             className="tf-btn-icon style-2 type-black"
-            onClick={() => addToCompareItem(product.id)}
+            onClick={() => addToCompareItem(item.id)}
           >
             <svg
               width={18}
@@ -194,12 +188,12 @@ export default function ProductCards3({ product }) {
             </svg>
             <span className="body-text-3 fw-normal">
               {" "}
-              {isAddedtoCompareItem(product.id) ? "Compared" : "Compare"}
+              {isAddedToCompareItem(item.id) ? "Compared" : "Compare"}
             </span>
           </a>
           <a
             href="#"
-            onClick={() => addToWishlist(product.id)}
+            onClick={() => addToWishlist(item.id)}
             className="tf-btn-icon style-2 type-black"
           >
             <svg
@@ -218,7 +212,7 @@ export default function ProductCards3({ product }) {
               />
             </svg>
             <span className="body-text-3 fw-normal">
-              {isAddedtoWishlist(product.id) ? "Wishlisted" : "Wishlist"}
+              {isAddedToWishlist(item.id) ? "Wishlisted" : "Wishlist"}
             </span>
           </a>
         </div>

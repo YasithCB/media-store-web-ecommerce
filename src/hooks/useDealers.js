@@ -24,6 +24,29 @@ export const useDealersTopRated = () => {
     return { data, loading, error };
 };
 
+export const useDealerById = (id) => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await api.dealer.getDealerById(id);
+                setData(response.data || []);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    return { data, loading, error };
+};
+
 export const useDealersBySubCategoryId = (id) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);

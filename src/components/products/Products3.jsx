@@ -7,8 +7,9 @@ import { initialState, reducer } from "@/reducer/filterReducer";
 import LayoutHandler from "./LayoutHandler";
 import ProductCards3 from "../productCards/ProductCards3";
 import FilterSidebar from "./FilterSidebar";
+import JobCard from "@/components/productCards/JobCard.jsx";
 
-export default function Products3() {
+export default function Products3({itemList, title}) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     price,
@@ -213,8 +214,8 @@ export default function Products3() {
                     <span className="body-md-2 fw-medium">Filter</span>
                   </a>
                   <p className="body-text-3 d-none d-lg-block">
-                    1-16 of 66 results for "
-                    <span className="title-sidebar fw-bold">macbook m1</span>"
+                    1-16 of {itemList.length} results for "
+                    <span className="title-sidebar fw-bold">{title}</span>"
                   </p>
                 </div>
 
@@ -344,8 +345,8 @@ export default function Products3() {
                   className="tf-grid-layout xxl-col-5 lg-col-4 md-col-3 sm-col-2 flat-grid-product wrapper-shop layout-tabgrid-1"
                   id="gridLayout"
                 >
-                  {sorted.map((product, i) => (
-                    <ProductCards3 key={i} product={product} />
+                  {itemList.map((item, i) => (
+                    item.category_id === 2 ? <JobCard key={i} item={item} /> : <ProductCards3 key={i} item={item} />
                   ))}
                   {/* Navigation */}
                   <ul className="wg-pagination wd-load">
@@ -354,7 +355,7 @@ export default function Products3() {
                         <i className="icon-arrow-left-lg" />
                       </a>
                     </li>
-                    <li className="active">
+                    <li className="text-third">
                       <p className="title-normal link">1</p>
                     </li>
                     <li>

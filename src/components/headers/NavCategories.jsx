@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Award, Blocks, Briefcase, RefreshCcw, Key, Sparkles, Clapperboard, Store, Printer, Headphones, Search, UserSearch, MapPinHouse  } from "lucide-react";
-
+import { Link } from "react-router-dom";
 
 export default function NavCategories({ styleClass = "" }) {
   const [activeDropdown, setActiveDropdown] = useState(false);
@@ -36,82 +36,82 @@ export default function NavCategories({ styleClass = "" }) {
         <div className="menu-category-menu-container">
           <ul id="primary-menu" className="megamenu">
             <li className="menu-item">
-              <a href="#">
+              <Link to={`/shop/top-dealers/Top Dealers`}>
                   <Award size={20} />
                   <span>Top Dealers</span>
-              </a>
+              </Link>
             </li>
             <li className="menu-item">
-              <a href="#">
+              <Link to={`/shop/equipments/Equipments & Machinery`}>
                 <Blocks size={20} />
                 <span>Equipments & Machinery</span>
-              </a>
+              </Link>
             </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/all-jobs/All Jobs`}>
                       <Briefcase size={20} />
-                      <span>Jobs</span>
-                  </a>
+                      <span>All Jobs</span>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/used-items/Used Items`}>
                       <RefreshCcw size={20} />
                       <span>Used Items</span>
-                  </a>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/rent-items/Rent Items`}>
                       <Key size={20} />
                       <span>Rent Items</span>
-                  </a>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/brand-new-items/Brand New Items`}>
                       <Sparkles size={20} />
                       <span>Brand New Items</span>
-                  </a>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/video-camera/Video & Camera Equipments`}>
                       <Clapperboard size={20} />
                       <span>Video & Camera Equipments</span>
-                  </a>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/audio-sound/Audio & Sound Equipments`}>
                       <Headphones size={20} />
                       <span>Audio & Sound Equipments</span>
-                  </a>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/printing-equipments/Printing Equipments`}>
                       <Printer size={20} />
                       <span>Printing Equipments</span>
-                  </a>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/job-seeking/Job Seeking`}>
                       <Search size={20} />
                       <span>Job Seeking</span>
-                  </a>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/job-hiring/Job Hiring`}>
                       <UserSearch size={20} />
                       <span>Job Hiring</span>
-                  </a>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/companies-directory/Companies Directory`}>
                       <MapPinHouse size={20} />
                       <span>Companies Directory</span>
-                  </a>
+                  </Link>
               </li>
               <li className="menu-item">
-                  <a href="#">
+                  <Link to={`/shop/service-providers/Service Providers`}>
                       <Store size={20} />
                       <span>Service Providers</span>
-                  </a>
+                  </Link>
               </li>
           </ul>
         </div>

@@ -28,7 +28,7 @@ export default function Header2() {
               <div className="header-center justify-content-center">
                 <SearchForm parentClass="form-search-product style-3" />
                 <p className="body-small text-main-2 d-none d-xl-block">
-                  Popular search: Used Items, Video & Camera Equipments, Job Seeking, Rent Items
+                  Start Your Brand With Us ! We Are Always Ready
                 </p>
               </div>
             </div>
