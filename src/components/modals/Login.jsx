@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {login} from "@/api/auth.js";
 import {useContextElement} from "@/context/Context.jsx";
 
+
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -10,6 +11,8 @@ export default function Login() {
     const [showLogin, setShowLogin] = useState(true);
     const { setCurrentUser, setAuthToken, currentUser,  authToken, logout } = useContextElement();
 
+    const [role, setRole] = useState("user"); // <-- "user" or "dealer"
+
 
     const handleLogin = async (e) => {
         e.preventDefault(); // prevent form reload
@@ -17,7 +20,16 @@ export default function Login() {
         setLoading(true);
 
         try {
-            const res = await login({ email, password });
+            let res;
+            // logic based on selected role
+            if (role === "dealer") {
+                console.log("Logging in as Dealer", { email, password });
+                res = await login({ email, password });
+            } else {
+                console.log("Logging in as User", { email, password });
+                res = await login({ email, password });
+            }
+
 
             // Example: if your API returns token or user data
             if (res?.['status'] === "success") {
@@ -79,6 +91,25 @@ export default function Login() {
                             (
                                 <div className="modal-log-wrap list-file-delete">
                                     <h5 className="title fw-semibold">Log In</h5>
+
+                                    {/* Role Tabs */}
+                                    <div className="login-role-tabs d-flex justify-content-center mb-3">
+                                        <button
+                                            type="button"
+                                            className={`role-tab ${role === "user" ? "active" : ""}`}
+                                            onClick={() => setRole("user")}
+                                        >
+                                            Login as User
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className={`role-tab ${role === "dealer" ? "active" : ""}`}
+                                            onClick={() => setRole("dealer")}
+                                        >
+                                            Login as Dealer
+                                        </button>
+                                    </div>
+
                                     <form onSubmit={handleLogin} className="form-log">
                                         <div className="form-content">
                                             <fieldset>

@@ -1,0 +1,198 @@
+.role-tab {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-right: none;             /* avoid double borders */
+    padding: 8px 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* First tab: round left corners */
+.role-tab:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+/* Last tab: round right corners, keep right border */
+.role-tab:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-right: 1px solid #ccc;
+}
+
+/* Active tab style */
+.role-tab.active {
+    background: var(--secondary);
+    color: #fff;
+    border-color: var(--secondary);
+}
+
+
+/* checkbox */
+/* Wrap styling */
+.custom-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Hide default checkbox */
+.custom-check .form-check-input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;        /* outline border */
+    border-radius: 4px;            /* rounded square */
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    position: relative;
+}
+
+/* Checked state */
+.custom-check .form-check-input:checked {
+    border-color: var(--secondary);         /* primary outline */
+    background-color: var(--secondary);     /* primary fill */
+}
+
+/* Checkmark icon (using pseudo-element) */
+.custom-check .form-check-input:checked::after {
+    content: "✔";
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    font-size: 12px;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.custom-check .form-check-input:hover {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+}
+
+/* Label */
+.custom-check .form-check-label {
+    color: #333;
+    font-size: 0.95rem;
+    cursor: pointer;
+    user-select: none;
+}
+/* checkbox */
+
+
+/* textboxes */
+/* Wrapper spacing (optional) */
+.custom-input {
+    position: relative;
+}
+
+/* Modern outlined text field */
+.modern-input {
+    border: 1.5px solid #ccc !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    font-size: 0.95rem !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    transition: all 0.25s ease-in-out;
+    box-shadow: none;
+}
+
+/* Placeholder color */
+.modern-input::placeholder {
+    color: #999;
+}
+
+/* On focus — glow with theme primary */
+.modern-input:focus {
+    border-color: var(--third) !important; /* Bootstrap primary */
+    box-shadow: 0 0 0 3px rgba(210, 178, 0, 0.1) !important;
+    outline: none !important;
+}
+
+/* Label styling */
+.custom-input .form-label {
+    color: #222;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    display: block;
+}
+/* textboxes */
+
+/* select */
+/* Custom select wrapper */
+.custom-select {
+    position: relative;
+}
+
+/* Modern outlined dropdown */
+.modern-select {
+    border: 1.5px solid var(--bs-secondary);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #fff;
+    transition: all 0.25s ease-in-out;
+    appearance: none; /* remove default arrow */
+    background-image: linear-gradient(45deg, transparent 50%, var(--third) 50%),
+    linear-gradient(135deg, var(--black) 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1.1em), calc(100% - 15px) calc(1.1em);
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+}
+
+/* Focus state */
+.modern-select:focus {
+    border-color: var(--third) !important;
+    box-shadow: 0 0 0 3px rgba(210, 178, 0, 0.1);
+    outline: none;
+}
+
+/* Label styling */
+.custom-select .form-label {
+    color: var(--bs-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Option text */
+.modern-select option {
+    color: #333;
+}
+/* select */
+
+/* remove button */
+.remove-logo-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+    background-color: rgba(220, 53, 69, 0.9); /* subtle red */
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.remove-logo-btn:hover {
+    background-color: #dc3545; /* solid red on hover */
+    transform: scale(1.1);
+}
+/* remove button */

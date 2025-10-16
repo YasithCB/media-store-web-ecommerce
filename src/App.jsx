@@ -17,18 +17,7 @@ import Toolbar from "@/components/modals/Toolbar";
 import Search from "@/components/modals/Search";
 import AddParallax from "@/utlis/AddParallax";
 import NewsLetter from "@/components/modals/NewsLetter";
-import HomePage from "./pages/page";
 import HomePage2 from "./pages/homes/home-2";
-import HomePage3 from "./pages/homes/home-3";
-import HomePage4 from "./pages/homes/home-4";
-import HomePage5 from "./pages/homes/home-5";
-import HomePage6 from "./pages/homes/home-6";
-import HomePage7 from "./pages/homes/home-7";
-import HomePage8 from "./pages/homes/home-8";
-import HomePage9 from "./pages/homes/home-9";
-import HomePage10 from "./pages/homes/home-10";
-import HomePage11 from "./pages/homes/home-11";
-import ShopDefaultPage from "./pages/shop/shop-default";
 import ShopRightSidebarPage from "./pages/shop/shop-right-sidebar";
 import ShopFullwidthPage from "./pages/shop/shop-fullwidth";
 import ShopCartPage from "./pages/products/shop-cart";
@@ -38,7 +27,6 @@ import CheckoutPage from "./pages/products/checkout";
 import OrderDetailsPage from "./pages/products/order-details";
 import TrackYourOrderPage from "./pages/products/track-your-order";
 import MyAccountPage from "./pages/dashboard/my-account";
-import ProductDetailPage from "./pages/product-detail/product-detail";
 import ProductThumbsRightPage from "./pages/product-detail/product-thumbs-right";
 import ProductThumbsLeftPage from "./pages/product-detail/product-thumbs-left";
 import ProductDetailPage2 from "./pages/product-detail/product-detail-2";
@@ -59,9 +47,13 @@ import MyAccountAddressPage from "./pages/dashboard/my-account-address";
 import MyAccountEditPage from "./pages/dashboard/my-account-edit";
 import ScrollTopBehaviour from "./components/common/ScrollToTopBehaviour";
 import DealerDetails from "@/pages/product-detail/dealerDetails.jsx";
+import AddPostPage from "@/pages/products/addPost.jsx";
+
+import '@/assets/css/my-style.css'
 
 function App() {
   const { pathname } = useLocation();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Import the script only on the client side
@@ -157,6 +149,7 @@ function App() {
     });
     wow.init();
   }, [pathname]);
+
   return (
     <>
       <div id="wrapper">
@@ -166,15 +159,6 @@ function App() {
               <Route index element={<HomePage2 />} />
               <Route path="" element={<HomePage2 />} />
               <Route path="home-2" element={<HomePage2 />} />
-              <Route path="home-3" element={<HomePage3 />} />
-              <Route path="home-4" element={<HomePage4 />} />
-              <Route path="home-5" element={<HomePage5 />} />
-              <Route path="home-6" element={<HomePage6 />} />
-              <Route path="home-7" element={<HomePage7 />} />
-              <Route path="home-8" element={<HomePage8 />} />
-              <Route path="home-9" element={<HomePage9 />} />
-              <Route path="home-10" element={<HomePage10 />} />
-              <Route path="home-11" element={<HomePage11 />} />
 
               <Route path="shop/:id/:title" element={<ShopFullwidthPage />} />
               <Route path="shop" element={<ShopFullwidthPage />} />
@@ -188,6 +172,7 @@ function App() {
               <Route path="compare" element={<ComparePage />} />
               <Route path="wishlist" element={<WishlistPage />} />
               <Route path="checkout" element={<CheckoutPage />} />
+              <Route path="add-post" element={<AddPostPage />} />
               <Route path="order-details" element={<OrderDetailsPage />} />
               <Route path="track-your-order" element={<TrackYourOrderPage />} />
               <Route path="my-account" element={<MyAccountPage />} />

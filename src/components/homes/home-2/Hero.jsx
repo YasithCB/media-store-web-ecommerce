@@ -1,6 +1,7 @@
-import { products6 } from "@/data/products";
 import React from "react";
 import { Link } from "react-router-dom";
+
+import { PackagePlus } from 'lucide-react';
 
 import AddToCart from "@/components/common/AddToCart";
 import AddToWishlist from "@/components/common/AddToWishlist";
@@ -60,11 +61,22 @@ export default function Hero() {
               </div>
             </div>
           </div>
+
+          {/* right col */}
           <div className="other-item flex-xl-column flex-md-row">
-            {data.slice(0, 2).map((product) => (
-                <div
-                className={`card-product style-row row-small-2 bg-white radius-8`}
-                key={product.id}
+              <div className="d-grid">
+                  <Link to={`/add-post`} className="body-small link">
+                      <button className="btn bg-primary text-secondary fw-semibold w-100">
+                          <PackagePlus />
+                          {" "}Add Your post for FREE
+                      </button>
+                  </Link>
+              </div>
+
+              {data.slice(0, 2).map((product) => (
+                  <div
+                      className={`card-product style-row row-small-2 bg-white radius-8`}
+                      key={product.id}
               >
                 <div className="card-product-wrapper">
                   <Link

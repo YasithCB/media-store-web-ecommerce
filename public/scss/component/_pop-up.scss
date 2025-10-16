@@ -36,7 +36,7 @@
       @include mixin.transition3;
 
       &:hover {
-        color: var(--primary);
+        color: var(--bs-red);
       }
     }
   }

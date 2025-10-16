@@ -16,7 +16,7 @@ export default function RecentProducts({
     <section className={parentClass}>
       <div className={`container${fullWidth ? "-full" : ""}`}>
         <div className="flat-title wow fadeInUp" data-wow-delay="0s">
-          <h5 className="fw-semibold">Recently Viewed</h5>
+          <h5 className="fw-semibold">Recently Viewed (todo)</h5>
           <div className="box-btn-slide relative">
             <div className="swiper-button-prev nav-swiper nav-prev-products snbp12">
               <i className="icon-arrow-left-lg" />
