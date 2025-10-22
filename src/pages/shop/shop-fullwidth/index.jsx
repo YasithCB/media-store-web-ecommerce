@@ -69,7 +69,7 @@ export default function ShopFullwidthPage() {
                 result = await getAllJobs();
             }else if (id === "brand-new-items") {
                 result = await getBrandNewEquipments();
-            }else if (id === "printing-equipments") {
+            }else if (id === "printing-machinery") {
                 result = await getEquipmentById(35);
             }else {
                 console.error("Unknown ID format:", id);

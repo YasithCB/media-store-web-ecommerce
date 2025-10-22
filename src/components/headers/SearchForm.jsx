@@ -5,6 +5,7 @@ const categories = [
   { rel: "top-dealers", label: "Top Dealers" },
   { rel: "equipments", label: "Equipments & Machinery" },
   { rel: "jobs", label: "Jobs" },
+  { rel: "studios", label: "Studios" },
 ];
 
 export default function SearchForm({

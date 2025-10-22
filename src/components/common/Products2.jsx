@@ -1,5 +1,4 @@
-import { products11 } from "@/data/products";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Link } from "react-router-dom";
@@ -8,22 +7,51 @@ import AddToCart from "./AddToCart";
 import AddToWishlist from "./AddToWishlist";
 import AddToQuickview from "./AddToQuickview";
 import AddToCompare from "./AddToCompare";
+import {getAllStudios} from "@/api/studio.js";
+import LoadingDots from "@/components/custom/loadingDots.jsx";
+import {getImageUrl} from "@/utlis/util.js";
 export default function Products2({
   parentClass = "tf-sp-2 pt-0",
   title = "Studios For Rent",
 }) {
-  const productSlides = products11.reduce((acc, product, index) => {
-    const slideIndex = Math.floor(index / 2);
-    if (!acc[slideIndex]) {
-      acc[slideIndex] = {
-        id: slideIndex + 1,
-        wowDelay: product.wowDelay,
-        products: [],
-      };
-    }
-    acc[slideIndex].products.push(product);
-    return acc;
-  }, []);
+
+  const [data, setData] = useState(null);
+  const [slides, setSlides] = useState(null);
+
+    const fetchStudios = async () => {
+        try {
+            let result = await getAllStudios();
+
+            setData(result.data);
+
+            const productSlides = result.data.reduce((acc, product, index) => {
+                const slideIndex = Math.floor(index / 2);
+                if (!acc[slideIndex]) {
+                    acc[slideIndex] = {
+                        id: slideIndex + 1,
+                        wowDelay: product.wowDelay,
+                        products: [],
+                    };
+                }
+                acc[slideIndex].products.push(product);
+                return acc;
+            }, []);
+
+            setSlides(productSlides)
+
+            console.log(`studios fetched ::::::::::`)
+            console.log(result.data)
+        } catch (error) {
+            console.error("Error fetching studios:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchStudios();
+    }, []);
+
+    if (!data) return <LoadingDots />;
+
 
   return (
     <section className={parentClass}>
@@ -66,13 +94,13 @@ export default function Products2({
           }}
           spaceBetween={15}
         >
-          {productSlides.map((slide) => (
-            <SwiperSlide key={slide.id} className="swiper-slide">
+          {slides.map((item) => (
+            <SwiperSlide key={item.id} className="swiper-slide">
               <ul
                 className="product-list-wrap wow fadeInUp"
-                data-wow-delay={slide.wowDelay}
+                data-wow-delay={item.wowDelay}
               >
-                {slide.products.map((product) => (
+                {item.products.map((product) => (
                   <li key={product.id}>
                     <div className="card-product style-row row-small-2">
                       <div className="card-product-wrapper">
@@ -82,15 +110,15 @@ export default function Products2({
                         >
                           <img
                             className="img-product lazyload"
-                            src={product.imgSrc}
-                            alt="image-product"
+                            src={getImageUrl(product.photos?.[0] || "")}
+                            alt={`Studio-0${product.id}`}
                             width={product.width}
                             height={product.height}
                           />
                           <img
                             className="img-hover lazyload"
-                            src={product.imgHover}
-                            alt="image-product"
+                            src={getImageUrl(product.photos?.[0] || "")}
+                            alt={`Studio-0${product.id}`}
                             width={product.width}
                             height={product.height}
                           />
@@ -111,12 +139,25 @@ export default function Products2({
                           </div>
                           <div className="group-btn">
                             <p className="price-wrap fw-medium">
-                              <span className="new-price price-text fw-medium">
-                                ${product.price.toFixed(3)}
-                              </span>
-                              <span className="old-price body-md-2 text-main-2">
-                                ${product.oldPrice.toFixed(3)}
-                              </span>
+                                {product.sale_price ?
+                                    <>
+                                        <span className="new-price price-text fw-medium">
+                                            {parseFloat(product.sale_price).toFixed(2)} AED/h
+                                        </span>
+                                        <span className="old-price body-md-2 text-main-2">
+                                            {product.price != null && !isNaN(product.price)
+                                                ? parseFloat(product.price).toFixed(2)
+                                                : "N/A"} AED/h
+                                        </span>
+                                    </>
+                                    :
+                                    <span className="new-price price-text fw-medium">
+                                        {product.price != null && !isNaN(product.price)
+                                            ? parseFloat(product.price).toFixed(2)
+                                            : "N/A"} AED/h
+                                    </span>
+                                }
+
                             </p>
                             <ul className="list-product-btn flex-row">
                               <li>

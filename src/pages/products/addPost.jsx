@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 import Header4 from "@/components/headers/Header4";
 import Footer1 from "@/components/footers/Footer1";
 import Features2 from "@/components/common/Features2";
 import RecentProducts from "@/components/common/RecentProducts";
 import MetaComponent from "@/components/common/MetaComponent";
+import {createEquipment} from "@/api/equipments.js";
+import {createJob} from "@/api/jobs.js";
+import {fetchWrapper} from "@/utlis/fetchWrapper.js";
+import {toast} from "react-toastify";
+import {SmartToast} from "@/components/custom/ToastContainer.jsx";
 
 const metadata = {
     title: "Add Post || MediaStore - MultiMedia eCommerce Website",
@@ -13,32 +18,55 @@ const metadata = {
 };
 
 // Define categories and subcategories
-const categories = {
-    "Equipment and Machinery": [
-        'Video & Camera Equipment',
-        'Audio & Sound Equipment',
-        'Lighting Equipment',
-        'Studio & Production Equipment',
-        'Broadcasting Equipment',
-        'Accessories and Parts',
-        'Printing Machinery',
-        'Other Media-related Equipments',
-    ],
-    "Jobs": [
-        'Creative Roles',
-        'Media Production',
-        'Broadcast & Journalism',
-        'Marketing & Advertising',
-        'Event & Media Management',
-        'Technical & Support',
-        'Other Media-related Roles',
-    ],
-};
+const categories = [
+    {
+        id: 1,
+        title: "Equipment and Machinery",
+        subcategories: [
+            { id: 5, title: "Video & Camera Equipment" },
+            { id: 4, title: "Audio & Sound Equipment" },
+            { id: 6, title: "Lighting Equipment" },
+            { id: 7, title: "Studio & Production Equipment" },
+            { id: 8, title: "Broadcasting Equipment" },
+            { id: 9, title: "Accessories and Parts" },
+            { id: 35, title: "Printing Machinery" },
+            { id: 28, title: "Other Media-related Equipments" },
+        ],
+    },
+    {
+        id: 2,
+        title: "Jobs",
+        subcategories: [
+            { id: 12, title: "Creative Roles" },
+            { id: 13, title: "Media Production" },
+            { id: 14, title: "Broadcast & Journalism" },
+            { id: 15, title: "Marketing & Advertising" },
+            { id: 16, title: "Event & Media Management" },
+            { id: 17, title: "Technical & Support" },
+            { id: 18, title: "Other Media-related Roles" },
+        ],
+    },
+    {
+        id: 4,
+        title: "Studios",
+        subcategories: [
+            { id: 36, title: "Video Studio" },
+            { id: 38, title: "Media Studio" },
+            { id: 39, title: "Photography Studio" },
+            { id: 40, title: "Podcast Studio" },
+            { id: 41, title: "Media School Studio" },
+        ],
+    },
+];
 
 export default function AddPostPage() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
+        category_id: 1,
+        subcategory_id: 0,
         title: "",
-        category_title: "",
+        company_name: "",
+        category_title: "Equipment and Machinery",
         sub_category_title: "",
         contact: "",
         email: "",
@@ -62,15 +90,24 @@ export default function AddPostPage() {
         is_used: false,
     });
 
+    const requiredFields = [
+        "title",
+        "category_id",
+        "subcategory_id",
+        "category_title",
+        "sub_category_title",
+        "contact",
+        "description",
+    ];
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [photos, setPhotos] = useState([]);
     const [logo, setLogo] = useState();
-    const [service, setService] = useState("");
-    const [servicesList, setServicesList] = useState([]);
 
     const [selectedCategory, setSelectedCategory] = useState('Equipment and Machinery')
-    const [selectedSubcategory, setSelectedSubcategory] = useState("");
+    const [selectedCategoryId, setSelectedCategoryId] = useState('1')
+    const [selectedSubcategoryId, setSelectedSubcategoryId] = useState('0');
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -80,18 +117,99 @@ export default function AddPostPage() {
         }));
     };
 
+    const validateFormData = (data, photos) => {
+        for (const field of requiredFields) {
+            if (!data[field] || data[field].toString().trim() === "") {
+                return `Field "${field}" is required`;
+            }
+        }
+
+        // Check at least one photo
+        if ((!photos || photos.length === 0) && !logo) {
+            return "Please upload at least one photo or the logo";
+        }
+
+        // Validate numeric fields
+        if (isNaN(data.price)) return "Price must be a number";
+        if (data.sale_price && isNaN(data.sale_price)) return "Sale Price must be a number";
+
+        // Basic email validation
+        if (data.email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) return "Invalid email address";
+        }
+
+        return null; // No errors
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        setError("");
 
+        // Validate form data first
+        const validationError = validateFormData(formData, photos);
+        if (validationError) {
+            SmartToast.error(validationError);
+            return;
+        }
+
+        setLoading(true);
         try {
-            console.log("Submitting Equipment Post:", formData);
-            // TODO: Call your API here to save the equipment post
-        } catch (err) {
-            setError("Failed to submit post. Please try again.");
-        } finally {
-            setLoading(false);
+            // Prepare FormData
+            const formDataToSend = new FormData();
+
+            // Append all form fields
+            Object.entries(formData).forEach(([key, value]) => {
+                if (Array.isArray(value)) {
+                    // for arrays like photos
+                    value.forEach((item) => {
+                        formDataToSend.append(key, item);
+                    });
+                } else if (value !== null && value !== undefined) {
+                    formDataToSend.append(key, value);
+                }
+            });
+
+            // Append photos (if stored separately)
+            photos.forEach((file) => formDataToSend.append("photos", file));
+            if (logo) formDataToSend.append("logo", logo);
+
+            // ✅ Use normal fetch
+            let response;
+            if (selectedCategory === 'Equipment and Machinery') {
+                 response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/equipment-posts`, {
+                    method: "POST",
+                    body: formDataToSend, // Do NOT set headers manually
+                });
+            }else if (selectedCategory === 'Jobs') {
+                response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/job-posts`, {
+                    method: "POST",
+                    body: formDataToSend, // Do NOT set headers manually
+                });
+            }else  {
+                response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/studio-posts`, {
+                    method: "POST",
+                    body: formDataToSend, // Do NOT set headers manually
+                });
+            }
+
+            if (!response.ok) {
+                const text = await response.text(); // for debugging
+                throw new Error(`Server error: ${text}`);
+            }
+
+            // Success
+            const data = await response.json();
+            console.log("✅ Uploaded successfully:", data);
+            SmartToast.success("Post Created successfully!!");
+            navigate('/')
+        } catch (error) {
+            setError(error.message)
+            toast.error(`Post Create Failed - ${error.message}`, {
+                autoClose: 5000,
+            });
+            console.error("❌ Error submitting form:", error);
+        }finally {
+            setLoading(false)
         }
     };
 
@@ -116,28 +234,6 @@ export default function AddPostPage() {
         setLogo(null);
     };
 
-    const handleCategoryChange = (e) => {
-        setSelectedCategory(e.target.value);
-        setSelectedSubcategory(""); // Reset subcategory when category changes
-    };
-
-    const handleSubcategoryChange = (e) => {
-        setSelectedSubcategory(e.target.value);
-    };
-
-    const handleKeyDown = (e) => {
-        if (e.key === "Enter" && service.trim() !== "") {
-            e.preventDefault();
-            if (!servicesList.includes(service.trim())) {
-                setServicesList([...servicesList, service.trim()]);
-            }
-            setService("");
-        }
-    };
-
-    const removeService = (item) => {
-        setServicesList(servicesList.filter((s) => s !== item));
-    };
 
     return (
         <>
@@ -167,17 +263,40 @@ export default function AddPostPage() {
 
                 {/* category Tabs */}
                 <div className="category-subcategory row mb-3">
+
                     <div className="mb-3 col-12 col-md-6 custom-select">
                         <label className="form-label">Category *</label>
                         <select
                             className="form-select modern-select"
-                            value={selectedCategory}
-                            onChange={handleCategoryChange}
+                            value={selectedCategoryId || ""} // ensure controlled input
+                            onChange={(e) => {
+                                const categoryId = e.target.value;
+                                const selectedCategory = categories.find(
+                                    (cat) => cat.id === parseInt(categoryId)
+                                );
+
+                                setSelectedCategoryId(categoryId);
+
+                                // Save the string value to a separate state variable
+                                setSelectedCategory(selectedCategory ? selectedCategory.title : "");
+
+                                // reset subcategory when category changes
+                                setSelectedSubcategoryId("");
+
+                                // update formData
+                                setFormData((prev) => ({
+                                    ...prev,
+                                    category_id: categoryId ? parseInt(categoryId) : null,
+                                    category_title: selectedCategory ? selectedCategory.title : "",
+                                    subcategory_id: null,
+                                    sub_category_title: "",
+                                }));
+                            }}
                         >
                             <option value="">Select Category</option>
-                            {Object.keys(categories).map((cat) => (
-                                <option key={cat} value={cat}>
-                                    {cat}
+                            {categories.map((cat) => (
+                                <option key={cat.id} value={cat.id}>
+                                    {cat.title}
                                 </option>
                             ))}
                         </select>
@@ -187,19 +306,38 @@ export default function AddPostPage() {
                         <label className="form-label">Subcategory *</label>
                         <select
                             className="form-select modern-select"
-                            value={selectedSubcategory}
-                            onChange={handleSubcategoryChange}
-                            disabled={!selectedCategory} // disable until category is selected
+                            value={selectedSubcategoryId || ""}
+                            onChange={(e) => {
+                                const subId = e.target.value;
+                                const selectedCategory = categories.find(
+                                    (c) => c.id === parseInt(selectedCategoryId)
+                                );
+                                const selectedSub = selectedCategory?.subcategories.find(
+                                    (s) => s.id === parseInt(subId)
+                                );
+
+                                setSelectedSubcategoryId(subId);
+
+                                setFormData((prev) => ({
+                                    ...prev,
+                                    subcategory_id: subId ? parseInt(subId) : null,
+                                    sub_category_title: selectedSub ? selectedSub.title : "",
+                                }));
+                            }}
+                            disabled={!selectedCategoryId}
                         >
                             <option value="">Select Subcategory</option>
-                            {selectedCategory &&
-                                categories[selectedCategory].map((subcat) => (
-                                    <option key={subcat} value={subcat}>
-                                        {subcat}
+                            {categories
+                                .find((c) => c.id === parseInt(selectedCategoryId))
+                                ?.subcategories.map((sub) => (
+                                    <option key={sub.id} value={sub.id}>
+                                        {sub.title}
                                     </option>
                                 ))}
                         </select>
                     </div>
+
+
                 </div>
 
                 <form onSubmit={handleSubmit}>
@@ -252,39 +390,6 @@ export default function AddPostPage() {
                     </div>
 
                     <div className="row">
-                        <div className="mb-3 col-md-4 custom-input">
-                            <label className="form-label">Brand</label>
-                            <input
-                                type="text"
-                                className="form-control modern-input"
-                                name="brand"
-                                value={formData.brand}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="mb-3 col-md-4 custom-input">
-                            <label className="form-label">Model</label>
-                            <input
-                                type="text"
-                                className="form-control modern-input"
-                                name="model"
-                                value={formData.model}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="mb-3 col-md-4">
-                            <label className="form-label">Usage</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="usage"
-                                value={formData.usage}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="row">
                         <div className="mb-3 col-md-6 custom-input">
                             <label className="form-label">Country</label>
                             <input
@@ -308,7 +413,7 @@ export default function AddPostPage() {
                         </div>
                     </div>
 
-                    { selectedCategory === 'Jobs' ?
+                    { selectedCategoryId === '2' ?
 
                         // add company logo / salary
                         <div className="mb-3">
@@ -320,6 +425,18 @@ export default function AddPostPage() {
                                     name="salary"
                                     value={formData.salary}
                                     onChange={handleChange}
+                                />
+                            </div>
+
+                            <div className="mb-3 custom-input">
+                                <label className="form-label">Company Name *</label>
+                                <input
+                                    type="text"
+                                    className="form-control modern-input"
+                                    name="company_name"
+                                    value={formData.company_name}
+                                    onChange={handleChange}
+                                    required
                                 />
                             </div>
 
@@ -375,12 +492,13 @@ export default function AddPostPage() {
                                 </div>
                             </div>
                         </div>
+
                         :
 
                         // Item images / price
                         <div className="mb-3">
                             <div className="mb-3 custom-input">
-                                <label className="form-label">Price</label>
+                                <label className="form-label">{selectedCategoryId === '4' ? 'Price Per Hour' : 'Price'}</label>
                                 <input
                                     type="number"
                                     className="form-control modern-input"
@@ -389,6 +507,41 @@ export default function AddPostPage() {
                                     onChange={handleChange}
                                 />
                             </div>
+
+                            { selectedCategoryId === '1' &&
+                                <div className="row">
+                                    <div className="mb-3 col-md-4 custom-input">
+                                        <label className="form-label">Brand</label>
+                                        <input
+                                            type="text"
+                                            className="form-control modern-input"
+                                            name="brand"
+                                            value={formData.brand}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="mb-3 col-md-4 custom-input">
+                                        <label className="form-label">Model</label>
+                                        <input
+                                            type="text"
+                                            className="form-control modern-input"
+                                            name="model"
+                                            value={formData.model}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="mb-3 col-md-4">
+                                        <label className="form-label">Usage</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="usage"
+                                            value={formData.usage}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </div>
+                            }
 
                             <div className="mb-5">
                                 <label className="form-label fw-semibold">Item Photos</label>
@@ -464,7 +617,7 @@ export default function AddPostPage() {
 
                     {error && <p className="text-danger">{error}</p>}
 
-                    <button className="btn bg-dark text-white w-100 fw-bold text-uppercase letter-sp-s2 mt-3" type="submit" disabled={loading}>
+                    <button onClick={handleSubmit} className="btn bg-dark text-white w-100 fw-bold text-uppercase letter-sp-s2 mt-3" type="submit" disabled={loading}>
                         {loading ? "Submitting..." : "Add Post"}
                     </button>
                 </form>

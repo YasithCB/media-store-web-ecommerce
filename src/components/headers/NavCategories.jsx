@@ -84,9 +84,9 @@ export default function NavCategories({ styleClass = "" }) {
                   </Link>
               </li>
               <li className="menu-item">
-                  <Link to={`/shop/printing-equipments/Printing Equipments`}>
+                  <Link to={`/shop/printing-machinery/Printing Machinery`}>
                       <Printer size={20} />
-                      <span>Printing Equipments</span>
+                      <span>Printing Machinery</span>
                   </Link>
               </li>
               <li className="menu-item">

@@ -1,5 +1,12 @@
 import { fetchWrapper } from "../utlis/fetchWrapper.js";
 
+export const createJob = async (data) => {
+    return fetchWrapper("/job-posts/", {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
+};
+
 export const getAllJobs = async () => {
     return fetchWrapper("/job-posts");
 };

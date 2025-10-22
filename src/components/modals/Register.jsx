@@ -1,6 +1,9 @@
 import React, {useState} from "react";
 import {signup} from "@/api/auth.js";
 
+import facebookIcon from '../../../public/icons/social/fb.svg'
+import googleIcon from '../../../public/icons/social/google.svg'
+
 export default function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -453,20 +456,29 @@ export default function Register() {
               <p className="caption text-main-2">Or login with</p>
             </div>
 
-            <ul className="list-log">
-              <li>
-                <a href="#" className="tf-btn-primary btn-line w-100">
-                  <i className="icon icon-facebook-2" />
-                  <span className="body-md-2 fw-semibold">Facebook</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="tf-btn-primary btn-line w-100">
-                  <i className="icon icon-google" />
-                  <span className="body-md-2 fw-semibold">Google</span>
-                </a>
-              </li>
-            </ul>
+              <ul className="list-log">
+                  <li>
+                      <a href="#" className="tf-btn-primary btn-line w-100 social-btn">
+                          <img
+                              src={facebookIcon}
+                              alt="Facebook"
+                              style={{ width: 20, height: 20 }}
+                          />
+                          <span className="body-md-2 fw-semibold ms-2">Facebook</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="#" className="tf-btn-primary btn-line w-100 social-btn">
+                          <img
+                              src={googleIcon}
+                              alt="Google"
+                              style={{ width: 20, height: 20 }}
+                          />
+                          <span className="body-md-2 fw-semibold ms-2">Google</span>
+                      </a>
+                  </li>
+              </ul>
+
           </div>
         </div>
       </div>

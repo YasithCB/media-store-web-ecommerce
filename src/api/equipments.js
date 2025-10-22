@@ -1,5 +1,13 @@
 import { fetchWrapper } from "../utlis/fetchWrapper.js";
 
+export const createEquipment = async (data) => {
+    return fetchWrapper("/equipment-posts/", {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
+};
+
+
 export const getTopRatedEquipments = async () => {
     return fetchWrapper("/equipment-posts/top-rated");
 };

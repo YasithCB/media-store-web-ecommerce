@@ -1,4 +1,3 @@
-import { products10 } from "@/data/products";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
@@ -10,7 +9,7 @@ import AddToQuickview from "@/components/common/AddToQuickview";
 import AddToCompare from "@/components/common/AddToCompare";
 
 import Banner from '/images/banner/banner-7.jpg';
-import Product1 from '/images/item/tivi-2.png';
+import Product1 from '/images/item/tivi-4.png';
 import {useDealersTopRated} from "@/hooks/useDealers.js";
 import {getImageUrl} from "@/utlis/util.js";
 
@@ -54,14 +53,14 @@ export default function Products4() {
               </div>
               <div className="content">
                 <div className="box-title">
-                  <h2 className="name fw-light lh-lg-50">
+                  <p className="name fw-light lh-lg-50">
                     <a href="#" className="text-white link">
-                        LED <br/>
-                        Video <br/>
-                        Light
+                        CATCH <br/>
+                        BEST <br/>
+                        DEALERS
                     </a>
-                  </h2>
-                  <p className="sub-name h1 mb-0 text-white">W140</p>
+                  </p>
+                  <p className="sub-name h1 mb-0 text-white">TODAY</p>
                 </div>
                 <p className="caption text-white font-2 pb-2">
                     Eacam LED Video Light, W140 RGB Rechargeable Photography <br/>
@@ -70,13 +69,13 @@ export default function Products4() {
               </div>
             </div>
             <Link
-              to={`/shop-default`}
+              to={`/shop`}
               className="img-item img-style overflow-visible"
             >
               <img
                 src={Product1}
                 alt=""
-                className="lazyload"
+                className="lazyload pt-4"
                 width={314}
                 height={311}
               />

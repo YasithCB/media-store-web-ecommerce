@@ -38,7 +38,7 @@ export default function Collections() {
                 data-wow-delay={item.wowDelay}
               >
                 <Link
-                  to={`/shop-default`}
+                  to={`/shop?search=${encodeURIComponent(item.searchText.toLowerCase())}&category=${encodeURIComponent(item.category)}`}
                   className="img-box img-style d-block"
                 >
                   <img
@@ -58,7 +58,7 @@ export default function Collections() {
                     <p className="product-title-2">{item.product}</p>
                   </div>
                   <Link
-                    to={`/shop-default`}
+                    to={`/shop?search=${encodeURIComponent(item.searchText.toLowerCase())}&category=${encodeURIComponent(item.category)}`}
                     className={`tf-btn-icon ${
                       item.textColor === "text-white" ? "style-white" : ""
                     }`}
@@ -68,8 +68,7 @@ export default function Collections() {
                   </Link>
                 </div>
                 <div className="box-sale-wrap">
-                  <p className="small-text">Sale</p>
-                  <p className="title-sidebar-2">{item.sale}</p>
+                  <p>Sale</p>
                 </div>
               </div>
             </SwiperSlide>

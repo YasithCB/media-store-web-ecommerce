@@ -130,7 +130,7 @@ export default function Products3({subCategoryId, title}) {
                       <span className="new-price price-text fw-medium mb-0">
                         {product.price != null && !isNaN(product.price)
                             ? parseFloat(product.price).toFixed(2)
-                            : "N/A"}
+                            : "N/A"} AED
                       </span>
                       <span className="old-price body-md-2 text-main-2 fw-normal">
                         {product.price != null && !isNaN(product.price)

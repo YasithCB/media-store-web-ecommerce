@@ -50,6 +50,7 @@ import DealerDetails from "@/pages/product-detail/dealerDetails.jsx";
 import AddPostPage from "@/pages/products/addPost.jsx";
 
 import '@/assets/css/my-style.css'
+import {SmartToastContainer} from "@/components/custom/ToastContainer.jsx";
 
 function App() {
   const { pathname } = useLocation();
@@ -152,6 +153,7 @@ function App() {
 
   return (
     <>
+      <SmartToastContainer />
       <div id="wrapper">
         <Context>
           <Routes>

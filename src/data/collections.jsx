@@ -40,41 +40,50 @@ export const categories = [
   { img: "/images/collection/cls-grid-4.jpg", title: "Rent Items" , id: 'rent-items'},
   { img: "/images/collection/cls-grid-5.jpg", title: "Video & Camera Equipment", id: 'video-camera' },
   { img: "/images/collection/cls-grid-6.jpg", title: "Audio & Sound Equipment", id: 'audio-sound' },
+  { img: "/images/collection/cls-grid-9.jpg", title: "Studios", id: 'studios' },
   {
     img: "/images/collection/cls-grid-7.jpg",
     title: "Job Seeking",
       id: 'job-seeking'
   },
-  { img: "/images/collection/cls-grid-8.jpg", title: "Job Hiring", id: 'job-hiring' },
+  // { img: "/images/collection/cls-grid-8.jpg", title: "Job Hiring", id: 'job-hiring' },
 ];
 
 export const categories2 = [
   {
     imgSrc: "/images/collection/cls-category-1.jpg",
+    searchText: "DSLR",
+    category: "Equipments & Machinery",
     wowDelay: "0s",
     textColor: "text-white",
-    product: "on the headphones",
+    product: "on the DSLR",
     sale: "20%",
   },
   {
     imgSrc: "/images/collection/cls-category-2.jpg",
+    searchText: "Digital",
+    category: "Equipments & Machinery",
     wowDelay: "0.1s",
     textColor: "text-white",
-    product: "on the cameras",
+    product: "on the digital",
     sale: "15%",
   },
   {
     imgSrc: "/images/collection/cls-category-3.jpg",
+    searchText: "Microphone",
+    category: "Equipments & Machinery",
     wowDelay: "0.2s",
     textColor: "text-white",
-    product: "on the phones",
+    product: "on the Mic",
     sale: "28%",
   },
   {
     imgSrc: "/images/collection/cls-category-4.jpg",
+    searchText: "light",
+    category: "Equipments & Machinery",
     wowDelay: "0.3s",
     textColor: "text-white",
-    product: "on the watchs",
+    product: "on the lights",
     sale: "22%",
   },
 ];

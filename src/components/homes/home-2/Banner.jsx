@@ -61,12 +61,12 @@ export default function Banner() {
                 <div className="inner">
                   <div className="box-sale-wrap box-price type-3 relative">
                     <p className="small-text sub-price">From</p>
-                    <p className="main-title-2 num-price">$1.399</p>
+                    <p className="main-title-2 num-price">990AED</p>
                   </div>
                   <h4 className="name fw-normal text-white lh-lg-38 text-xxl-center text-line-clamp-2">
-                      Canon 2000D DSLR
-                    <br className="d-none d-sm-block" />
-                    <span className="fw-bold"> 18-55 Is | 24.1 Mp </span>
+                      CANON EOS R7
+                      <br className="d-none d-sm-block" />
+                    <span className="fw-bold"> 18-55 IS | 24.1 MP </span>
                   </h4>
                 </div>
               </div>
@@ -97,7 +97,7 @@ export default function Banner() {
                 <div className="inner justify-content-xl-end">
                   <div className="box-sale-wrap type-3 relative">
                     <p className="small-text">From</p>
-                    <p className="main-title-2">$399</p>
+                    <p className="main-title-2">399AED</p>
                   </div>
                   <h4 className="name fw-normal text-white lh-lg-38 text-xl-end">
                       NEEWER MS150B
