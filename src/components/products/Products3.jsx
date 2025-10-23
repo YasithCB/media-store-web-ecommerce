@@ -8,6 +8,8 @@ import LayoutHandler from "./LayoutHandler";
 import ProductCards3 from "../productCards/ProductCards3";
 import FilterSidebar from "./FilterSidebar";
 import JobCard from "@/components/productCards/JobCard.jsx";
+import StudioCard from "@/components/productCards/StudioCard.jsx";
+import DealerCard from "@/components/productCards/DealerCard.jsx";
 
 export default function Products3({itemList, title}) {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -186,6 +188,7 @@ export default function Products3({itemList, title}) {
       });
     };
   }, []); // Empty dependency array means this runs once on mount
+
   return (
     <>
       <div className="flat-content">
@@ -345,9 +348,17 @@ export default function Products3({itemList, title}) {
                   className="tf-grid-layout xxl-col-5 lg-col-4 md-col-3 sm-col-2 flat-grid-product wrapper-shop layout-tabgrid-1"
                   id="gridLayout"
                 >
-                  {itemList.map((item, i) => (
-                    item.category_id === 2 ? <JobCard key={i} item={item} /> : <ProductCards3 key={i} item={item} />
-                  ))}
+                  {itemList.map((item, i) => {
+                      if (item.category_id === 1) {
+                          return <ProductCards3 key={i} item={item}/>
+                      }else if (item.category_id === 2) {
+                          return <JobCard key={i} item={item} />
+                      }else if (item.category_id === 3) {
+                          return <DealerCard key={i} item={item} />
+                      }else if (item.category_id === 4) {
+                          return <StudioCard key={i} item={item} />
+                      }
+                  })}
                   {/* Navigation */}
                   <ul className="wg-pagination wd-load">
                     <li>

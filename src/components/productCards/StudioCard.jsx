@@ -1,6 +1,6 @@
-import { useContextElement } from "@/context/Context";
+import {useContextElement} from "@/context/Context";
 
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import React from "react";
 import AddToCart from "../common/AddToCart";
 import AddToWishlist from "../common/AddToWishlist";
@@ -8,7 +8,7 @@ import AddToQuickview from "../common/AddToQuickview";
 import {getFirstPhoto, getImageUrl} from "@/utlis/util.js";
 import {StarRating} from "@/components/custom/starRating.jsx";
 
-export default function JobCard({ item }) {
+export default function StudioCard({item}) {
     const {
         addToWishlist,
         isAddedToWishlist,
@@ -24,7 +24,7 @@ export default function JobCard({ item }) {
                 <Link to={`/product-detail/${item.id}`} className="product-img">
                     <img
                         className="img-product ls-is-cached lazyloaded"
-                        src={getImageUrl(item.logo)}
+                        src={item.category_id === 2 ? getImageUrl(item.logo) : getImageUrl(getFirstPhoto(item.photos) || "")}
                         data-=""
                         alt="image-product"
                         width={500}
@@ -32,7 +32,7 @@ export default function JobCard({ item }) {
                     />
                     <img
                         className="img-hover ls-is-cached lazyloaded"
-                        src={getImageUrl(item.logo)}
+                        src={item.category_id === 2 ? getImageUrl(item.logo) : getImageUrl(getFirstPhoto(item.photos) || "")}
                         data-=""
                         alt="image-product"
                         width={500}
@@ -41,10 +41,10 @@ export default function JobCard({ item }) {
                 </Link>
                 <ul className="list-product-btn top-0 end-0">
                     <li>
-                        <AddToCart productId={item.id} tooltipClass="tooltip-left" />
+                        <AddToCart productId={item.id} tooltipClass="tooltip-left"/>
                     </li>
                     <li className="wishlist">
-                        <AddToWishlist productId={item.id} tooltipClass="tooltip-left" />
+                        <AddToWishlist productId={item.id} tooltipClass="tooltip-left"/>
                     </li>
                     <li>
                         <AddToQuickview
@@ -73,29 +73,72 @@ export default function JobCard({ item }) {
                     </div>
                     <p className="price-wrap fw-medium">
                         <span className="new-price price-text fw-medium">
-                          AED {item.salary}
+                          {item.price != null && !isNaN(item.price)
+                            ? parseFloat(item.price).toFixed(2)
+                            : "N/A"} AED/Hour
                         </span>
+                        {item.sale_price && (
+                            <span className="old-price body-md-2 text-main-2">
+                                AED {item.price != null && !isNaN(item.price)
+                                                ? parseFloat(item.price).toFixed(2)
+                                                : "N/A"}
+                              </span>
+                        )}
                     </p>
                 </div>
                 <div className="box-infor-detail">
+                    <ul className="list-computer-memory">
+                        <li>
+                            <p className="caption">{item.sub_category_title}</p>
+                        </li>
+                        {item.is_rent === 1 && (
+                            <li>
+                                <p className="caption">Rent</p>
+                            </li>
+                        )}
+                    </ul>
                     <ul className="list-infor-fearture">
                         <li>
-                            <p className="caption name-feature">Company:</p>
-                            <p className="caption property">{item.company_name}</p>
-                        </li>
-                        <li>
                             <p className="caption name-feature">City:</p>
-                            <p className="caption property">{item.location}</p>
+                            <p className="caption property">{item.city}</p>
                         </li>
                         <li>
                             <p className="caption name-feature">Country:</p>
                             <p className="caption property">{item.country}</p>
                         </li>
-                        <li>
-                            <p className="caption name-feature">Type:</p>
-                            <p className="caption property">{item.job_type}</p>
-                        </li>
                     </ul>
+                    {item.rating &&
+                        <div className="star-review flex-wrap">
+                            <StarRating rating={item.rating}/>
+                            <p className="caption text-main-2">{item.rating} ({Math.floor(Math.random() * 51) + 50})</p>
+                        </div>
+                    }
+                    <a
+                        href="#compare"
+                        data-bs-toggle="offcanvas"
+                        className="tf-btn-icon style-2"
+                        onClick={() => addToCompareItem(item.id)}
+                    >
+                        <svg
+                            width={18}
+                            height={18}
+                            viewBox="0 0 18 18"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M9 6.5V9V6.5ZM9 9V11.5V9ZM9 9H11.5H9ZM9 9H6.5H9ZM16.5 9C16.5 9.98491 16.306 10.9602 15.9291 11.8701C15.5522 12.7801 14.9997 13.6069 14.3033 14.3033C13.6069 14.9997 12.7801 15.5522 11.8701 15.9291C10.9602 16.306 9.98491 16.5 9 16.5C8.01509 16.5 7.03982 16.306 6.12987 15.9291C5.21993 15.5522 4.39314 14.9997 3.6967 14.3033C3.00026 13.6069 2.44781 12.7801 2.0709 11.8701C1.69399 10.9602 1.5 9.98491 1.5 9C1.5 7.01088 2.29018 5.10322 3.6967 3.6967C5.10322 2.29018 7.01088 1.5 9 1.5C10.9891 1.5 12.8968 2.29018 14.3033 3.6967C15.7098 5.10322 16.5 7.01088 16.5 9Z"
+                                stroke="#004EC3"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                        <span className="body-text-3 fw-normal">
+              {" "}
+                            {isAddedToCompareItem(item.id) ? "Compared" : "Compare"}
+            </span>
+                    </a>
                 </div>
             </div>
             <div className="card-product-btn">
@@ -110,7 +153,7 @@ export default function JobCard({ item }) {
                 ? "Already Added"
                 : "Add to Cart"}
           </span>
-                    <i className="icon-cart-2" />
+                    <i className="icon-cart-2"/>
                 </a>
                 <div className="box-btn">
                     <a

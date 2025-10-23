@@ -73,15 +73,15 @@ export default function ProductCards3({ item }) {
           </div>
           <p className="price-wrap fw-medium">
             <span className="new-price price-text fw-medium">
-              AED {item.price != null && !isNaN(item.price)
+              {item.price != null && !isNaN(item.price)
                   ? parseFloat(item.price).toFixed(2)
-                  : "N/A"}
+                  : "N/A"} AED
             </span>
             {item.oldPrice && (
               <span className="old-price body-md-2 text-main-2">
-                AED {item.price != null && !isNaN(item.price)
+                {item.price != null && !isNaN(item.price)
                     ? parseFloat(item.price).toFixed(2)
-                    : "N/A"}
+                    : "N/A"} AED
               </span>
             )}
           </p>
@@ -154,7 +154,7 @@ export default function ProductCards3({ item }) {
         <a
           href="#shoppingCart"
           data-bs-toggle="offcanvas"
-          className="tf-btn btn-line w-100"
+          className="tf-btn-dark btn-line w-100"
           onClick={() => addProductToCart(item.id)}
         >
           <span>

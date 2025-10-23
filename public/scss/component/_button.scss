@@ -121,7 +121,7 @@
   text-align: center;
   padding: 10px 16px;
   border-radius: 8px;
-  background-color: var(--primary);
+  background-color: var(--primary) !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,6 +227,26 @@
   }
 }
 
+.tf-btn-dark {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: #212529 !important;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  @include mixin.transition3;
+}
+.tf-btn-dark:hover {
+  color: var(--white);
+  background-color: black !important;
+}
+
 .hover-shine {
     position: relative;
     overflow: hidden;
@@ -314,11 +334,11 @@
     }
 
     &:hover {
-        color: var(--primary);
+        color: var(--third);
 
         i {
             animation: link-icon 0.3s linear;
-            color: var(--primary);
+            color: var(--third);
         }
     }
 
@@ -337,15 +357,15 @@
         color: var(--secondary);
 
         i {
-            color: var(--primary);
+            color: var(--third);
         }
 
         &:hover {
-            color: var(--primary);
+            color: var(--third);
 
             svg {
                 path {
-                    stroke: var(--primary);
+                    stroke: var(--third);
                 }
             }
         }
@@ -354,7 +374,7 @@
             color: var(--black);
 
             &:hover {
-                color: var(--primary);
+                color: var(--third);
             }
         }
     }

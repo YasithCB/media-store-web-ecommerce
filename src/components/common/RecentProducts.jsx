@@ -1,24 +1,62 @@
 import { products5 } from "@/data/products";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 
 import { Navigation, Pagination } from "swiper/modules";
 import AddToCart from "./AddToCart";
 import AddToWishlist from "./AddToWishlist";
-import AddToQuickview from "./AddToQuickview";
+import AddToQuickView from "./AddToQuickView";
 import AddToCompare from "./AddToCompare";
+import {getFirstPhoto, getImageUrl, getRecentlyViewed} from "@/utlis/util.js";
+import LoadingDots from "@/components/custom/loadingDots.jsx";
+
 export default function RecentProducts({
   parentClass = "tf-sp-2",
   fullWidth = false,
 }) {
-  return (
+
+    const [recentlyViewedList, setRecentlyViewedList] = useState([])
+
+    useEffect(() => {
+        const data = getRecentlyViewed();
+        setRecentlyViewedList(data);
+    }, []);
+
+
+    const handleClearRecents = () => {
+        localStorage.removeItem("recentlyViewed"); // clear localStorage
+        setRecentlyViewedList([]) // update state if you store in React state
+    };
+
+    if (recentlyViewedList.length === 0) return;
+
+    return (
     <section className={parentClass}>
       <div className={`container${fullWidth ? "-full" : ""}`}>
         <div className="flat-title wow fadeInUp" data-wow-delay="0s">
-          <h5 className="fw-semibold">Recently Viewed (todo)</h5>
+          <h5 className="fw-semibold">Recently Viewed</h5>
           <div className="box-btn-slide relative">
-            <div className="swiper-button-prev nav-swiper nav-prev-products snbp12">
+              <button
+                  onClick={handleClearRecents}
+                  style={{
+                      fontSize: "0.85rem",
+                      padding: "4px 10px",
+                      background: "transparent",
+                      border: "1px solid #ccc",
+                      borderRadius: "6px",
+                      color: "#333",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={e => e.target.style.background = "#f0f0f0"}
+                  onMouseLeave={e => e.target.style.background = "transparent"}
+              >
+                  Clear Recents
+              </button>
+
+
+              <div className="swiper-button-prev nav-swiper nav-prev-products snbp12">
               <i className="icon-arrow-left-lg" />
             </div>
             <div className="swiper-button-next nav-swiper nav-next-products snbn12">
@@ -53,7 +91,7 @@ export default function RecentProducts({
             nextEl: ".snbn12",
           }}
         >
-          {products5.map((product) => (
+          {recentlyViewedList.map((product) => (
             <SwiperSlide className="swiper-slide" key={product.id}>
               <div
                 className={`card-product style-img-border ${
@@ -68,14 +106,14 @@ export default function RecentProducts({
                   >
                     <img
                       className="img-product lazyload"
-                      src={product.imgSrc}
+                      src={product.category_id === 2 ? getImageUrl(product.logo) : getImageUrl(getFirstPhoto(product.photos) || "")}
                       alt="image-product"
                       width={product.imgWidth}
                       height={product.imgHeight}
                     />
                     <img
                       className="img-hover lazyload"
-                      src={product.imgHover}
+                      src={product.category_id === 2 ? getImageUrl(product.logo) : getImageUrl(getFirstPhoto(product.photos) || "")}
                       alt="image-product"
                       width={product.hoverWidth}
                       height={product.hoverHeight}
@@ -95,7 +133,7 @@ export default function RecentProducts({
                       />
                     </li>
                     <li>
-                      <AddToQuickview
+                      <AddToQuickView
                         productId={product.id}
                         tooltipClass="tooltip-left"
                       />
@@ -123,7 +161,9 @@ export default function RecentProducts({
                     </div>
                     <p className="price-wrap fw-medium">
                       <span className="new-price price-text fw-medium">
-                        ${product.price.toFixed(3)}
+                        {product.price != null && !isNaN(product.price)
+                          ? parseFloat(product.price).toFixed(2)
+                          : "N/A"} AED
                       </span>
                     </p>
                   </div>

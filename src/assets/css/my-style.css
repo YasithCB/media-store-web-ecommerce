@@ -169,6 +169,10 @@
 }
 /* select */
 
+
+
+
+/* buttons */
 /* remove button */
 .remove-logo-btn {
     position: absolute;
@@ -196,3 +200,6 @@
     transform: scale(1.1);
 }
 /* remove button */
+
+.dark-btn
+/* buttons */

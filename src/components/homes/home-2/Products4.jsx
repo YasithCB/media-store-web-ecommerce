@@ -19,8 +19,7 @@ export default function Products4() {
     if (loading) return <p>Loading top dealers...</p>;
     if (error) return <p>Error: {error}</p>;
 
-    console.log('Top Dealers')
-    console.log(data)
+    console.log('Top Dealers : ', data)
 
     return (
     <section className="tf-sp-2">
@@ -119,6 +118,7 @@ export default function Products4() {
                       to={`/dealer-detail/${dealer.id}`}
                       className="product-img"
                     >
+                        {console.log(getImageUrl(dealer.logo || ""))}
                       <img
                         className="img-product lazyload"
                         src={getImageUrl(dealer.logo || "")}

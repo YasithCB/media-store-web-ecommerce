@@ -5,10 +5,10 @@ import React from "react";
 import AddToCart from "../common/AddToCart";
 import AddToWishlist from "../common/AddToWishlist";
 import AddToQuickview from "../common/AddToQuickview";
-import {getFirstPhoto, getImageUrl} from "@/utlis/util.js";
+import { getImageUrl} from "@/utlis/util.js";
 import {StarRating} from "@/components/custom/starRating.jsx";
 
-export default function JobCard({ item }) {
+export default function DealerCard({ item }) {
     const {
         addToWishlist,
         isAddedToWishlist,
@@ -63,7 +63,6 @@ export default function JobCard({ item }) {
             <div className="card-product-info">
                 <div className="box-title">
                     <div>
-                        <p className="product-tag caption text-main-2 d-none">Headphone</p>
                         <Link
                             to={`/product-detail/${item.id}`}
                             className="name-product body-md-2 fw-semibold text-secondary link"
@@ -72,30 +71,68 @@ export default function JobCard({ item }) {
                         </Link>
                     </div>
                     <p className="price-wrap fw-medium">
+                        <p className='caption'>Services Starting From</p>
                         <span className="new-price price-text fw-medium">
-                          AED {item.salary}
+                          {item.services_starting_from != null && !isNaN(item.services_starting_from)
+                              ? parseFloat(item.services_starting_from).toFixed(2)
+                              : "N/A"} AED
                         </span>
                     </p>
                 </div>
                 <div className="box-infor-detail">
+                    <ul className="list-computer-memory">
+                        {item.tags.map((item, index) => (
+                            <li key={index}>
+                                <p className="caption">{item}</p>
+                            </li>
+                        ))}
+                    </ul>
                     <ul className="list-infor-fearture">
                         <li>
-                            <p className="caption name-feature">Company:</p>
-                            <p className="caption property">{item.company_name}</p>
-                        </li>
-                        <li>
                             <p className="caption name-feature">City:</p>
-                            <p className="caption property">{item.location}</p>
+                            <p className="caption property">{item.city}</p>
                         </li>
                         <li>
                             <p className="caption name-feature">Country:</p>
                             <p className="caption property">{item.country}</p>
                         </li>
                         <li>
-                            <p className="caption name-feature">Type:</p>
-                            <p className="caption property">{item.job_type}</p>
+                            <p className="caption name-feature">Established:</p>
+                            <p className="caption property">{item.established_year}</p>
                         </li>
                     </ul>
+                    { item.rating &&
+                        <div className="star-review flex-wrap">
+                            <StarRating rating={item.rating} />
+                            <p className="caption text-main-2">{item.rating} ({Math.floor(Math.random() * 51) + 50})</p>
+                        </div>
+                    }
+                    <a
+                        href="#compare"
+                        data-bs-toggle="offcanvas"
+                        className="tf-btn-icon style-2"
+                        onClick={() => addToCompareItem(item.id)}
+                    >
+                        <svg
+                            width={18}
+                            height={18}
+                            viewBox="0 0 18 18"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M9 6.5V9V6.5ZM9 9V11.5V9ZM9 9H11.5H9ZM9 9H6.5H9ZM16.5 9C16.5 9.98491 16.306 10.9602 15.9291 11.8701C15.5522 12.7801 14.9997 13.6069 14.3033 14.3033C13.6069 14.9997 12.7801 15.5522 11.8701 15.9291C10.9602 16.306 9.98491 16.5 9 16.5C8.01509 16.5 7.03982 16.306 6.12987 15.9291C5.21993 15.5522 4.39314 14.9997 3.6967 14.3033C3.00026 13.6069 2.44781 12.7801 2.0709 11.8701C1.69399 10.9602 1.5 9.98491 1.5 9C1.5 7.01088 2.29018 5.10322 3.6967 3.6967C5.10322 2.29018 7.01088 1.5 9 1.5C10.9891 1.5 12.8968 2.29018 14.3033 3.6967C15.7098 5.10322 16.5 7.01088 16.5 9Z"
+                                stroke="#004EC3"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                        <span className="body-text-3 fw-normal">
+              {" "}
+                            {isAddedToCompareItem(item.id) ? "Compared" : "Compare"}
+            </span>
+                    </a>
                 </div>
             </div>
             <div className="card-product-btn">

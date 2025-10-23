@@ -19,6 +19,7 @@ import {
 import {getDealerByName, getTopRatedDealers} from "@/api/dealers.js";
 import {getAllJobs, getJobsByName, getJobsBySubCategoryId, getJobsHiring} from "@/api/jobs.js";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
+import {getAllStudios, getStudioByName} from "@/api/studio.js";
 
 const metadata = {
   title: "Products || MediaStore - MultiMedia eCommerce Website",
@@ -41,6 +42,8 @@ export default function ShopFullwidthPage() {
             result = await getJobsByName(searchText);
         } else if (category === "Top Dealers") {
             result = await getDealerByName(searchText);
+        }else if (category === "Studios") {
+            result = await getStudioByName(searchText);
         }
         console.log(`searched data result : ${searchText} - ${category}`)
         console.log(result.data)
@@ -71,6 +74,8 @@ export default function ShopFullwidthPage() {
                 result = await getBrandNewEquipments();
             }else if (id === "printing-machinery") {
                 result = await getEquipmentById(35);
+            }else if (id === "studios") {
+                result = await getAllStudios();
             }else {
                 console.error("Unknown ID format:", id);
             }

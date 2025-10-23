@@ -13,6 +13,7 @@ import Products5 from "@/components/common/Products2";
 import Collections from "@/components/homes/home-2/Collections";
 import Footer1 from "@/components/footers/Footer1";
 import MetaComponent from "@/components/common/MetaComponent";
+import RecentProducts from "@/components/common/RecentProducts.jsx";
 
 const metadata = {
   title: "Home 02 || MediaStore - MultiMedia eCommerce Website",
@@ -33,10 +34,13 @@ export default function HomePage2() {
       <Products3 title={'Trending In Video & Camera'} subCategoryId={5} />
       <Products3 title={'Trending In Audio & Sound'} subCategoryId={4} />
       <Banner2 />
+
+      {/* top dealers */}
       <Products4 />
+
       <Products5 />
       <Collections />
-      {/*<RecentProducts />*/}
+      <RecentProducts />
       <Footer1 />
     </>
   );
