@@ -6,9 +6,6 @@ import Footer1 from "@/components/footers/Footer1";
 import Features2 from "@/components/common/Features2";
 import RecentProducts from "@/components/common/RecentProducts";
 import MetaComponent from "@/components/common/MetaComponent";
-import {createEquipment} from "@/api/equipments.js";
-import {createJob} from "@/api/jobs.js";
-import {fetchWrapper} from "@/utlis/fetchWrapper.js";
 import {toast} from "react-toastify";
 import {SmartToast} from "@/components/custom/ToastContainer.jsx";
 
@@ -233,7 +230,6 @@ export default function AddPostPage() {
     const handleRemoveLogo = () => {
         setLogo(null);
     };
-
 
     return (
         <>
