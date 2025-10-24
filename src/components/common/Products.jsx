@@ -95,7 +95,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToCart productId={product.id} />
                                 </li>
                                 <li className="wishlist">
-                                  <AddToWishlist productId={product.id} />
+                                  <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
                                   <AddToQuickview
@@ -173,7 +173,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToCart productId={product.id} />
                                 </li>
                                 <li className="wishlist">
-                                  <AddToWishlist productId={product.id} />
+                                  <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
                                   <AddToQuickview
@@ -279,7 +279,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToCart productId={product.id} />
                                 </li>
                                 <li className="wishlist">
-                                  <AddToWishlist productId={product.id} />
+                                  <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
                                   <AddToQuickview
@@ -356,7 +356,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToCart productId={product.id} />
                                 </li>
                                 <li className="wishlist">
-                                  <AddToWishlist productId={product.id} />
+                                  <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
                                   <AddToQuickview
@@ -461,7 +461,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToCart productId={product.id} />
                                 </li>
                                 <li className="wishlist">
-                                  <AddToWishlist productId={product.id} />
+                                  <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
                                   <AddToQuickview
@@ -539,7 +539,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToCart productId={product.id} />
                                 </li>
                                 <li className="wishlist">
-                                  <AddToWishlist productId={product.id} />
+                                  <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
                                   <AddToQuickview
@@ -645,7 +645,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToCart productId={product.id} />
                                 </li>
                                 <li className="wishlist">
-                                  <AddToWishlist productId={product.id} />
+                                  <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
                                   <AddToQuickview
@@ -722,7 +722,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToCart productId={product.id} />
                                 </li>
                                 <li className="wishlist">
-                                  <AddToWishlist productId={product.id} />
+                                  <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
                                   <AddToQuickview

@@ -17,9 +17,6 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
     if (loading) return <LoadingDots />;
     if (error) return <p>Error: {error}</p>;
 
-    console.log('Deal Of The Day')
-    console.log(data)
-
     return (
     <section className={parentClass}>
       <div className="container">
@@ -116,10 +113,11 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
                         />
                       </li>
                       <li className="d-none d-sm-block wishlist">
-                        <AddToWishlist
-                          tooltipClass="tooltip-left"
-                          productId={product.id}
-                        />
+                          <AddToWishlist
+                              tooltipClass="tooltip-left"
+                              productId={product.id}
+                              productCategory={product.category_title}
+                          />
                       </li>
                       <li>
                         <AddToQuickview

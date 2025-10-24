@@ -124,6 +124,7 @@ export default function Products1() {
                           <AddToWishlist
                             tooltipClass="tooltip-left"
                             productId={product.id}
+                            productCategory={product.category_title}
                           />
                         </li>
                         <li>

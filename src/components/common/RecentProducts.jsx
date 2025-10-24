@@ -130,6 +130,7 @@ export default function RecentProducts({
                       <AddToWishlist
                         tooltipClass="tooltip-left"
                         productId={product.id}
+                        productCategory={product.category_title}
                       />
                     </li>
                     <li>

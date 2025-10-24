@@ -7,7 +7,6 @@ export const createEquipment = async (data) => {
     });
 };
 
-
 export const getTopRatedEquipments = async () => {
     return fetchWrapper("/equipment-posts/top-rated");
 };

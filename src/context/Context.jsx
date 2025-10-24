@@ -1,14 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
 import { allProducts } from "@/data/products";
-// import { openCartModal } from "@/utlis/openCartModal";
-// import { openWishlistModal } from "@/utlis/openWishlist";
+import {getWishlistByUser, removeFromWishList as removeFromWishListAPI} from "@/api/wishlist.js";
 
 const dataContext = React.createContext();
 
 export default function Context({ children }) {
     // 🛒 CART + WISHLIST STATE
     const [cartProducts, setCartProducts] = useState([]);
-    const [wishList, setWishList] = useState([1, 2, 3]);
+
+    const [wishList, setWishList] = useState(() => {
+        const stored = JSON.parse(localStorage.getItem("wishlist"));
+        return Array.isArray(stored) ? stored : [];
+    });
+
     const [compareItem, setCompareItem] = useState([1, 2, 3, 4]);
     const [quickViewItem, setQuickViewItem] = useState(allProducts[0]);
     const [quickAddItem, setQuickAddItem] = useState(1);
@@ -17,6 +21,16 @@ export default function Context({ children }) {
     // 👤 AUTH STATE
     const [currentUser, setCurrentUser] = useState(null);
     const [authToken, setAuthToken] = useState(null);
+
+    const fetchWishlistFromDB = async () => {
+        if (!currentUser) return;
+        try {
+            const res = await getWishlistByUser(currentUser.id);
+            setWishList(res.data || []);
+        } catch (err) {
+            console.error("Failed to fetch wishlist:", err);
+        }
+    };
 
     // Calculate total price
     useEffect(() => {
@@ -59,12 +73,38 @@ export default function Context({ children }) {
                 ? prev.filter((elm) => elm !== id)
                 : [...prev, id]
         );
+        console.log('wishList from ctx')
+        console.log(wishList)
     };
 
-    const removeFromWishlist = (id) =>
-        setWishList((prev) => prev.filter((elm) => elm !== id));
 
-    const isAddedToWishlist = (id) => wishList.includes(id);
+    const removeFromWishlist = async (postId, postCategory) => {
+        if (!currentUser) return alert("Please log in first.");
+
+        // Optimistic update: remove from local state immediately
+        setWishList((prev) =>
+            prev.filter((item) => !(item.post_id === postId && item.post_category === postCategory))
+        );
+
+        try {
+            // Remove from backend DB
+            let res = await removeFromWishListAPI(currentUser.id, postId, postCategory)
+            if (res.status === 'success') {
+                fetchWishlistFromDB()
+            }
+        } catch (err) {
+            console.error("Failed to remove from wishlist:", err);
+            // Rollback: add it back in case of error
+            setWishList((prev) => [...prev, { post_id: postId, post_category: postCategory }]);
+        }
+    };
+
+
+    const isAddedToWishlist = (postId, postCategory) => {
+        if (!Array.isArray(wishList)) return false; // ✅ safeguard
+        return wishList.some(item => item.post_id === postId);
+    };
+
 
     // Compare functions
     const addToCompareItem = (id) =>
@@ -130,9 +170,14 @@ export default function Context({ children }) {
         totalPrice,
         addProductToCart,
         isAddedToCartProducts,
+
+        // Wishlist
+        wishList,
+        fetchWishlistFromDB,
         removeFromWishlist,
         addToWishlist,
         isAddedToWishlist,
+
         quickViewItem,
         setQuickViewItem,
         quickAddItem,

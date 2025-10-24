@@ -85,9 +85,10 @@ export default function Products5() {
                     </li>
                     <li className="wishlist">
                       <AddToWishlist
-                        tooltipClass="tooltip-left"
-                        productId={product.id}
-                      />
+                              tooltipClass="tooltip-left"
+                              productId={product.id}
+                              productCategory={product.category_title}
+                          />
                     </li>
                     <li>
                       <AddToQuickview

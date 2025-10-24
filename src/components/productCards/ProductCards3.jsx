@@ -44,7 +44,7 @@ export default function ProductCards3({ item }) {
             <AddToCart productId={item.id} tooltipClass="tooltip-left" />
           </li>
           <li className="wishlist">
-            <AddToWishlist productId={item.id} tooltipClass="tooltip-left" />
+            <AddToWishlist productId={item.id} productCategory={item.category_title} tooltipClass="tooltip-left" />
           </li>
           <li>
             <AddToQuickview

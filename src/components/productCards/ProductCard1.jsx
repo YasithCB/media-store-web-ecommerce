@@ -53,7 +53,7 @@ export default function ProductCard1({ product, index }) {
             <AddToCart tooltipClass="tooltip-left" productId={product.id} />
           </li>
           <li className="wishlist">
-            <AddToWishlist tooltipClass="tooltip-left" productId={product.id} />
+            <AddToWishlist tooltipClass="tooltip-left" productId={product.id} productCategory={item.category_title} />
           </li>
           <li>
             <AddToQuickview

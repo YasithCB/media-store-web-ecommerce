@@ -118,7 +118,6 @@ export default function Products4() {
                       to={`/dealer-detail/${dealer.id}`}
                       className="product-img"
                     >
-                        {console.log(getImageUrl(dealer.logo || ""))}
                       <img
                         className="img-product lazyload"
                         src={getImageUrl(dealer.logo || "")}
@@ -145,6 +144,7 @@ export default function Products4() {
                         <AddToWishlist
                           tooltipClass="tooltip-left"
                           productId={dealer.id}
+                          productCategory={dealer.category_title}
                         />
                       </li>
                       <li>

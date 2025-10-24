@@ -1,24 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useContextElement } from "@/context/Context";
-import { allProducts } from "@/data/products";
+import {getImageUrl} from "@/utlis/util.js";
+import Swal from "sweetalert2";
+
 export default function Wishlist() {
   const {
     wishList,
+    fetchWishlistFromDB,
+    currentUser,
     removeFromWishlist,
     addProductToCart,
     isAddedToCartProducts,
   } = useContextElement();
-  const [items, setItems] = useState(allProducts);
-  useEffect(() => {
-    setItems([...allProducts.filter((elm) => wishList.includes(elm.id))]);
-  }, [wishList]);
+
+    useEffect(() => {
+        if (currentUser?.id) {
+            fetchWishlistFromDB(currentUser.id);
+        }
+    }, [currentUser]); // run when user logs in or changes
+
+    function confirmAndRemove(productId, productCategory, removeFromWishlist) {
+        Swal.fire({
+            title: "Remove from Wishlist?",
+            text: "Are you sure you want to remove this item?",
+            icon: "warning",
+            iconColor: '#212529',
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#212529",
+            confirmButtonText: "Yes, remove it",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeFromWishlist(productId, productCategory);
+                Swal.fire({
+                    title: "Removed!",
+                    text: "Item has been removed from your wishlist.",
+                    icon: "success",
+                    confirmButtonColor: "#212529",
+                });
+            }
+        });
+    }
+
+  if (!currentUser)
+      return (
+          <div className="p-4 d-flex flex-column justify-content-center align-items-center text-center">
+              <div className="col-4">
+                  Your wishlist is empty. Log in to start adding favorite products and easily manage them from your wishlist!
+              </div>
+              <a
+                  className="tf-btn mt-2 mb-3 text-white"
+                  style={{ width: "fit-content" }}
+                  href="#log"
+                  data-bs-toggle="modal"
+              >
+                  Login Now
+              </a>
+          </div>
+      )
+
   return (
     <div className="tf-sp-2">
       <div className="container">
         <div className="tf-wishlist">
-          {items.length ? (
+          {wishList.length ? (
             <table className="tf-table-wishlist">
               <thead>
                 <tr>
@@ -37,18 +84,18 @@ export default function Wishlist() {
                 </tr>
               </thead>
               <tbody>
-                {items.map((product, i) => (
+                {wishList.map((product, i) => (
                   <tr key={i} className="wishlist-item">
                     <td
                       className="wishlist-item_remove"
-                      onClick={() => removeFromWishlist(product.id)}
+                      onClick={() => confirmAndRemove(product.id, product.category_title, removeFromWishlist)}
                     >
                       <i className="icon-close remove link cs-pointer" />
                     </td>
                     <td className="wishlist-item_image">
                       <Link to={`/product-detail/${product.id}`}>
                         <img
-                          src={product.imgSrc}
+                          src={getImageUrl(product.photos?.[0] || "")}
                           alt="Image"
                           className="lazyload"
                           width={500}
@@ -67,13 +114,10 @@ export default function Wishlist() {
                     <td className="wishlist-item_price">
                       <p className="price-wrap fw-medium flex-nowrap">
                         <span className="new-price price-text fw-medium mb-0">
-                          ${product.price.toFixed(3)}
+                          {product.price != null && !isNaN(product.price)
+                              ? parseFloat(product.price).toFixed(2)
+                              : "N/A"} AED
                         </span>
-                        {product.oldPrice && (
-                          <span className="old-price body-md-2 text-main-2 fw-normal">
-                            ${product.oldPrice.toFixed(3)}
-                          </span>
-                        )}
                       </p>
                     </td>
                     <td className="wishlist-item_stock">
@@ -105,18 +149,18 @@ export default function Wishlist() {
               </tfoot>
             </table>
           ) : (
-            <div className="p-4">
+          <div className="p-4 d-flex flex-column justify-content-center align-items-center text-center">
               <div className="col-4">
                 Your wishlist is empty. Start adding favorite products to
                 wishlist!{" "}
               </div>
-              <Link
+              <a
                 className="tf-btn mt-2 mb-3 text-white"
                 style={{ width: "fit-content" }}
                 href="/shop-default"
               >
                 Explore Products
-              </Link>
+              </a>
             </div>
           )}
         </div>

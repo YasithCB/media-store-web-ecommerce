@@ -71,7 +71,13 @@ export default function NewsLetter() {
             className="icon icon-close icon-close-popup link"
             data-bs-dismiss="modal"
           />
-          <div className="heading">
+          <div className="heading d-flex flex-column align-items-center">
+              <img
+                  alt="Logo"
+                  className="img-fluid mb-3"
+                  src="/images/logo/logo.webp"
+                  width={150}
+              />
             <h5 className="fw-semibold">Join our newsletter for $10 offs</h5>
             <p className="body-md-2">
               Register now to get latest updates on promotions &amp; coupons.{" "}

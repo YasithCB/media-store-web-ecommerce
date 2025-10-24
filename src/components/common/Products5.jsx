@@ -91,6 +91,7 @@ export default function Products5({ parentClass = "tf-sp-2 pt-0" }) {
                       <AddToWishlist
                         tooltipClass="tooltip-left"
                         productId={product.id}
+                        productCategory={product.category_title}
                       />
                     </li>
                     <li>

@@ -44,7 +44,7 @@ export default function DealerCard({ item }) {
                         <AddToCart productId={item.id} tooltipClass="tooltip-left" />
                     </li>
                     <li className="wishlist">
-                        <AddToWishlist productId={item.id} tooltipClass="tooltip-left" />
+                        <AddToWishlist productId={item.id} productCategory={item.category_title} tooltipClass="tooltip-left" />
                     </li>
                     <li>
                         <AddToQuickview
@@ -174,31 +174,31 @@ export default function DealerCard({ item }) {
                         <span className="body-text-3 fw-normal">
               {" "}
                             {isAddedToCompareItem(item.id) ? "Compared" : "Compare"}
-            </span>
-                    </a>
-                    <a
-                        href="#"
-                        onClick={() => addToWishlist(item.id)}
-                        className="tf-btn-icon style-2 type-black"
-                    >
-                        <svg
-                            width={20}
-                            height={20}
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M3.59837 5.26487C3.25014 5.61309 2.97391 6.02649 2.78546 6.48146C2.597 6.93644 2.5 7.42408 2.5 7.91654C2.5 8.409 2.597 8.89664 2.78546 9.35161C2.97391 9.80658 3.25014 10.22 3.59837 10.5682L10 16.9699L16.4017 10.5682C17.105 9.86494 17.5001 8.9111 17.5001 7.91654C17.5001 6.92197 17.105 5.96814 16.4017 5.26487C15.6984 4.5616 14.7446 4.16651 13.75 4.16651C12.7555 4.16651 11.8016 4.5616 11.0984 5.26487L10 6.3632L8.9017 5.26487C8.55348 4.91665 8.14008 4.64042 7.68511 4.45196C7.23013 4.2635 6.74249 4.1665 6.25003 4.1665C5.75757 4.1665 5.26993 4.2635 4.81496 4.45196C4.35998 4.64042 3.94659 4.91665 3.59837 5.26487V5.26487Z"
-                                stroke="#FF3D3D"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
-                        <span className="body-text-3 fw-normal">
-              {isAddedToWishlist(item.id) ? "Wishlisted" : "Wishlist"}
-            </span>
+                        </span>
+                                </a>
+                                <a
+                                    href="#"
+                                    onClick={() => addToWishlist(item.id)}
+                                    className="tf-btn-icon style-2 type-black"
+                                >
+                                    <svg
+                                        width={20}
+                                        height={20}
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M3.59837 5.26487C3.25014 5.61309 2.97391 6.02649 2.78546 6.48146C2.597 6.93644 2.5 7.42408 2.5 7.91654C2.5 8.409 2.597 8.89664 2.78546 9.35161C2.97391 9.80658 3.25014 10.22 3.59837 10.5682L10 16.9699L16.4017 10.5682C17.105 9.86494 17.5001 8.9111 17.5001 7.91654C17.5001 6.92197 17.105 5.96814 16.4017 5.26487C15.6984 4.5616 14.7446 4.16651 13.75 4.16651C12.7555 4.16651 11.8016 4.5616 11.0984 5.26487L10 6.3632L8.9017 5.26487C8.55348 4.91665 8.14008 4.64042 7.68511 4.45196C7.23013 4.2635 6.74249 4.1665 6.25003 4.1665C5.75757 4.1665 5.26993 4.2635 4.81496 4.45196C4.35998 4.64042 3.94659 4.91665 3.59837 5.26487V5.26487Z"
+                                            stroke="#FF3D3D"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                    <span className="body-text-3 fw-normal">
+                          {isAddedToWishlist(item.id) ? "Wishlisted" : "Wishlist"}
+                        </span>
                     </a>
                 </div>
             </div>

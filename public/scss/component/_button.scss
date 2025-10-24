@@ -121,7 +121,7 @@
   text-align: center;
   padding: 10px 16px;
   border-radius: 8px;
-  background-color: var(--primary) !important;
+  background-color: var(--white) !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,7 +130,7 @@
 
   &:hover {
     color: var(--white);
-    background-color: var(--secondary);
+    background-color: var(--secondary) !important;
   }
 
   &.hover-2 {
