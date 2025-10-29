@@ -134,12 +134,7 @@ export default function RecentProducts({
                         productCategory={product.category_title}
                       />
                     </li>
-                    <li>
-                      <AddToQuickView
-                        productId={product.id}
-                        tooltipClass="tooltip-left"
-                      />
-                    </li>
+
                     <li className="d-none d-sm-block">
                       <AddToCompare
                         productId={product.id}

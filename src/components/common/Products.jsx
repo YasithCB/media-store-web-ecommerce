@@ -98,10 +98,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
-                                  <AddToQuickview
-                                    productId={product.id}
-                                    tooltipClass=""
-                                  />
+
                                 </li>
                                 <li>
                                   <AddToCompare productId={product.id} />
@@ -176,10 +173,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
-                                  <AddToQuickview
-                                    productId={product.id}
-                                    tooltipClass=""
-                                  />
+
                                 </li>
                                 <li>
                                   <AddToCompare productId={product.id} />
@@ -282,10 +276,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
-                                  <AddToQuickview
-                                    productId={product.id}
-                                    tooltipClass=""
-                                  />
+
                                 </li>
                                 <li>
                                   <AddToCompare productId={product.id} />
@@ -359,10 +350,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
-                                  <AddToQuickview
-                                    productId={product.id}
-                                    tooltipClass=""
-                                  />
+
                                 </li>
                                 <li>
                                   <AddToCompare productId={product.id} />
@@ -464,10 +452,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
-                                  <AddToQuickview
-                                    productId={product.id}
-                                    tooltipClass=""
-                                  />
+
                                 </li>
                                 <li>
                                   <AddToCompare productId={product.id} />
@@ -542,10 +527,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
-                                  <AddToQuickview
-                                    productId={product.id}
-                                    tooltipClass=""
-                                  />
+
                                 </li>
                                 <li>
                                   <AddToCompare productId={product.id} />
@@ -648,10 +630,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
-                                  <AddToQuickview
-                                    productId={product.id}
-                                    tooltipClass=""
-                                  />
+
                                 </li>
                                 <li>
                                   <AddToCompare productId={product.id} />
@@ -725,10 +704,7 @@ export default function Products({ parentClass = "tf-sp-2" }) {
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
                                 <li>
-                                  <AddToQuickview
-                                    productId={product.id}
-                                    tooltipClass=""
-                                  />
+
                                 </li>
                                 <li>
                                   <AddToCompare productId={product.id} />

@@ -22,8 +22,10 @@ export default function Context({children}) {
         return Array.isArray(stored) ? stored : [];
     });
 
-    const [compareItem, setCompareItem] = useState([1, 2, 3, 4]);
-    const [quickViewItem, setQuickViewItem] = useState(allProducts[0]);
+    // COMPARE
+    const [compareItem, setCompareItem] = useState([]);
+    const [quickViewItem, setQuickViewItem] = useState([]);
+
     const [quickAddItem, setQuickAddItem] = useState(1);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -47,9 +49,26 @@ export default function Context({children}) {
             console.error("Failed to fetch orders:", err);
         }
     };
-
-
     // MY ORDERS ----------------------------------------------
+
+    // COMPARE -----------------------------------------------------
+    const addToCompareItem = (product) => {
+        // Avoid duplicates
+        if (!compareItem.find((item) => item.id === product.id)) {
+            setCompareItem([...compareItem, product]);
+        }
+    };
+
+    const isAddedToCompareItem = (productId) => {
+        return compareItem.some(item => item.id === productId);
+    };
+
+    const removeFromCompareItem = (id) => {
+        setCompareItem(compareItem.filter((item) => item.id !== id));
+    };
+
+    const clearCompare = () => setCompareItem([]);
+    // COMPARE -----------------------------------------------------
 
     const fetchWishlistFromDB = async () => {
         if (!currentUser) return;
@@ -118,17 +137,6 @@ export default function Context({children}) {
         return wishList.some(item => item.post_id === postId);
     };
 
-
-    // Compare functions
-    const addToCompareItem = (id) =>
-        setCompareItem((prev) =>
-            prev.includes(id) ? prev : [...prev, id]
-        );
-
-    const removeFromCompareItem = (id) =>
-        setCompareItem((prev) => prev.filter((elm) => elm !== id));
-
-    const isAddedToCompareItem = (id) => compareItem.includes(id);
 
     // CART --------------------------------------------------------------
     useEffect(() => {
@@ -304,16 +312,20 @@ export default function Context({children}) {
         addToWishlist,
         isAddedToWishlist,
 
+        // QUICK VIEW
         quickViewItem,
         setQuickViewItem,
         quickAddItem,
         setQuickAddItem,
+
+        // COMPARE
         addToCompareItem,
         isAddedToCompareItem,
         removeFromCompareItem,
         compareItem,
         setCompareItem,
         updateQuantity,
+        clearCompare,
 
         // 👤 Auth
         currentUser,

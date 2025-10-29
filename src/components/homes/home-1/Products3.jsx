@@ -106,9 +106,7 @@ export default function Products3() {
                                 <li className="wishlist">
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
-                                <li>
-                                  <AddToQuickview productId={product.id} />
-                                </li>
+
                                 <li>
                                   <AddToCompare productId={product.id} />
                                 </li>
@@ -183,9 +181,7 @@ export default function Products3() {
                                 <li className="wishlist">
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
-                                <li>
-                                  <AddToQuickview productId={product.id} />
-                                </li>
+
                                 <li>
                                   <AddToCompare productId={product.id} />
                                 </li>
@@ -261,9 +257,7 @@ export default function Products3() {
                                 <li className="wishlist">
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
-                                <li>
-                                  <AddToQuickview productId={product.id} />
-                                </li>
+
                                 <li>
                                   <AddToCompare productId={product.id} />
                                 </li>
@@ -338,9 +332,7 @@ export default function Products3() {
                                 <li className="wishlist">
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
-                                <li>
-                                  <AddToQuickview productId={product.id} />
-                                </li>
+
                                 <li>
                                   <AddToCompare productId={product.id} />
                                 </li>
@@ -416,9 +408,7 @@ export default function Products3() {
                                 <li className="wishlist">
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
-                                <li>
-                                  <AddToQuickview productId={product.id} />
-                                </li>
+
                                 <li>
                                   <AddToCompare productId={product.id} />
                                 </li>
@@ -493,9 +483,7 @@ export default function Products3() {
                                 <li className="wishlist">
                                   <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                                 </li>
-                                <li>
-                                  <AddToQuickview productId={product.id} />
-                                </li>
+
                                 <li>
                                   <AddToCompare productId={product.id} />
                                 </li>

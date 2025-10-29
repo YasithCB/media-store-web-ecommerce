@@ -147,12 +147,7 @@ export default function Products4() {
                           productCategory={dealer.category_title}
                         />
                       </li>
-                      <li>
-                        <AddToQuickview
-                          productId={dealer.id}
-                          tooltipClass="tooltip-left"
-                        />
-                      </li>
+
                       <li className="d-none d-sm-block">
                         <AddToCompare
                           productId={dealer.id}

@@ -8,6 +8,7 @@ import React from "react";
 
 import MetaComponent from "@/components/common/MetaComponent";
 import Header2 from "@/components/headers/Header2.jsx";
+import Topbar1 from "@/components/headers/Topbar1.jsx";
 
 const metadata = {
   title: "Order Details || MediaStore - MultiMedia eCommerce Website",
@@ -18,7 +19,8 @@ export default function OrderDetailsPage() {
   return (
     <>
       <MetaComponent meta={metadata} />
-      <Header2 />
+        <Topbar1 parentClass="tf-topbar" />
+        <Header2 />
       <div className="tf-sp-3 pb-0">
         <div className="container">
           <ul className="breakcrumbs">

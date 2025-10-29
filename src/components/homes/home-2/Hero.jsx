@@ -133,9 +133,6 @@ export default function Hero() {
                           <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                         </li>
                         <li>
-                          <AddToQuickview productId={product.id} />
-                        </li>
-                        <li>
                           <AddToCompare productId={product.id} />
                         </li>
                       </ul>

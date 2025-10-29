@@ -107,9 +107,6 @@ export default function Products2() {
                           <li className="d-none d-sm-block wishlist">
                             <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                           </li>
-                          <li>
-                            <AddToQuickview productId={product.id} />
-                          </li>
                           <li className="d-none d-sm-block">
                             <AddToCompare productId={product.id} />
                           </li>
@@ -197,9 +194,6 @@ export default function Products2() {
                           </li>
                           <li className="d-none d-sm-block wishlist">
                             <AddToWishlist productId={product.id} productCategory={product.category_title}/>
-                          </li>
-                          <li>
-                            <AddToQuickview productId={product.id} />
                           </li>
                           <li className="d-none d-sm-block">
                             <AddToCompare productId={product.id} />

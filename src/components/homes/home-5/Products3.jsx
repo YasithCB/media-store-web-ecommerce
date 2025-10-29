@@ -81,9 +81,6 @@ export default function Products3() {
                             <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                           </li>
                           <li>
-                            <AddToQuickview productId={product.id} />
-                          </li>
-                          <li>
                             <AddToCompare productId={product.id} />
                           </li>
                         </ul>

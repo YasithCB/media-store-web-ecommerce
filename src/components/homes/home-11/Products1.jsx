@@ -89,12 +89,7 @@ export default function Products1() {
                         productCategory={product.category_title}
                       />
                     </li>
-                    <li>
-                      <AddToQuickview
-                        productId={product.id}
-                        tooltipClass="tooltip-left"
-                      />
-                    </li>
+
                     <li className="d-none d-sm-block">
                       <AddToCompare
                         productId={product.id}

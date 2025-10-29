@@ -489,7 +489,7 @@
       justify-content: center;
       width: 32px;
       height: 32px;
-      background-color: var(--primary);
+      background-color: var(--black);
       border-radius: 50%;
       font-size: 12px;
       color: var(--white);
@@ -498,7 +498,7 @@
       @include mixin.transition3;
 
       &:hover {
-        background-color: var(--gray-2);
+        background-color: var(--bs-red);
       }
     }
 

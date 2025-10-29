@@ -9,7 +9,6 @@ import AddToWishlist from "@/components/common/AddToWishlist";
 import AddToQuickview from "@/components/common/AddToQuickview";
 import AddToCompare from "@/components/common/AddToCompare";
 import {api} from "@/api/index.js";
-import {BASEURL} from "@/data/constants.js";
 import {getImageUrl} from "@/utlis/util.js";
 export default function Products2() {
   const [activeTab, setActiveTab] = useState("Toprate");
@@ -144,12 +143,6 @@ export default function Products2() {
                             tooltipClass="tooltip-left"
                             productId={product.id}
                             productCategory={product.category_title}
-                          />
-                        </li>
-                        <li>
-                          <AddToQuickview
-                            productId={product.id}
-                            tooltipClass="tooltip-left"
                           />
                         </li>
                         <li className="d-none d-sm-block">

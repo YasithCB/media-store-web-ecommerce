@@ -166,12 +166,6 @@ export default function Products2({
                               <li className="wishlist">
                                 <AddToWishlist productId={product.id} productCategory={product.category_title}/>
                               </li>
-                              <li>
-                                <AddToQuickview
-                                  productId={product.id}
-                                  tooltipClass=""
-                                />
-                              </li>
                               <li className="">
                                 <AddToCompare productId={product.id} />
                               </li>

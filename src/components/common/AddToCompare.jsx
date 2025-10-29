@@ -1,12 +1,12 @@
 import { useContextElement } from "@/context/Context";
 
-export default function AddToCompare({ productId, tooltipClass = "" }) {
+export default function AddToCompare({ productId, product={}, tooltipClass = "" }) {
   const { addToCompareItem, isAddedToCompareItem } = useContextElement();
   return (
     <a
       href="#compare"
       data-bs-toggle="offcanvas"
-      onClick={() => addToCompareItem(productId)}
+      onClick={() => addToCompareItem(product)}
       className={`box-icon btn-icon-action hover-tooltip ${tooltipClass}`}
     >
       <span className="icon icon-compare1" />
