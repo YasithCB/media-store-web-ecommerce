@@ -7,7 +7,7 @@ import {
     getCartByUser,
     addToCartAPI,
     removeFromCartAPI,
-    updateCartAPI
+    updateCartAPI, clearCartByUser
 } from "@/api/cart.js";
 
 const dataContext = React.createContext();
@@ -174,7 +174,6 @@ export default function Context({ children }) {
     };
 
     const removeFromCart = async (productId, category) => {
-
         // Backend sync if logged in
         if (currentUser) {
             try {
@@ -192,6 +191,22 @@ export default function Context({ children }) {
             }
         }
     };
+
+    const clearCart = async () => {
+        // Backend sync if logged in
+        if (currentUser) {
+            try {
+                await clearCartByUser(currentUser.id); // Call your backend API to clear cart
+            } catch (err) {
+                console.error("Failed to clear cart on server:", err);
+            }
+        }
+
+        // Clear local state and localStorage
+        setCartProducts([]);
+        localStorage.setItem("cartList", JSON.stringify([]));
+    };
+
 
     const isAddedToCartProducts = (id) => {
         return cartProducts.some((item) => item.id === id);
@@ -254,6 +269,7 @@ export default function Context({ children }) {
         fetchCartFromDB,
         isAddedToCartProducts,
         removeFromCart,
+        clearCart,
 
         // Wishlist
         wishList,

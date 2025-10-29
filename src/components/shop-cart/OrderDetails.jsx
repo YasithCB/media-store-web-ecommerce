@@ -4,8 +4,8 @@ import {charge, saveOrder} from "@/api/payment.js";
 import {useContextElement} from "@/context/Context.jsx";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
 
-export default function OrderDetails() {
-    const {currentUser} = useContextElement();
+export function OrderDetails() {
+    const {currentUser, cartProducts, clearCart} = useContextElement();
 
     const [paymentDetails, setPaymentDetails] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ export default function OrderDetails() {
             }
         };
 
-         getPaymentResults();
+        getPaymentResults();
     }, []);
 
     useEffect(() => {
@@ -53,13 +53,15 @@ export default function OrderDetails() {
                     description: paymentDetails.description || 'N/A',
                     status: paymentDetails.status || 'INITIATED',
                     payment_method: paymentDetails.source?.payment_method || '',
-                    response_data: paymentDetails
+                    response_data: paymentDetails,
+                    items: cartProducts
                 };
 
                 // 3️⃣ Save order/payment in backend
-                const saveRes = await saveOrder(paymentData);
-
-                console.log("Saved order/payment:", saveRes);
+                let saveOrderResp = await saveOrder(paymentData);
+                if (saveOrderResp.status === 'success') {
+                    clearCart();
+                }
 
             } catch (err) {
                 alert("Failed to fetch/save payment details: " + err.message);
@@ -78,7 +80,7 @@ export default function OrderDetails() {
             <section className="tf-sp-2">
                 <div className="container text-center py-5">
                     <p className="mt-3">Verifying your payment...</p>
-                    <LoadingDots />
+                    <LoadingDots/>
                 </div>
             </section>
         );
@@ -120,7 +122,8 @@ export default function OrderDetails() {
                         fill="#28a745"
                         viewBox="0 0 256 256"
                     >
-                      <path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34Z" />
+                      <path
+                          d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34Z"/>
                     </svg>
                   </span>
                     <h4 className="fw-bold text-success">Payment Successful!</h4>

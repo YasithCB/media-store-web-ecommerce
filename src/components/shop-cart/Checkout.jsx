@@ -168,6 +168,8 @@ export function Checkout() {
                 confirmButtonColor: "#212529",
             });
         } finally {
+            // ⏳ wait for 1 second before createCharge
+            await new Promise(resolve => setTimeout(resolve, 2000));
             setLoading(false);
         }
     };

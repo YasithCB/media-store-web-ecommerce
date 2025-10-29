@@ -1,4 +1,5 @@
 import {fetchWrapper} from "@/utlis/fetchWrapper.js";
+import {items} from "@/data/collections.jsx";
 
 /**
  * ✅ Verify Tap payment (called from redirect or success page)
@@ -93,7 +94,8 @@ export const saveOrder = async (paymentData) => {
                 description: paymentData.description || '',
                 status: paymentData.status || 'INITIATED',
                 payment_method: paymentData.payment_method || '',
-                response_data: paymentData.response_data || null
+                response_data: paymentData.response_data || null,
+                items: paymentData.items
             }),
         });
     } catch (err) {

@@ -87,3 +87,20 @@ export const removeFromCartAPI = async (userId, productId, category) => {
         throw err;
     }
 };
+
+/**
+ * Clear all cart items for a specific user
+ * @param {number} userId - ID of the user
+ * @returns {Promise<object>} - response from server
+ */
+export const clearCartByUser = async (userId) => {
+    try {
+        return await fetchWrapper(`/cart/clear/${userId}`, {
+            method: "DELETE", // DELETE is standard for removing resources
+        });
+    } catch (err) {
+        console.error("Error clearing user cart:", err);
+        throw err;
+    }
+};
+

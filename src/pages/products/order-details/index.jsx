@@ -2,7 +2,7 @@ import Features2 from "@/components/common/Features2";
 import RecentProducts from "@/components/common/RecentProducts";
 import Footer1 from "@/components/footers/Footer1";
 
-import OrderDetails from "@/components/shop-cart/OrderDetails";
+import {OrderDetails} from "@/components/shop-cart/OrderDetails";
 import { Link } from "react-router-dom";
 import React from "react";
 

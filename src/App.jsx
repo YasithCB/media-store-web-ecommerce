@@ -51,6 +51,7 @@ import AddPostPage from "@/pages/products/addPost.jsx";
 
 import '@/assets/css/my-style.css'
 import {SmartToastContainer} from "@/components/custom/ToastContainer.jsx";
+import MyOrdersPage from "@/pages/myOrders.jsx";
 
 function App() {
   const { pathname } = useLocation();
@@ -173,6 +174,7 @@ function App() {
               <Route path="shop-cart" element={<ShopCartPage />} />
               <Route path="compare" element={<ComparePage />} />
               <Route path="wishlist" element={<WishlistPage />} />
+              <Route path="my-orders" element={<MyOrdersPage />} />
               <Route path="checkout" element={<CheckoutPage />} />
               <Route path="add-post" element={<AddPostPage />} />
               <Route path="order-details" element={<OrderDetailsPage />} />
