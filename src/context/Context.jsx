@@ -298,6 +298,7 @@ export default function Context({children}) {
 
         // Wishlist
         wishList,
+        setWishList,
         fetchWishlistFromDB,
         removeFromWishlist,
         addToWishlist,
