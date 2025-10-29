@@ -76,9 +76,10 @@ export default function SimilerProducts() {
                   <ul className="list-product-btn">
                     <li>
                       <AddToCart
-                        tooltipClass="tooltip-left"
-                        productId={product.id}
-                      />
+                          tooltipClass="tooltip-left"
+                          productId={product.id}
+                          productCategory={product.category_title}
+                        />
                     </li>
                     <li className="d-none d-sm-block wishlist">
                       <AddToWishlist

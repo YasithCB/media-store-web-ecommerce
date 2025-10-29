@@ -8,6 +8,7 @@ import RecentProducts from "@/components/common/RecentProducts";
 import MetaComponent from "@/components/common/MetaComponent";
 import {toast} from "react-toastify";
 import {SmartToast} from "@/components/custom/ToastContainer.jsx";
+import Header2 from "@/components/headers/Header2.jsx";
 
 const metadata = {
     title: "Add Post || MediaStore - MultiMedia eCommerce Website",
@@ -234,7 +235,7 @@ export default function AddPostPage() {
     return (
         <>
             <MetaComponent meta={metadata} />
-            <Header4 />
+            <Header2 />
 
             <div className="tf-sp-3 pb-0">
                 <div className="container">

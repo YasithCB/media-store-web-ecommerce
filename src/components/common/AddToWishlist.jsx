@@ -40,12 +40,12 @@ export default function AddToWishlist({ productId, productCategory, tooltipClass
     >
       <span
         className={`icon ${
-          isAddedToWishlist(productId) ? "icon-trash" : "icon-heart2"
+          added ? "icon-trash" : "icon-heart2"
         } `}
       />
       <span className="tooltip">
         {" "}
-        {isAddedToWishlist(productId) ? "Remove Wishlist" : "Add to Wishlist"}
+        {added ? "Remove Wishlist" : "Add to Wishlist"}
       </span>
     </a>
   );

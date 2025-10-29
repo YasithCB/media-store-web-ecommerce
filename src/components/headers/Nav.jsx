@@ -28,48 +28,9 @@ export default function Nav() {
           isMenuParentActive(demoItems) ? "active" : ""
         }  pst-unset`}
       >
-        <a href="#" className="item-link link body-md-2 fw-semibold">
+        <a href="/" className="item-link link body-md-2 fw-semibold">
           <span>Home</span>
-          <i className="icon icon-arrow-down" />
         </a>
-        <div className="sub-menu-container mega-menu mega-home">
-          <div className="container">
-            <ul className="row-demo">
-              {demoItems.map((item) => (
-                <li
-                  key={item.id}
-                  className={`demo-item  ${isMenuActive(item) ? "active" : ""}`}
-                >
-                  <Link to={item.href}>
-                    <div className="demo-image relative">
-                      <img
-                        src={item.imageSrc}
-                        alt=""
-                        className="lazyload"
-                        width={273}
-                        height={300}
-                      />
-                      <div className="demo-label">
-                        {item.labels.map((label, index) => (
-                          <span key={index} className={label.className || ""}>
-                            {label.text}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <span className="demo-name">{item.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            {/* <div class="view-all-demo text-center">
-                                <a href="#modalDemo" data-bs-toggle="modal"
-                                    class="tf-btn d-inline-flex">
-                                    <span class="text-white">View All Demos</span>
-                                </a>
-                            </div> */}
-          </div>
-        </div>
       </li>
       <li
         className={`nav-item ${isMenuParentActive2(shopPages) ? "active" : ""}`}

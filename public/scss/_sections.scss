@@ -1087,7 +1087,7 @@
       height: 4px;
       left: 0;
       top: 0;
-      background-color: var(--primary);
+      background-color: var(--secondary);
       border-radius: 999px;
     }
 
@@ -1113,7 +1113,7 @@
   .icon {
     @include mixin.flex(center, center);
     border-radius: 50%;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     width: 48px;
     height: 48px;
     color: var(--white);

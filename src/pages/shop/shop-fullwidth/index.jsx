@@ -20,6 +20,7 @@ import {getDealerByName, getTopRatedDealers} from "@/api/dealers.js";
 import {getAllJobs, getJobsByName, getJobsBySubCategoryId, getJobsHiring} from "@/api/jobs.js";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
 import {getAllStudios, getStudioByName} from "@/api/studio.js";
+import Header2 from "@/components/headers/Header2.jsx";
 
 const metadata = {
   title: "Products || MediaStore - MultiMedia eCommerce Website",
@@ -77,7 +78,7 @@ export default function ShopFullwidthPage() {
             }else if (id === "studios") {
                 result = await getAllStudios();
             }else {
-                console.error("Unknown ID format:", id);
+                result = await getAllEquipments();
             }
 
             setData(result.data);
@@ -108,7 +109,7 @@ export default function ShopFullwidthPage() {
     return (
     <>
       <MetaComponent meta={metadata} />
-      <Header4 fullWidth />
+      <Header2 fullWidth />
       <div className="tf-sp-1">
         <div className="container-full">
           <ul className="breakcrumbs">

@@ -2,6 +2,14 @@ import React, { useEffect, useState, useContext } from "react";
 import { allProducts } from "@/data/products";
 import {getWishlistByUser, removeFromWishList as removeFromWishListAPI} from "@/api/wishlist.js";
 
+// 🆕 Optional (add your API endpoints later)
+import {
+    getCartByUser,
+    addToCartAPI,
+    removeFromCartAPI,
+    updateCartAPI
+} from "@/api/cart.js";
+
 const dataContext = React.createContext();
 
 export default function Context({ children }) {
@@ -41,20 +49,6 @@ export default function Context({ children }) {
         setTotalPrice(subtotal);
     }, [cartProducts]);
 
-    // Cart functions
-    const isAddedToCartProducts = (id) =>
-        !!cartProducts.find((elm) => elm.id === id);
-
-    const addProductToCart = (id, qty, isModal = true) => {
-        if (!isAddedToCartProducts(id)) {
-            const item = {
-                ...allProducts.find((elm) => elm.id === id),
-                quantity: qty ? qty : 1,
-            };
-            setCartProducts((prev) => [...prev, item]);
-            // if (isModal) openCartModal();
-        }
-    };
 
     const updateQuantity = (id, qty) => {
         if (isAddedToCartProducts(id) && qty >= 1) {
@@ -73,8 +67,6 @@ export default function Context({ children }) {
                 ? prev.filter((elm) => elm !== id)
                 : [...prev, id]
         );
-        console.log('wishList from ctx')
-        console.log(wishList)
     };
 
 
@@ -116,6 +108,96 @@ export default function Context({ children }) {
         setCompareItem((prev) => prev.filter((elm) => elm !== id));
 
     const isAddedToCompareItem = (id) => compareItem.includes(id);
+
+    // CART --------------------------------------------------------------
+    useEffect(() => {
+        if (currentUser && authToken) {
+            fetchCartFromDB();   // 🆕 load user cart
+            fetchWishlistFromDB();
+        }
+    }, [currentUser, authToken]);
+
+
+    const fetchCartFromDB = async () => {
+        if (!currentUser) return;
+        try {
+            const res = await getCartByUser(currentUser.id);
+            setCartProducts(res.data || []);
+        } catch (err) {
+            console.error("Failed to fetch cart:", err);
+        }
+    };
+
+    const addProductToCart = async (productId, qty = 1) => {
+        console.log(`cart add : ${productId}`)
+        console.log(`cart list : ${cartProducts}`)
+
+        const existingItem = cartProducts.find((item) => item.id === productId);
+
+        if (existingItem) {
+            // If already exists, increase quantity
+            const updated = cartProducts.map((item) =>
+                item.id === productId
+                    ? { ...item, quantity: item.quantity + qty }
+                    : item
+            );
+            setCartProducts(updated);
+            localStorage.setItem("cartList", JSON.stringify(updated));
+
+            // Optional backend update
+            if (currentUser) {
+                try {
+                    await updateCartAPI(currentUser.id, productId, updated.quantity);
+                } catch (err) {
+                    console.error("Failed to update cart item:", err);
+                }
+            }
+        } else {
+            const product = allProducts.find((elm) => elm.id === productId);
+            if (!product) return;
+
+            const newItem = { ...product, quantity: qty };
+            const updated = [...cartProducts, newItem];
+            setCartProducts(updated);
+            localStorage.setItem("cartList", JSON.stringify(updated));
+
+            // Optional backend add
+            if (currentUser) {
+                try {
+                    await addToCartAPI(currentUser.id, productId, qty);
+                } catch (err) {
+                    console.error("Failed to add to cart:", err);
+                }
+            }
+        }
+        await fetchWishlistFromDB()
+    };
+
+    const removeFromCart = async (productId, category) => {
+
+        // Backend sync if logged in
+        if (currentUser) {
+            try {
+                await removeFromCartAPI(currentUser.id, productId, category);
+                await fetchWishlistFromDB()
+
+                // Optimistic update: remove from local state immediately
+                setCartProducts((prev) => prev.filter((item) => item.id !== productId));
+                localStorage.setItem(
+                    "cartList",
+                    JSON.stringify(cartProducts.filter((item) => item.id !== productId))
+                );
+            } catch (err) {
+                console.error("Failed to remove from cart:", err);
+            }
+        }
+    };
+
+    const isAddedToCartProducts = (id) => {
+        return cartProducts.some((item) => item.id === id);
+    };
+
+    // CART --------------------------------------------------------------
 
     // LocalStorage sync — CART & WISHLIST
     useEffect(() => {
@@ -164,12 +246,14 @@ export default function Context({ children }) {
 
     // Combine all context data
     const contextElement = {
-        // 🛒 Cart & wishlist
+        // 🛒 Cart
         cartProducts,
         setCartProducts,
         totalPrice,
         addProductToCart,
+        fetchCartFromDB,
         isAddedToCartProducts,
+        removeFromCart,
 
         // Wishlist
         wishList,

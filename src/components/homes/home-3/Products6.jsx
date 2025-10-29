@@ -58,7 +58,7 @@ export default function Products6() {
                   <span className="text fw-2 price-text text-white">
                     Starting
                   </span>
-                  <span className="h2 mb-0 fw-bold text-price">$250</span>
+                  <span className="h2 mb-0 fw-bold text-price">900 AED</span>
                 </div>
               </div>
             </div>

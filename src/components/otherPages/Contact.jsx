@@ -58,8 +58,8 @@ export default function Contact() {
                     className="link"
                     target="_blank"
                   >
-                    8500 Lorem Street Chicago, <br />
-                    IL 55030 Dolor sit amet
+                      Airport Road, <br />
+                      Abu Dhabi, UAE
                   </a>
                 </li>
                 <li>
@@ -70,7 +70,7 @@ export default function Contact() {
                     href="tel:1234567"
                     className="product-title fw-semibold link"
                   >
-                    <span>+8(800) 123 4567</span>
+                    <span>+971 50 2 30 31 30</span>
                   </a>
                 </li>
                 <li>

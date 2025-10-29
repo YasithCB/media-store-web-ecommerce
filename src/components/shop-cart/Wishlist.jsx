@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import { useContextElement } from "@/context/Context";
 import {getImageUrl} from "@/utlis/util.js";
 import Swal from "sweetalert2";
+import {addToCartAPI} from "@/api/cart.js";
 
 export default function Wishlist() {
-  const {
+    const {
     wishList,
     fetchWishlistFromDB,
     currentUser,
@@ -128,7 +129,11 @@ export default function Wishlist() {
                         href="#shoppingCart"
                         data-bs-toggle="offcanvas"
                         className="tf-btn btn-gray"
-                        onClick={() => addProductToCart(product.id)}
+                        onClick={async () => {
+                            addProductToCart(product.id);
+                            await addToCartAPI(currentUser.id, product.id, product.category_title);
+                            await fetchCartFromDB(); // refresh local cart
+                        }}
                       >
                         <span className="text-white">
                           {isAddedToCartProducts(product.id)

@@ -7,6 +7,7 @@ import Testimonials from "@/components/shop-cart/Testimonials";
 import React from "react";
 import { Link } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
+import Header2 from "@/components/headers/Header2.jsx";
 
 const metadata = {
   title: "Shop Cart || MediaStore - MultiMedia eCommerce Website",
@@ -16,7 +17,7 @@ export default function ShopCartPage() {
   return (
     <>
       <MetaComponent meta={metadata} />
-      <Header4 />
+      <Header2 />
       <div className="tf-sp-3 pb-0">
         <div className="container">
           <ul className="breakcrumbs">

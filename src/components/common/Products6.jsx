@@ -110,6 +110,7 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
                         <AddToCart
                           tooltipClass="tooltip-left"
                           productId={product.id}
+                          productCategory={product.category_title}
                         />
                       </li>
                       <li className="d-none d-sm-block wishlist">

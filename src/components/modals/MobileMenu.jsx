@@ -296,7 +296,7 @@ export default function MobileMenu() {
                           href="https://www.google.com/maps?q=8500LoremStreetChicago,IL55030Dolorsitamet"
                         >
                           <span className="fw-medium">
-                            8500 Lorem Street Chicago, IL 55030 Dolor
+                            Airport Road, Abu dhabi, UAE
                           </span>
                         </a>
                       </p>
@@ -305,7 +305,7 @@ export default function MobileMenu() {
                       <p>
                         Phone:
                         <a href="tel:+88001234567">
-                          <span className="fw-medium">+8(800) 123 4567</span>
+                          <span className="fw-medium">+971 50 2 30 31 30</span>
                         </a>
                       </p>
                     </li>

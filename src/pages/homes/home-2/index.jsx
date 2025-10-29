@@ -16,8 +16,8 @@ import MetaComponent from "@/components/common/MetaComponent";
 import RecentProducts from "@/components/common/RecentProducts.jsx";
 
 const metadata = {
-  title: "Home 02 || MediaStore - MultiMedia eCommerce Website",
-  description: "MediaStore - MultiMedia eCommerce Website",
+  title: "Home | MediaStore",
+  description: "MediaStore",
 };
 export default function HomePage2() {
   return (

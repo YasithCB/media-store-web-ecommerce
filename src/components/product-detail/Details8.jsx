@@ -151,7 +151,7 @@ export default function Details8({postDetails}) {
                       </a>
                       <Link
                         to={`/shop-cart`}
-                        className="tf-btn"
+                        className="tf-btn-dark"
                       >
                         Buy now
                       </Link>

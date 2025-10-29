@@ -1,6 +1,5 @@
 import BrandsSlider from "@/components/common/BrandsSlider";
 import Footer1 from "@/components/footers/Footer1";
-import Header4 from "@/components/headers/Header4";
 import Description from "@/components/product-detail/Description";
 import Details8 from "@/components/product-detail/Details8";
 import Relatedproducts from "@/components/product-detail/Relatedproducts";
@@ -10,6 +9,7 @@ import MetaComponent from "@/components/common/MetaComponent";
 import {usePostsById} from "@/hooks/usePosts.js";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
 import {addRecentlyViewed} from "@/utlis/util.js";
+import Header2 from "@/components/headers/Header2.jsx";
 
 const metadata = {
   title: "Product Details || MediaStore - MultiMedia eCommerce Website",
@@ -31,7 +31,7 @@ export default function ProductInnerCircleZoomPage() {
   return (
     <>
       <MetaComponent meta={metadata} />
-      <Header4 />
+      <Header2 />
       <div className="tf-sp-1">
         <div className="container">
           <ul className="breakcrumbs">

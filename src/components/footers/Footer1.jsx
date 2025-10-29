@@ -250,7 +250,7 @@ export default function Footer1({ fullWidth = false }) {
                           <i className="icon-location" />
                         </span>
                         <a href="#" className="link">
-                          8500 Lorem Street Chicago, IL 55030 Dolor sit amet
+                          Airport Road, Abu Dhabi, UAE
                         </a>
                       </li>
                       <li>
@@ -259,7 +259,7 @@ export default function Footer1({ fullWidth = false }) {
                         </span>
                         <a href="#" className="product-title">
                           <span className="product-title text-third">
-                            +8(800) 123 4567
+                            +971 50 2 30 31 30
                           </span>
                         </a>
                       </li>

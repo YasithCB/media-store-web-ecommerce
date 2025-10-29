@@ -23,7 +23,7 @@ export default function Testimonials() {
               <p className="body-text-3">
                 <i className="icon-delivery-2 fs-24" />
                 Free shipping on all orders over
-                <span className="fw-bold">$250</span>
+                <span className="fw-bold">900 AED</span>
               </p>
             </div>
           </div>

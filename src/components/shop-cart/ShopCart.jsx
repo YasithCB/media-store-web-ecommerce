@@ -2,18 +2,39 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useContextElement } from "@/context/Context";
+import {getImageUrl} from "@/utlis/util.js";
+import Swal from "sweetalert2";
 export default function ShopCart() {
   const {
     cartProducts,
-    setCartProducts,
+    removeFromCart,
     totalPrice,
 
     updateQuantity,
   } = useContextElement();
 
-  const removeItem = (id) => {
-    setCartProducts((pre) => [...pre.filter((elm) => elm.id != id)]);
-  };
+    function confirmAndRemove(productId, category) {
+        Swal.fire({
+            title: "Remove from Cart?",
+            text: "Are you sure you want to remove this item?",
+            icon: "warning",
+            iconColor: '#212529',
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#212529",
+            confirmButtonText: "Yes, remove it",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeFromCart(productId, category);
+                Swal.fire({
+                    title: "Removed!",
+                    text: "Item has been removed from your cart.",
+                    icon: "success",
+                    confirmButtonColor: "#212529",
+                });
+            }
+        });
+    }
 
   return (
     <div className="s-shoping-cart tf-sp-2">
@@ -70,7 +91,7 @@ export default function ShopCart() {
                         <a href="#" className="img-box">
                           <img
                             alt=""
-                            src={product.imgSrc}
+                            src={getImageUrl(product.photos?.[0] || "")}
                             width={300}
                             height={300}
                           />
@@ -102,7 +123,9 @@ export default function ShopCart() {
                         className="tf-cart-item_price"
                       >
                         <p className="cart-price price-on-sale price-text fw-medium">
-                          ${product.price.toFixed(2)}
+                            {product.price != null && !isNaN(product.price)
+                                ? parseFloat(product.price).toFixed(2)
+                                : "N/A"} AED
                         </p>
                       </td>
                       <td
@@ -140,17 +163,17 @@ export default function ShopCart() {
                         className="tf-cart-item_total"
                       >
                         <p className="cart-total total-price price-text fw-medium">
-                          ${(product.price * product.quantity).toFixed(2)}
+                          {(parseFloat(product.price).toFixed(2) * product.quantity).toFixed(2)} AED
                         </p>
                       </td>
                       <td
                         data-cart-title="Remove"
                         className="remove-cart text-xxl-end"
                       >
-                        <span
-                          className="remove icon icon-close link"
-                          onClick={() => removeItem(product.id)}
-                        />
+                          <span
+                              className="icon-close remove link"
+                              onClick={() => confirmAndRemove(product.id, product.category_title)}
+                          />
                       </td>
                     </tr>
                   ))}
@@ -164,8 +187,7 @@ export default function ShopCart() {
                 <Link
                   className="tf-btn mt-2 mb-3 text-white"
                   style={{ width: "fit-content" }}
-                  href="/shop-default"
-                >
+                  to={"/shop-default"}>
                   Explore Products
                 </Link>
               </div>
@@ -183,15 +205,15 @@ export default function ShopCart() {
               </button>
             </div>
             <span className="last-total-price main-title fw-semibold">
-              Total: ${totalPrice.toFixed(2)}
+              Total: {totalPrice.toFixed(2)} AED
             </span>
           </div>
         </form>
         <div className="box-btn">
-          <Link to={`/product-grid`} className="tf-btn btn-gray">
+          <Link to={`/shop`} className="tf-btn btn-gray">
             <span className="text-white">Continue shopping</span>
           </Link>
-          <Link to={`/checkout`} className="tf-btn">
+          <Link to={`/checkout`} className="tf-btn-dark">
             <span className="text-white">Proceed to checkout</span>
           </Link>
         </div>

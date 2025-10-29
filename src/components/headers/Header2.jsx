@@ -7,6 +7,7 @@ import CartTotal from "../common/CartTotal";
 import WishlistLength from "../common/WishlistLength";
 import NavCategories from "./NavCategories";
 import SearchForm from "./SearchForm";
+
 export default function Header2() {
   return (
     <header className="tf-header style-3">

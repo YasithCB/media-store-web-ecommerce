@@ -1,13 +1,59 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 
 import { useContextElement } from "@/context/Context";
-export default function Cart() {
-  const { cartProducts, setCartProducts, totalPrice } = useContextElement();
+import {getImageUrl} from "@/utlis/util.js";
+import Swal from "sweetalert2";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-  const removeItem = (id) => {
-    setCartProducts((pre) => [...pre.filter((elm) => elm.id != id)]);
-  };
+export default function Cart() {
+  const { cartProducts, removeFromCart, totalPrice, currentUser, fetchCartFromDB } = useContextElement();
+
+    useEffect(() => {
+        if (currentUser?.id) {
+            fetchCartFromDB();
+        }
+    }, [currentUser]); // run when user logs in or changes
+
+    function confirmAndRemove(productId, category) {
+        Swal.fire({
+            title: "Remove from Cart?",
+            text: "Are you sure you want to remove this item?",
+            icon: "warning",
+            iconColor: '#212529',
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#212529",
+            confirmButtonText: "Yes, remove it",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeFromCart(productId, category);
+                Swal.fire({
+                    title: "Removed!",
+                    text: "Item has been removed from your cart.",
+                    icon: "success",
+                    confirmButtonColor: "#212529",
+                });
+            }
+        });
+    }
+
+    if (!currentUser)
+        return (
+            <div className="p-4 d-flex flex-column justify-content-center align-items-center text-center">
+                <div className="col-4">
+                    Your cart is empty. Log in to start adding favorite products and easily manage them from your cart!
+                </div>
+                <a
+                    className="tf-btn mt-2 mb-3 text-white"
+                    style={{ width: "fit-content" }}
+                    href="#log"
+                    data-bs-toggle="modal"
+                >
+                    Login Now
+                </a>
+            </div>
+        )
 
   return (
     <div
@@ -45,7 +91,7 @@ export default function Cart() {
               />
             </svg>
             <h6>
-              Your cart is curently empty <br />
+              Your cart is currently empty <br />
               Let up help you find the perfect item
             </h6>
             <Link to={`/shop-default`} className="tf-btn btn-gray w-100">
@@ -55,7 +101,7 @@ export default function Cart() {
         ) : (
           <ul className="popup-body product-list-wrap">
             {cartProducts.map((product, i) => (
-              <li key={i} className="file-delete">
+              <li key={i} className="file-delete m-0">
                 <div className="card-product style-row row-small-2 align-items-center">
                   <div className="card-product-wrapper">
                     <Link
@@ -64,16 +110,14 @@ export default function Cart() {
                     >
                       <img
                         className="img-product lazyload"
-                        src={product.imgSrc}
+                        src={getImageUrl(product.photos?.[0] || "")}
                         alt="image-product"
                         width={500}
                         height={500}
                       />
                       <img
                         className="img-hover lazyload"
-                        src={
-                          product.imgHover ? product.imgHover : product.imgSrc
-                        }
+                        src={getImageUrl(product.photos?.[0] || "")}
                         alt="image-product"
                         width={500}
                         height={500}
@@ -90,15 +134,16 @@ export default function Cart() {
                       </Link>
                       <p className="price-wrap fw-medium">
                         <span className="new-price price-text fw-medium">
-                          ${product.price.toFixed(3)}
+                          {product.price != null && !isNaN(product.price)
+                              ? parseFloat(product.price).toFixed(2)
+                              : "N/A"} AED
                         </span>
                       </p>
-                      <p className="body-md-2">X{product.quantity}</p>
                     </div>
                   </div>
                   <span
                     className="icon-close remove link"
-                    onClick={() => removeItem(product.id)}
+                    onClick={() => confirmAndRemove(product.id, product.category_title)}
                   />
                 </div>
               </li>
@@ -108,15 +153,15 @@ export default function Cart() {
         <div className="popup-footer">
           <p className="cart-total fw-semibold">
             <span>Subtotal:</span>
-            <span className="price-amount product-title text-primary">
-              ${totalPrice.toFixed(2)}
+            <span className="price-amount product-title text-third">
+              {totalPrice.toFixed(2)} AED
             </span>
           </p>
           <div className="box-btn">
             <Link to={`/shop-cart`} className="tf-btn btn-gray">
               <span className="text-white">View Cart</span>
             </Link>
-            <Link to={`/checkout`} className="tf-btn">
+            <Link to={`/checkout`} className="tf-btn-dark">
               <span className="text-white">Check Out</span>
             </Link>
           </div>
@@ -134,7 +179,7 @@ export default function Cart() {
             <p className="body-text-3">
               <i className="icon-delivery-2 fs-24" />
               Free shipping on all orders over{" "}
-              <span className="fw-bold">$250</span>
+              <span className="fw-bold">900 AED</span>
             </p>
           </div>
         </div>
