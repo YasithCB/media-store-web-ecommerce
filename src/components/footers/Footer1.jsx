@@ -258,7 +258,7 @@ export default function Footer1({ fullWidth = false }) {
                           <i className="icon-phone" />
                         </span>
                         <a href="#" className="product-title">
-                          <span className="product-title text-third">
+                          <span className="product-title">
                             +971 50 2 30 31 30
                           </span>
                         </a>
@@ -268,7 +268,7 @@ export default function Footer1({ fullWidth = false }) {
                           <i className="icon-direction" />
                         </span>
                         <a href="#" className="">
-                          <span className="text-third">
+                          <span>
                             info@mediastore.com
                           </span>
                         </a>

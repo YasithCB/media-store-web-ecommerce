@@ -1,9 +1,10 @@
 import Footer1 from "@/components/footers/Footer1";
-import Wishlist from "@/components/shop-cart/Wishlist";
 import React from "react";
 import { Link } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import Header2 from "@/components/headers/Header2.jsx";
+import MyOrders from "@/components/MyOrders.jsx";
+import Topbar1 from "@/components/headers/Topbar1.jsx";
 
 const metadata = {
     title: "My Orders | MediaStore",
@@ -13,6 +14,7 @@ export default function MyOrdersPage() {
     return (
         <>
             <MetaComponent meta={metadata} />
+            <Topbar1 parentClass="tf-topbar" />
             <Header2 />
             <div className="tf-sp-3 pb-0">
                 <div className="container">
@@ -33,7 +35,7 @@ export default function MyOrdersPage() {
                 </div>
             </div>
 
-            <Wishlist />
+            <MyOrders />
             <Footer1 />
         </>
     );

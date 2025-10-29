@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { allProducts } from "@/data/products";
+import React, {useEffect, useState, useContext} from "react";
+import {allProducts} from "@/data/products";
 import {getWishlistByUser, removeFromWishList as removeFromWishListAPI} from "@/api/wishlist.js";
 
 // 🆕 Optional (add your API endpoints later)
@@ -9,10 +9,11 @@ import {
     removeFromCartAPI,
     updateCartAPI, clearCartByUser
 } from "@/api/cart.js";
+import {getOrdersByUser} from "@/api/payment.js";
 
 const dataContext = React.createContext();
 
-export default function Context({ children }) {
+export default function Context({children}) {
     // 🛒 CART + WISHLIST STATE
     const [cartProducts, setCartProducts] = useState([]);
 
@@ -29,6 +30,26 @@ export default function Context({ children }) {
     // 👤 AUTH STATE
     const [currentUser, setCurrentUser] = useState(null);
     const [authToken, setAuthToken] = useState(null);
+
+    // MY ORDERS
+    const [myOrders, setMyOrders] = useState([]);
+
+
+    // MY ORDERS ----------------------------------------------
+    const fetchMyOrdersFromDB = async () => {
+        console.log("fetchMyOrdersFromDB");
+        if (!currentUser) return;
+        try {
+            const res = await getOrdersByUser(currentUser.id);
+            console.log("fetchMyOrdersFromDB res", res);
+            setMyOrders(res); // keep full response object
+        } catch (err) {
+            console.error("Failed to fetch orders:", err);
+        }
+    };
+
+
+    // MY ORDERS ----------------------------------------------
 
     const fetchWishlistFromDB = async () => {
         if (!currentUser) return;
@@ -54,7 +75,7 @@ export default function Context({ children }) {
         if (isAddedToCartProducts(id) && qty >= 1) {
             setCartProducts((prev) =>
                 prev.map((item) =>
-                    item.id === id ? { ...item, quantity: qty / 1 } : item
+                    item.id === id ? {...item, quantity: qty / 1} : item
                 )
             );
         }
@@ -87,7 +108,7 @@ export default function Context({ children }) {
         } catch (err) {
             console.error("Failed to remove from wishlist:", err);
             // Rollback: add it back in case of error
-            setWishList((prev) => [...prev, { post_id: postId, post_category: postCategory }]);
+            setWishList((prev) => [...prev, {post_id: postId, post_category: postCategory}]);
         }
     };
 
@@ -138,7 +159,7 @@ export default function Context({ children }) {
             // If already exists, increase quantity
             const updated = cartProducts.map((item) =>
                 item.id === productId
-                    ? { ...item, quantity: item.quantity + qty }
+                    ? {...item, quantity: item.quantity + qty}
                     : item
             );
             setCartProducts(updated);
@@ -156,7 +177,7 @@ export default function Context({ children }) {
             const product = allProducts.find((elm) => elm.id === productId);
             if (!product) return;
 
-            const newItem = { ...product, quantity: qty };
+            const newItem = {...product, quantity: qty};
             const updated = [...cartProducts, newItem];
             setCartProducts(updated);
             localStorage.setItem("cartList", JSON.stringify(updated));
@@ -270,6 +291,10 @@ export default function Context({ children }) {
         isAddedToCartProducts,
         removeFromCart,
         clearCart,
+
+        // MY ORDERS
+        myOrders,
+        fetchMyOrdersFromDB,
 
         // Wishlist
         wishList,

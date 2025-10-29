@@ -1,5 +1,4 @@
 import {fetchWrapper} from "@/utlis/fetchWrapper.js";
-import {items} from "@/data/collections.jsx";
 
 /**
  * ✅ Verify Tap payment (called from redirect or success page)
@@ -104,3 +103,20 @@ export const saveOrder = async (paymentData) => {
     }
 };
 
+/**
+ * 🌟 Fetch all orders for a specific user
+ * @param {string|number} userId
+ * @returns {Promise<Array>} - Array of orders
+ */
+export const getOrdersByUser = async (userId) => {
+    try {
+        if (!userId) throw new Error("User ID is required");
+
+        return await fetchWrapper(`/orders/${userId}`, {
+            method: "get",
+        });
+    } catch (err) {
+        console.error("Error fetching orders by user:", err);
+        throw err;
+    }
+};
