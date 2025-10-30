@@ -44,6 +44,13 @@ export default function Topbar1({parentClass = "tf-topbar line-bt"}) {
                     </div>
                     <div className="col-xl-6 d-none d-xl-block">
                         <div className="tf-cur justify-content-end bar-lang">
+                            <div className="tf-cur-item tf-currencies gap-0 cs-pointer" onClick={() => navigate("/my-posts")}>
+                                <i className="fa-solid fa-file-lines text-cl-2 me-2"></i>
+                                <div className="tf-curs">
+                                    <span className='body-small text-cl-2 hover-shine'>My Posts</span>
+                                </div>
+                            </div>
+
                             <div className="tf-cur-item tf-currencies gap-0 cs-pointer" onClick={() => navigate("/my-orders")}>
                                 <i className="fa-solid fa-bag-shopping text-cl-2 me-2"></i>
                                 <div className="tf-curs">

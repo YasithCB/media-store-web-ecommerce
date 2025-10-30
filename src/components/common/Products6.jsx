@@ -69,7 +69,6 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
             }}
           >
             {data.map((product) => (
-            // {products7.map((product) => (
               <SwiperSlide className="swiper-slide" key={product.id}>
                 <div
                   className={`card-product style-img-border ${
@@ -89,6 +88,7 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
                         width={product.width}
                         height={product.height}
                       />
+                        {console.log(getImageUrl(product.photos?.[0] || ""))}
                       <img
                         className="img-hover lazyload"
                         src={getImageUrl(product.photos?.[0] || "")}

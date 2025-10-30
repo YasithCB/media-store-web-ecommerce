@@ -10,6 +10,7 @@ import {
     updateCartAPI, clearCartByUser
 } from "@/api/cart.js";
 import {getOrdersByUser} from "@/api/payment.js";
+import {getPostsByUserId} from "@/api/posts.js";
 
 const dataContext = React.createContext();
 
@@ -36,14 +37,26 @@ export default function Context({children}) {
     // MY ORDERS
     const [myOrders, setMyOrders] = useState([]);
 
+    // MY POSTS
+    const [myPosts, setMyPosts] = useState([]);
+
+    // MY POSTS ----------------------------------------------
+    const fetchMyPostsFromDB = async () => {
+        try {
+            const res = await getPostsByUserId(currentUser.id); // call your API wrapper
+            setMyPosts(res); // store full response
+        } catch (err) {
+            console.error("Failed to fetch my posts:", err);
+        }
+    };
+    // MY POSTS ----------------------------------------------
+
 
     // MY ORDERS ----------------------------------------------
     const fetchMyOrdersFromDB = async () => {
-        console.log("fetchMyOrdersFromDB");
         if (!currentUser) return;
         try {
             const res = await getOrdersByUser(currentUser.id);
-            console.log("fetchMyOrdersFromDB res", res);
             setMyOrders(res); // keep full response object
         } catch (err) {
             console.error("Failed to fetch orders:", err);
@@ -158,9 +171,6 @@ export default function Context({children}) {
     };
 
     const addProductToCart = async (productId, qty = 1) => {
-        console.log(`cart add : ${productId}`)
-        console.log(`cart list : ${cartProducts}`)
-
         const existingItem = cartProducts.find((item) => item.id === productId);
 
         if (existingItem) {
@@ -303,6 +313,11 @@ export default function Context({children}) {
         // MY ORDERS
         myOrders,
         fetchMyOrdersFromDB,
+
+        // MY POSTS
+        myPosts,
+        setMyPosts,
+        fetchMyPostsFromDB,
 
         // Wishlist
         wishList,

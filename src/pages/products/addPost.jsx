@@ -9,6 +9,7 @@ import MetaComponent from "@/components/common/MetaComponent";
 import {toast} from "react-toastify";
 import {SmartToast} from "@/components/custom/ToastContainer.jsx";
 import Header2 from "@/components/headers/Header2.jsx";
+import {useContextElement} from "@/context/Context.jsx";
 
 const metadata = {
     title: "Add Post || MediaStore - MultiMedia eCommerce Website",
@@ -58,9 +59,12 @@ const categories = [
 ];
 
 export default function AddPostPage() {
+    const { currentUser } = useContextElement();
+
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         category_id: 1,
+        user_id: currentUser.id,
         subcategory_id: 0,
         title: "",
         company_name: "",
