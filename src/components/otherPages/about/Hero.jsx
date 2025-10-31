@@ -4,24 +4,25 @@ export default function Hero() {
   return (
     <section className="tf-sp-2">
       <div className="container">
-        <div className="flat-title-2">
+
           <div className="box-title">
-            <h3 className="fw-semibold">Welcome to MediaStore</h3>
-            <p className="product-title">
-              Blend contemporary designs with timeless elegance
-            </p>
+              <h3 className="fw-semibold">Welcome to MediaStore</h3>
+              <p className="product-title mb-1">
+                  Where creativity meets technology — shaping the future of digital media.
+              </p>
           </div>
           <div className="box-text">
-            At MediaStore, we offer meticulously curated collections that seamlessly
-            combine modern <br className="d-none d-xl-block" />
-            aesthetics with classic sophistication. With more than 15 years of
-            expertise, we serve <br className="d-none d-xl-block" />
-            fashion lovers who value quality, elegance, and adaptability.
+              At <strong>MediaStore</strong>, we specialize in delivering innovative digital solutions that
+              blend cutting-edge design with smart technology. With over 15 years of experience,
+              we empower brands, creators, and businesses to stand out in today’s fast-moving digital world.
+              <br className="d-none d-xl-block" />
+              From media production and marketing to custom software and web development —
+              we bring your vision to life with precision, passion, and purpose.
           </div>
-        </div>
-        <div
-          className="parallaxie parallax-style"
-          style={{ background: 'url("/images/section/parallax-3.jpg")' }}
+
+          <div
+          className="parallaxie parallax-style mt-3"
+          style={{ background: 'url("/images/section/parallax-3.jpg")', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
         />
       </div>
     </section>

@@ -11,59 +11,37 @@ import {
 
 export default function Nav() {
   const { pathname } = useLocation();
-  const isMenuActive = (link) => {
-    return link.href?.split("/")[1] == pathname.split("/")[1];
-  };
-  const isMenuParentActive = (menu) => {
-    return menu.some((elm) => isMenuActive(elm));
-  };
-  const isMenuParentActive2 = (menu) => {
-    return menu.some((elm) => isMenuParentActive(elm.items));
-  };
+
+    const isActive = (href) => {
+        if (href === "/") return pathname === "/";
+        return pathname.startsWith(href);
+    };
 
   return (
     <>
-      <li
-        className={`nav-item ${
-          isMenuParentActive(demoItems) ? "active" : ""
-        }  pst-unset`}
-      >
+      <li className={`nav-item ${isActive("/") ? "active" : ""}`}>
         <a href="/" className="item-link link body-md-2 fw-semibold">
           <span>Home</span>
         </a>
       </li>
 
-      <li
-        className={`nav-item ${isMenuParentActive2(shopPages) ? "active" : ""}`}
-      >
+      <li className={`nav-item ${isActive("/shop-fullwidth") ? "active" : ""}`}>
         <a href="/shop-fullwidth" className="item-link link body-md-2 fw-semibold">
           <span>Shop</span>
         </a>
       </li>
 
-      <li
-        className={`nav-item ${
-          isMenuParentActive(blogMenuItems) ? "active" : ""
-        }`}
-      >
+        <li className={`nav-item ${isActive("/blog-grid") ? "active" : ""}`}>
         <a href="/blog-grid" className="item-link link body-md-2 fw-semibold">
           <span>Blog</span>
         </a>
       </li>
-        <li
-            className={`nav-item ${
-                isMenuParentActive(blogMenuItems) ? "active" : ""
-            }`}
-        >
+        <li className={`nav-item ${isActive("/about") ? "active" : ""}`}>
             <a href="/about" className="item-link link body-md-2 fw-semibold">
                 <span>About</span>
             </a>
         </li>
-        <li
-            className={`nav-item ${
-                isMenuParentActive(blogMenuItems) ? "active" : ""
-            }`}
-        >
+        <li className={`nav-item ${isActive("/contact") ? "active" : ""}`}>
             <a href="/contact" className="item-link link body-md-2 fw-semibold">
                 <span>Contact</span>
             </a>

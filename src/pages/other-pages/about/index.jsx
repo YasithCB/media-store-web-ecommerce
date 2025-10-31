@@ -39,7 +39,7 @@ export default function AboutPage() {
       </div>
       <Hero />
       <Features />
-      <Testimonials />
+      {/*<Testimonials />*/}
       <BrandsSlider fullWidth />
       <Blogs />
       <Footer1 />

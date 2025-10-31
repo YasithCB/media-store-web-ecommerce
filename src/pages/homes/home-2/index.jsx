@@ -14,6 +14,7 @@ import Collections from "@/components/homes/home-2/Collections";
 import Footer1 from "@/components/footers/Footer1";
 import MetaComponent from "@/components/common/MetaComponent";
 import RecentProducts from "@/components/common/RecentProducts.jsx";
+import Blogs from "@/components/otherPages/about/Blogs.jsx";
 
 const metadata = {
   title: "Home | MediaStore",
@@ -46,6 +47,10 @@ export default function HomePage2() {
       <Products5 />
 
       <Collections />
+
+      {/* NEWS */}
+      <Blogs />
+
       <RecentProducts />
       <Footer1 />
     </>
