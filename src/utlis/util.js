@@ -1,13 +1,11 @@
-import {BASEURL} from "@/data/constants.js";
-
 export const getImageUrl = (path) => {
-    if (!path) return `${BASEURL}/uploads/default-image.png`;
+    if (!path) return `${import.meta.env.VITE_API_BASE_URL}/uploads/default-image.png`;
 
     // Normalize path
     let cleanPath = path.replace(/\\/g, "/"); // convert backslashes
     if (cleanPath.startsWith("/")) cleanPath = cleanPath.slice(1); // remove leading slash
 
-    return `${BASEURL}/${cleanPath}`;
+    return `${import.meta.env.VITE_API_BASE_URL}/${cleanPath}`;
 };
 
 export const getFirstPhoto = (photos) => {

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import AddToCart from "@/components/common/AddToCart";
 import AddToWishlist from "@/components/common/AddToWishlist";
-import AddToQuickview from "@/components/common/AddToQuickview";
+import AddToQuickView from "@/components/common/AddToQuickview";
 import AddToCompare from "@/components/common/AddToCompare";
 export default function Products6() {
   return (
@@ -133,7 +133,7 @@ export default function Products6() {
                         />
                       </li>
                       <li>
-                        <AddToQuickview
+                        <AddToQuickView
                           productId={product.id}
                           tooltipClass="tooltip-left"
                         />

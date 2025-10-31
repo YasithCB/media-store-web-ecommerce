@@ -88,7 +88,6 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
                         width={product.width}
                         height={product.height}
                       />
-                        {console.log(getImageUrl(product.photos?.[0] || ""))}
                       <img
                         className="img-hover lazyload"
                         src={getImageUrl(product.photos?.[0] || "")}
