@@ -21,8 +21,6 @@ export default function DealerDetails() {
     if (loading) return <LoadingDots />;
     if (error) return <p>Error: {error}</p>;
 
-    console.log("Fetched product:", data);
-
     return (
         <>
             <MetaComponent meta={metadata} />
@@ -55,7 +53,10 @@ export default function DealerDetails() {
                 </div>
             </div>
             <Details8 postDetails={data} />
-            <Description />
+
+            {/* review */}
+            {/*<Description />*/}
+
             {/*<SimilerProducts />*/}
             <RelatedProducts categoryId={data.category_id} subCategoryId={data.subcategory_id} />
             <BrandsSlider />

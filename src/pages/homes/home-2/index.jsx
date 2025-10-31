@@ -28,17 +28,23 @@ export default function HomePage2() {
       <Hero />
       <Features parentClass="tf-sp-2" />
       <Categories />
+
+      {/* TOP RATING */}
       <Products1 />
+
       <Banner />
-      {/*<Products2 />*/}
+
       <Products3 title={'Trending In Video & Camera'} subCategoryId={5} />
       <Products3 title={'Trending In Audio & Sound'} subCategoryId={4} />
+
       <Banner2 />
 
-      {/* top dealers */}
+      {/* TOP DEALERS */}
       <Products4 />
 
+      {/* STUDIOS */}
       <Products5 />
+
       <Collections />
       <RecentProducts />
       <Footer1 />

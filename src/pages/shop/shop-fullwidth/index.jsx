@@ -24,7 +24,7 @@ import Header2 from "@/components/headers/Header2.jsx";
 import Topbar1 from "@/components/headers/Topbar1.jsx";
 
 const metadata = {
-    title: "Products || MediaStore - MultiMedia eCommerce Website",
+    title: "Shop | MediaStore",
     description: "MediaStore - MultiMedia eCommerce Website",
 };
 export default function ShopFullwidthPage() {

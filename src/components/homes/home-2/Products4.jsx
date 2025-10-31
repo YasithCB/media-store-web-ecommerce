@@ -12,14 +12,13 @@ import Banner from '/images/banner/banner-7.jpg';
 import Product1 from '/images/item/tivi-4.png';
 import {useDealersTopRated} from "@/hooks/useDealers.js";
 import {getImageUrl} from "@/utlis/util.js";
+import {StarRating} from "@/components/custom/starRating.jsx";
 
 export default function Products4() {
     const { data, loading, error } = useDealersTopRated();
 
     if (loading) return <p>Loading top dealers...</p>;
     if (error) return <p>Error: {error}</p>;
-
-    console.log('Top Dealers : ', data)
 
     return (
     <section className="tf-sp-2">
@@ -172,6 +171,14 @@ export default function Products4() {
                         <p className="caption text-main-2 font-2">
                             {dealer.description}
                         </p>
+
+                        {/* RATING */}
+                        { dealer.rating &&
+                            <div className="star-review flex-wrap">
+                                <StarRating rating={dealer.rating} />
+                                <p className="caption text-main-2">{dealer.rating} ({Math.floor(Math.random() * 51) + 50})</p>
+                            </div>
+                        }
                     </div>
                   </div>
                 </div>

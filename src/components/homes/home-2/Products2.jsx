@@ -157,7 +157,7 @@ export default function Products2() {
                       <div className="box-title">
                         <div className="d-flex flex-column">
                           <p className="caption text-main-2 font-2">
-                              {product.sub_category_title}
+                              {product.subcategory_title}
                           </p>
                           <Link
                             to={`/product-detail/${product.id}`}

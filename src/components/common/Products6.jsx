@@ -10,6 +10,7 @@ import {getImageUrl} from "@/utlis/util.js";
 import {useEquipmentsTopRated} from "@/hooks/useEquipments.js";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
 import React from "react";
+import {StarRating} from "@/components/custom/starRating.jsx";
 
 export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
     const { data, loading, error } = useEquipmentsTopRated();
@@ -132,7 +133,7 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
                     <div className="box-title">
                       <div className="d-flex flex-column">
                         <p className="caption text-main-2 font-2">
-                            {product.sub_category_title}
+                            {product.subcategory_title}
                         </p>
                         <Link
                           to={`/product-detail/${product.id}`}
@@ -153,34 +154,15 @@ export default function Products6({ parentClass = "tf-sp-2 pt-0" }) {
                               : "N/A"}
                         </span>
                       </p>
+
+                        {/* RATING */}
+                        { product.rating &&
+                            <div className="star-review flex-wrap">
+                                <StarRating rating={product.rating} />
+                                <p className="caption text-main-2">{product.rating} ({Math.floor(Math.random() * 51) + 50})</p>
+                            </div>
+                        }
                     </div>
-                      {product.progressWidth ??
-                          <div className="box-infor-detail">
-                              <div className="product-progress-sale">
-                                  <div
-                                      className="progress-sold progress"
-                                      role="progressbar"
-                                      aria-valuemin={0}
-                                      aria-valuemax={100}
-                                  >
-                                      <div
-                                          className="progress-bar bg-dark"
-                                          style={{ width: product.progressWidth }}
-                                      />
-                                  </div>
-                                  <div className="box-quantity d-flex justify-content-between">
-                                      <p className="text-avaiable caption">
-                                          Sold:{" "}
-                                          <span className="fw-bold">{product.sold}</span>
-                                      </p>
-                                      <p className="text-avaiable caption">
-                                          Available:{" "}
-                                          <span className="fw-bold">{product.available}</span>
-                                      </p>
-                                  </div>
-                              </div>
-                          </div>
-                      }
                   </div>
                 </div>
               </SwiperSlide>

@@ -10,6 +10,7 @@ import AddToCompare from "./AddToCompare";
 import {getAllStudios} from "@/api/studio.js";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
 import {getImageUrl} from "@/utlis/util.js";
+import {StarRating} from "@/components/custom/starRating.jsx";
 export default function Products2({
   parentClass = "tf-sp-2 pt-0",
   title = "Studios For Rent",
@@ -38,9 +39,6 @@ export default function Products2({
             }, []);
 
             setSlides(productSlides)
-
-            console.log(`studios fetched ::::::::::`)
-            console.log(result.data)
         } catch (error) {
             console.error("Error fetching studios:", error);
         }
@@ -51,7 +49,6 @@ export default function Products2({
     }, []);
 
     if (!data) return <LoadingDots />;
-
 
   return (
     <section className={parentClass}>
@@ -138,7 +135,7 @@ export default function Products2({
                             </Link>
                           </div>
                           <div className="group-btn">
-                            <p className="price-wrap fw-medium">
+                            <p className="mb-1 price-wrap fw-medium">
                                 {product.sale_price ?
                                     <>
                                         <span className="new-price price-text fw-medium">
@@ -159,6 +156,15 @@ export default function Products2({
                                 }
 
                             </p>
+
+                              {/* RATING */}
+                              { product.rating &&
+                                  <div className="star-review flex-wrap">
+                                      <StarRating rating={product.rating} />
+                                      <p className="caption text-main-2">{product.rating} ({Math.floor(Math.random() * 51) + 50})</p>
+                                  </div>
+                              }
+
                             <ul className="list-product-btn flex-row">
                               <li>
                                 <AddToCart productId={product.id} />

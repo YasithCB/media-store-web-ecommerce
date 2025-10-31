@@ -146,9 +146,9 @@ export default function RecentProducts({
                 <div className="card-product-info">
                   <div className="box-title">
                     <div className="d-flex flex-column">
-                      <p className="caption text-main-2 font-2">
-                        {product.category}
-                      </p>
+                        <p className="caption text-main-2 font-2">
+                            {product.subcategory_title}
+                        </p>
                       <Link
                         to={`/product-detail/${product.id}`}
                         className="name-product body-md-2 fw-semibold text-secondary link"

@@ -9,15 +9,13 @@ import AddToQuickView from "@/components/common/AddToQuickview";
 import AddToCompare from "@/components/common/AddToCompare";
 import {useEquipmentBySubCategoryId} from "@/hooks/useEquipments.js";
 import {getImageUrl} from "@/utlis/util.js";
+import {StarRating} from "@/components/custom/starRating.jsx";
 
 export default function Products3({subCategoryId, title}) {
     const { data, loading, error } = useEquipmentBySubCategoryId(subCategoryId);
 
     if (loading) return <p>Loading Video & Cameras...</p>;
     if (error) return <p>Error: {error}</p>;
-
-    console.log(`useEquipmentBySubCategoryId : ${title}`)
-    console.log(data)
 
   return (
     <section className="tf-sp-2 ">
@@ -135,6 +133,14 @@ export default function Products3({subCategoryId, title}) {
                             : "N/A"}
                       </span>
                     </p>
+
+                      {/* RATING */}
+                      { product.rating &&
+                          <div className="star-review flex-wrap">
+                              <StarRating rating={product.rating} />
+                              <p className="caption text-main-2">{product.rating} ({Math.floor(Math.random() * 51) + 50})</p>
+                          </div>
+                      }
                   </div>
                 </div>
               </div>

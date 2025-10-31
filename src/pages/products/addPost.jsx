@@ -57,7 +57,7 @@ export default function AddPostPage() {
         "category_id",
         "subcategory_id",
         "category_title",
-        "sub_category_title",
+        "subcategory_title",
         "contact",
         "description",
     ];
@@ -250,7 +250,7 @@ export default function AddPostPage() {
                                     category_id: categoryId ? parseInt(categoryId) : null,
                                     category_title: selectedCategory ? selectedCategory.title : "",
                                     subcategory_id: null,
-                                    sub_category_title: "",
+                                    subcategory_title: "",
                                 }));
                             }}
                         >
@@ -270,7 +270,7 @@ export default function AddPostPage() {
                             value={selectedSubcategoryId || ""}
                             onChange={(e) => {
                                 const subId = e.target.value;
-                                const selectedCategory = categories.find(
+                                const selectedCategory = CATEGORIES_LIST.find(
                                     (c) => c.id === parseInt(selectedCategoryId)
                                 );
                                 const selectedSub = selectedCategory?.subcategories.find(
@@ -282,13 +282,13 @@ export default function AddPostPage() {
                                 setFormData((prev) => ({
                                     ...prev,
                                     subcategory_id: subId ? parseInt(subId) : null,
-                                    sub_category_title: selectedSub ? selectedSub.title : "",
+                                    subcategory_title: selectedSub ? selectedSub.title : "",
                                 }));
                             }}
                             disabled={!selectedCategoryId}
                         >
                             <option value="">Select Subcategory</option>
-                            {categories
+                            {CATEGORIES_LIST
                                 .find((c) => c.id === parseInt(selectedCategoryId))
                                 ?.subcategories.map((sub) => (
                                     <option key={sub.id} value={sub.id}>

@@ -11,7 +11,7 @@ export default function Brands() {
           <a href="#" className="brand-item d-inline-flex">
             <img
               alt="Brand"
-              src="/images/brand/lead-ecommerce.svg"
+              src="/images/brand/netflix.svg"
               width={159}
               height={100}
             />
@@ -21,7 +21,7 @@ export default function Brands() {
           <a href="#" className="brand-item d-inline-flex">
             <img
               alt="Brand"
-              src="/images/brand/ctaecom.svg"
+              src="/images/brand/adobe.svg"
               width={159}
               height={100}
             />
@@ -31,7 +31,7 @@ export default function Brands() {
           <a href="#" className="brand-item d-inline-flex">
             <img
               alt="Brand"
-              src="/images/brand/great-deal.svg"
+              src="/images/brand/cisco.svg"
               width={159}
               height={100}
             />
@@ -51,7 +51,7 @@ export default function Brands() {
           <a href="#" className="brand-item d-inline-flex">
             <img
               alt="Brand"
-              src="/images/brand/bestbuy.svg"
+              src="/images/brand/sony.svg"
               width={159}
               height={100}
             />
@@ -71,7 +71,7 @@ export default function Brands() {
           <a href="#" className="brand-item d-inline-flex">
             <img
               alt="Brand"
-              src="/images/brand/sudo.svg"
+              src="/images/brand/samsung.svg"
               width={159}
               height={100}
             />
@@ -81,7 +81,7 @@ export default function Brands() {
           <a href="#" className="brand-item d-inline-flex">
             <img
               alt="Brand"
-              src="/images/brand/global-brand.svg"
+              src="/images/brand/google.svg"
               width={159}
               height={100}
             />

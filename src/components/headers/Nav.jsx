@@ -32,114 +32,68 @@ export default function Nav() {
           <span>Home</span>
         </a>
       </li>
+
       <li
         className={`nav-item ${isMenuParentActive2(shopPages) ? "active" : ""}`}
       >
-        <a href="#" className="item-link link body-md-2 fw-semibold">
+        <a href="/shop-fullwidth" className="item-link link body-md-2 fw-semibold">
           <span>Shop</span>
-          <i className="icon icon-arrow-down" />
         </a>
-        <div className="sub-menu-container mega-menu text-nowrap">
-          <div className="wrapper-sub-menu">
-            {shopPages.map((menu) => (
-              <div key={menu.id} className="mega-menu-item">
-                <p className="menu-heading body-small">{menu.heading}</p>
-                <ul className="menu-list">
-                  {menu.items.map((item) => (
-                    <li
-                      key={item.id}
-                      className={` ${isMenuActive(item) ? "active" : ""}`}
-                    >
-                      <Link to={item.href} className="body-md-2 link">
-                        <span>{item.text}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
       </li>
-      <li
-        className={`nav-item ${
-          isMenuParentActive2(shopDetailsPages) ? "active" : ""
-        }`}
-      >
-        <a href="#" className="item-link link body-md-2 fw-semibold">
-          <span>Product</span>
-          <i className="icon icon-arrow-down" />
-        </a>
-        <div className="sub-menu-container mega-menu text-nowrap">
-          <div className="wrapper-sub-menu">
-            {shopDetailsPages.map((menu) => (
-              <div key={menu.id} className="mega-menu-item">
-                <p className="menu-heading body-small">{menu.heading}</p>
-                <ul className="menu-list">
-                  {menu.items.map((item) => (
-                    <li
-                      key={item.id}
-                      className={` ${isMenuActive(item) ? "active" : ""}`}
-                    >
-                      <Link to={item.href} className="body-md-2 link">
-                        <span>{item.text}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </li>
+
       <li
         className={`nav-item ${
           isMenuParentActive(blogMenuItems) ? "active" : ""
         }`}
       >
-        <a href="#" className="item-link link body-md-2 fw-semibold">
+        <a href="/blog-grid" className="item-link link body-md-2 fw-semibold">
           <span>Blog</span>
-          <i className="icon icon-arrow-down" />
         </a>
-        <div className="sub-menu-container">
-          <ul className="sub-menu-list">
-            {blogMenuItems.map((item) => (
-              <li
-                key={item.id}
-                className={` ${isMenuActive(item) ? "active" : ""}`}
-              >
-                <Link to={item.href} className="body-md-2 link">
-                  <span>{item.text}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
       </li>
-      <li
-        className={`nav-item relative ${
-          isMenuParentActive(othersPages) ? "active" : ""
-        }`}
-      >
-        <a href="#" className="item-link link body-md-2 fw-semibold">
-          <span>Page</span>
-          <i className="icon icon-arrow-down" />
-        </a>
-        <div className="sub-menu-container">
-          <ul className="sub-menu-list">
-            {othersPages.map((item) => (
-              <li
-                key={item.id}
-                className={` ${isMenuActive(item) ? "active" : ""}`}
-              >
-                <Link to={item.href} className="body-md-2 link">
-                  <span>{item.text}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </li>
+        <li
+            className={`nav-item ${
+                isMenuParentActive(blogMenuItems) ? "active" : ""
+            }`}
+        >
+            <a href="/about" className="item-link link body-md-2 fw-semibold">
+                <span>About</span>
+            </a>
+        </li>
+        <li
+            className={`nav-item ${
+                isMenuParentActive(blogMenuItems) ? "active" : ""
+            }`}
+        >
+            <a href="/contact" className="item-link link body-md-2 fw-semibold">
+                <span>Contact</span>
+            </a>
+        </li>
+
+
+      {/*<li*/}
+      {/*  className={`nav-item relative ${*/}
+      {/*    isMenuParentActive(othersPages) ? "active" : ""*/}
+      {/*  }`}*/}
+      {/*>*/}
+      {/*  <a href="#" className="item-link link body-md-2 fw-semibold">*/}
+      {/*    <span>Page</span>*/}
+      {/*    <i className="icon icon-arrow-down" />*/}
+      {/*  </a>*/}
+      {/*  <div className="sub-menu-container">*/}
+      {/*    <ul className="sub-menu-list">*/}
+      {/*      {othersPages.map((item) => (*/}
+      {/*        <li*/}
+      {/*          key={item.id}*/}
+      {/*          className={` ${isMenuActive(item) ? "active" : ""}`}*/}
+      {/*        >*/}
+      {/*          <Link to={item.href} className="body-md-2 link">*/}
+      {/*            <span>{item.text}</span>*/}
+      {/*          </Link>*/}
+      {/*        </li>*/}
+      {/*      ))}*/}
+      {/*    </ul>*/}
+      {/*  </div>*/}
+      {/*</li>*/}
     </>
   );
 }

@@ -21,7 +21,7 @@ export default function DealerCard({ item }) {
     return (
         <div className="card-product">
             <div className="card-product-wrapper">
-                <Link to={`/product-detail/${item.id}`} className="product-img">
+                <Link to={`/dealer-detail/${item.id}`} className="product-img">
                     <img
                         className="img-product ls-is-cached lazyloaded"
                         src={getImageUrl(item.logo)}
@@ -64,7 +64,7 @@ export default function DealerCard({ item }) {
                 <div className="box-title">
                     <div>
                         <Link
-                            to={`/product-detail/${item.id}`}
+                            to={`/dealer-detail/${item.id}`}
                             className="name-product body-md-2 fw-semibold text-secondary link"
                         >
                             {item.title}

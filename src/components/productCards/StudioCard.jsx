@@ -89,7 +89,7 @@ export default function StudioCard({item}) {
                 <div className="box-infor-detail">
                     <ul className="list-computer-memory">
                         <li>
-                            <p className="caption">{item.sub_category_title}</p>
+                            <p className="caption">{item.subcategory_title}</p>
                         </li>
                         {item.is_rent === 1 && (
                             <li>

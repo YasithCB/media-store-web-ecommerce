@@ -192,7 +192,7 @@ export default function EditPostPage() {
                                     setFormData((prev) => ({
                                         ...prev,
                                         subcategory_id: subId ? parseInt(subId) : null,
-                                        sub_category_title: selectedSub ? selectedSub.title : "",
+                                        subcategory_title: selectedSub ? selectedSub.title : "",
                                     }));
                                 }}
                                 disabled={!selectedCategoryId}

@@ -26,8 +26,6 @@ export default function ProductInnerCircleZoomPage() {
     if (loading) return <LoadingDots />;
     if (error) return <p>Error: {error}</p>;
 
-    console.log("Fetched product:", data);
-
   return (
     <>
       <MetaComponent meta={metadata} />
@@ -60,7 +58,10 @@ export default function ProductInnerCircleZoomPage() {
         </div>
       </div>
       <Details8 postDetails={data} />
-      <Description />
+
+      {/* review */}
+      {/*<Description />*/}
+
       {/*<SimilerProducts />*/}
       <Relatedproducts categoryId={data.category_id} subCategoryId={data.subcategory_id} />
       <BrandsSlider />

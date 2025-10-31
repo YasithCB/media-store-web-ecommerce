@@ -18,9 +18,6 @@ export default function Relatedproducts({categoryId, subCategoryId}) {
     if (loading) return <LoadingDots />;
     if (error) return <p>Error: {error}</p>;
 
-    console.log(`Relatedproducts : ${subCategoryId}`)
-    console.log(data)
-
   return (
     <section className="tf-sp-2 pt-0">
       <div className="container">
@@ -62,6 +59,7 @@ export default function Relatedproducts({categoryId, subCategoryId}) {
           }}
           spaceBetween={15}
         >
+
           {data.map((dealer) => (
               <SwiperSlide className="swiper-slide" key={dealer.id}>
                   <div
@@ -69,25 +67,48 @@ export default function Relatedproducts({categoryId, subCategoryId}) {
                       data-wow-delay={dealer.wowDelay}
                   >
                       <div className="card-product-wrapper">
-                          <Link
-                              to={`/dealer-detail/${dealer.id}`}
-                              className="product-img"
-                          >
-                              <img
-                                  className="img-product lazyload"
-                                  src={getImageUrl(dealer.photos[0] || "")}
-                                  alt="image-product"
-                                  width={dealer.width}
-                                  height={dealer.height}
-                              />
-                              <img
-                                  className="img-hover lazyload"
-                                  src={getImageUrl(dealer.photos[0] || "")}
-                                  alt="image-product"
-                                  width={dealer.width}
-                                  height={dealer.height}
-                              />
-                          </Link>
+                          { dealer.category_id.toString() === '3' ?
+                              <Link
+                                  to={`/dealer-detail/${dealer.id}`}
+                                  className="product-img"
+                              >
+                                  <img
+                                      className="img-product lazyload"
+                                      src={getImageUrl(dealer.logo || "")}
+                                      alt="image-product"
+                                      width={dealer.width}
+                                      height={dealer.height}
+                                  />
+                                  <img
+                                      className="img-product lazyload"
+                                      src={getImageUrl(dealer.logo || "")}
+                                      alt="image-product"
+                                      width={dealer.width}
+                                      height={dealer.height}
+                                  />
+                              </Link>
+                              :
+                              <Link
+                                  to={`/dealer-detail/${dealer.id}`}
+                                  className="product-img"
+                              >
+                                  <img
+                                      className="img-product lazyload"
+                                      src={getImageUrl(dealer.photos[0] || "")}
+                                      alt="image-product"
+                                      width={dealer.width}
+                                      height={dealer.height}
+                                  />
+                                  <img
+                                      className="img-product lazyload"
+                                      src={getImageUrl(dealer.photos[0] || "")}
+                                      alt="image-product"
+                                      width={dealer.width}
+                                      height={dealer.height}
+                                  />
+                              </Link>
+
+                          }
                           <ul className="list-product-btn">
                               <li>
                                   <AddToCart

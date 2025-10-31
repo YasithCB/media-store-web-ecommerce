@@ -13,7 +13,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
                 flexFlow: "row",
                 alignItems: "center",
                 animation:
-                  "12.72s linear 0s infinite normal none running infiniteslider",
+                  "16s linear 0s infinite normal none running infiniteslider",
               }}
             >
               <div
@@ -22,7 +22,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/lead-ecommerce.svg"
+                  src="/images/brand/amazon.png"
                   width={159}
                   height={100}
                 />
@@ -33,7 +33,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/global-brand.svg"
+                  src="/images/brand/canon.png"
                   width={159}
                   height={100}
                 />
@@ -44,7 +44,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/great-deal.svg"
+                  src="/images/brand/fujifilm.png"
                   width={159}
                   height={100}
                 />
@@ -55,7 +55,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/walmart.svg"
+                  src="/images/brand/google.png"
                   width={159}
                   height={100}
                 />
@@ -66,7 +66,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/rodem.svg"
+                  src="/images/brand/ibm.png"
                   width={159}
                   height={100}
                 />
@@ -77,7 +77,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/fabric.svg"
+                  src="/images/brand/intel.png"
                   width={159}
                   height={100}
                 />
@@ -88,7 +88,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/sudo.svg"
+                  src="/images/brand/microsoft.png"
                   width={159}
                   height={100}
                 />
@@ -99,7 +99,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/ctaecom.svg"
+                  src="/images/brand/netflix.png"
                   width={159}
                   height={100}
                 />
@@ -110,7 +110,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/lead-ecommerce.svg"
+                  src="/images/brand/nikon.png"
                   width={159}
                   height={100}
                 />
@@ -121,7 +121,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/global-brand.svg"
+                  src="/images/brand/panasonic.png"
                   width={159}
                   height={100}
                 />
@@ -132,7 +132,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/great-deal.svg"
+                  src="/images/brand/sony.png"
                   width={159}
                   height={100}
                 />
@@ -143,7 +143,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/walmart.svg"
+                  src="/images/brand/starbucks.png"
                   width={159}
                   height={100}
                 />
@@ -154,7 +154,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/rodem.svg"
+                  src="/images/brand/walmart.png"
                   width={159}
                   height={100}
                 />
@@ -165,7 +165,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/fabric.svg"
+                  src="/images/brand/orient.png"
                   width={159}
                   height={100}
                 />
@@ -176,7 +176,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/sudo.svg"
+                  src="/images/brand/shure.svg"
                   width={159}
                   height={100}
                 />
@@ -187,7 +187,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/ctaecom.svg"
+                  src="/images/brand/rode.png"
                   width={159}
                   height={100}
                 />
@@ -198,7 +198,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/lead-ecommerce.svg"
+                  src="/images/brand/olympus.png"
                   width={159}
                   height={100}
                 />
@@ -209,7 +209,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/global-brand.svg"
+                  src="/images/brand/kodak.png"
                   width={159}
                   height={100}
                 />
@@ -220,7 +220,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/great-deal.svg"
+                  src="/images/brand/akg.svg"
                   width={159}
                   height={100}
                 />
@@ -231,7 +231,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/walmart.svg"
+                  src="/images/brand/samsung.png"
                   width={159}
                   height={100}
                 />
@@ -242,7 +242,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/rodem.svg"
+                  src="/images/brand/philips.png"
                   width={159}
                   height={100}
                 />
@@ -253,7 +253,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/fabric.svg"
+                  src="/images/brand/sigma.svg"
                   width={159}
                   height={100}
                 />
@@ -264,7 +264,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/sudo.svg"
+                  src="/images/brand/rode.png"
                   width={159}
                   height={100}
                 />
@@ -275,7 +275,7 @@ export default function BrandsSlider({ fullWidth = false, typeClass = "" }) {
               >
                 <img
                   alt="brand"
-                  src="/images/brand/ctaecom.svg"
+                  src="/images/brand/casio.png"
                   width={159}
                   height={100}
                 />
