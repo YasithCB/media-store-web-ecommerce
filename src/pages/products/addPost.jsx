@@ -10,53 +10,12 @@ import {toast} from "react-toastify";
 import {SmartToast} from "@/components/custom/ToastContainer.jsx";
 import Header2 from "@/components/headers/Header2.jsx";
 import {useContextElement} from "@/context/Context.jsx";
+import {CATEGORIES_LIST} from "@/data/constants.js";
 
 const metadata = {
     title: "Add Post || MediaStore - MultiMedia eCommerce Website",
     description: "MediaStore - MultiMedia eCommerce Website",
 };
-
-// Define categories and subcategories
-const categories = [
-    {
-        id: 1,
-        title: "Equipment and Machinery",
-        subcategories: [
-            { id: 5, title: "Video & Camera Equipment" },
-            { id: 4, title: "Audio & Sound Equipment" },
-            { id: 6, title: "Lighting Equipment" },
-            { id: 7, title: "Studio & Production Equipment" },
-            { id: 8, title: "Broadcasting Equipment" },
-            { id: 9, title: "Accessories and Parts" },
-            { id: 35, title: "Printing Machinery" },
-            { id: 28, title: "Other Media-related Equipments" },
-        ],
-    },
-    {
-        id: 2,
-        title: "Jobs",
-        subcategories: [
-            { id: 12, title: "Creative Roles" },
-            { id: 13, title: "Media Production" },
-            { id: 14, title: "Broadcast & Journalism" },
-            { id: 15, title: "Marketing & Advertising" },
-            { id: 16, title: "Event & Media Management" },
-            { id: 17, title: "Technical & Support" },
-            { id: 18, title: "Other Media-related Roles" },
-        ],
-    },
-    {
-        id: 4,
-        title: "Studios",
-        subcategories: [
-            { id: 36, title: "Video Studio" },
-            { id: 38, title: "Media Studio" },
-            { id: 39, title: "Photography Studio" },
-            { id: 40, title: "Podcast Studio" },
-            { id: 41, title: "Media School Studio" },
-        ],
-    },
-];
 
 export default function AddPostPage() {
     const { currentUser } = useContextElement();
@@ -67,9 +26,10 @@ export default function AddPostPage() {
         user_id: currentUser.id,
         subcategory_id: 0,
         title: "",
+        quantity: 1,
         company_name: "",
         category_title: "Equipment and Machinery",
-        sub_category_title: "",
+        subcategory_title: "",
         contact: "",
         email: "",
         price: "",
@@ -272,7 +232,7 @@ export default function AddPostPage() {
                             value={selectedCategoryId || ""} // ensure controlled input
                             onChange={(e) => {
                                 const categoryId = e.target.value;
-                                const selectedCategory = categories.find(
+                                const selectedCategory = CATEGORIES_LIST.find(
                                     (cat) => cat.id === parseInt(categoryId)
                                 );
 
@@ -295,7 +255,7 @@ export default function AddPostPage() {
                             }}
                         >
                             <option value="">Select Category</option>
-                            {categories.map((cat) => (
+                            {CATEGORIES_LIST.map((cat) => (
                                 <option key={cat.id} value={cat.id}>
                                     {cat.title}
                                 </option>
@@ -391,7 +351,7 @@ export default function AddPostPage() {
                     </div>
 
                     <div className="row">
-                        <div className="mb-3 col-md-6 custom-input">
+                        <div className="mb-3 col-12 col-md custom-input">
                             <label className="form-label">Country</label>
                             <input
                                 type="text"
@@ -402,7 +362,7 @@ export default function AddPostPage() {
                             />
                         </div>
 
-                        <div className="mb-3 col-md-6 custom-input">
+                        <div className="mb-3 col-12 col-md custom-input">
                             <label className="form-label">City</label>
                             <input
                                 type="text"
@@ -412,6 +372,21 @@ export default function AddPostPage() {
                                 onChange={handleChange}
                             />
                         </div>
+
+                        { selectedCategoryId !== '4' &&
+                            <div className="mb-3 col-12 col-md custom-input">
+                                <label className="form-label">{selectedCategoryId === '2' ? 'Positions Available QTY' : 'Available QTY'}</label>
+                                <input
+                                    type="number"
+                                    className="form-control modern-input"
+                                    name="quantity"
+                                    value={formData.quantity}
+                                    min={1}       // no negative numbers
+                                    step={1}      // only integers
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        }
                     </div>
 
                     { selectedCategoryId === '2' ?

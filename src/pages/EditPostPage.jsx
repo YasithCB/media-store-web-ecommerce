@@ -9,6 +9,7 @@ import {SmartToast} from "@/components/custom/ToastContainer.jsx";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
 import {getPostById, updatePost} from "@/api/posts.js";
 import {getImageUrl} from "@/utlis/util.js";
+import {CATEGORIES_LIST} from "@/data/constants.js";
 
 const metadata = {
     title: "Edit Post || MediaStore",
@@ -165,6 +166,49 @@ export default function EditPostPage() {
                 <h3 className="mb-4">Edit Post</h3>
 
                 <form onSubmit={handleSubmit}>
+                    {/* CATEGORY | SUBCATEGORY */}
+                    <div className="row">
+                        <div className="mb-3 col-md custom-input">
+                            <label className="form-label">Category</label>
+                            <p className="form-control-plaintext fw-bold text-uppercase">{formData.category_title || "-"}</p>
+                        </div>
+
+                        <div className="mb-3 col-md subcategory-dropdown col-12 col-md-6 custom-select">
+                            <label className="form-label">Subcategory *</label>
+                            <select
+                                className="form-select modern-select"
+                                value={selectedSubcategoryId || ""}
+                                onChange={(e) => {
+                                    const subId = e.target.value;
+                                    const selectedCategory = CATEGORIES_LIST.find(
+                                        (c) => c.id === parseInt(selectedCategoryId)
+                                    );
+                                    const selectedSub = selectedCategory?.subcategories.find(
+                                        (s) => s.id === parseInt(subId)
+                                    );
+
+                                    setSelectedSubcategoryId(subId);
+
+                                    setFormData((prev) => ({
+                                        ...prev,
+                                        subcategory_id: subId ? parseInt(subId) : null,
+                                        sub_category_title: selectedSub ? selectedSub.title : "",
+                                    }));
+                                }}
+                                disabled={!selectedCategoryId}
+                            >
+                                <option value="">Select Subcategory</option>
+                                {CATEGORIES_LIST
+                                    .find((c) => c.id === parseInt(selectedCategoryId))
+                                    ?.subcategories.map((sub) => (
+                                        <option key={sub.id} value={sub.id}>
+                                            {sub.title}
+                                        </option>
+                                    ))}
+                            </select>
+                        </div>
+                    </div>
+
                     {/* TITLE */}
                     <div className="mb-3 custom-input">
                         <label className="form-label">Title *</label>
@@ -200,6 +244,47 @@ export default function EditPostPage() {
                                 onChange={handleChange}
                             />
                         </div>
+                    </div>
+
+                    {/* CITY | COUNTRY | QTY */}
+                    <div className="row">
+                        <div className="mb-3 col-12 col-md custom-input">
+                            <label className="form-label">City</label>
+                            <input
+                                type="text"
+                                name="city"
+                                className="form-control modern-input"
+                                value={formData.city || ""}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        <div className="mb-3 col-12 col-md custom-input">
+                            <label className="form-label">Country</label>
+                            <input
+                                type="text"
+                                name="country"
+                                className="form-control modern-input"
+                                value={formData.country || ""}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        { selectedCategoryId !== '4' &&
+                            <div className="mb-3 col-12 col-md custom-input">
+                                <label className="form-label">{selectedCategoryId === '2' ? 'Positions Available QTY' : 'Available QTY'}</label>
+                                <input
+                                    type="number"
+                                    className="form-control modern-input"
+                                    name="quantity"
+                                    value={formData.quantity}
+                                    min={1}       // no negative numbers
+                                    step={1}      // only integers
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        }
+
                     </div>
 
                     {/* DESCRIPTION */}
