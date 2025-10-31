@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
-  title: "Contact || MediaStore - MultiMedia eCommerce Website",
+  title: "Contact | MediaStore",
   description: "MediaStore - MultiMedia eCommerce Website",
 };
 export default function ContactPage() {
