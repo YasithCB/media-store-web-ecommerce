@@ -253,3 +253,20 @@
 .dark-btn
 /* buttons */
 
+
+/* NAVBAR --------------------------------------------------------------------------------------------------- */
+/* LOGO */
+.logo-img {
+    width: 100px; /* default desktop width */
+}
+@media (max-width: 768px) {
+    .logo-img {
+        width: 80px; /* smaller on mobile */
+    }
+}
+@media (max-width: 480px) {
+    .logo-img {
+        width: 50px; /* extra small mobile */
+    }
+}
+/* NAVBAR --------------------------------------------------------------------------------------------------- */

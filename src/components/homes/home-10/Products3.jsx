@@ -29,7 +29,7 @@ export default function Products3() {
             data-wow-delay="0s"
           >
             <div className="banner-product-3 hover-img">
-              <Link to={`/shop-default`} className="image img-style h-100">
+              <Link to={`/shop-fullwidth`} className="image img-style h-100">
                 <img
                   src="/images/section/product-15.jpg"
                   alt=""
@@ -44,7 +44,7 @@ export default function Products3() {
                 </div>
                 <div className="box-title">
                   <Link
-                    to={`/shop-default`}
+                    to={`/shop-fullwidth`}
                     className="name main-title-3 fw-bold link"
                   >
                     20W Charging Speed For <br className="d-none d-xxl-block" />

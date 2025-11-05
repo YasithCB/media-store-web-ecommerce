@@ -4,7 +4,7 @@ export default function Toolbar() {
   return (
     <div className="tf-toolbar-bottom d-xl-none">
       <div className="toolbar-item">
-        <Link to={`/shop-default`}>
+        <Link to={`/shop-fullwidth`}>
           <span className="toolbar-icon">
             <svg
               width={20}

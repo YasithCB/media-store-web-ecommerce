@@ -29,7 +29,7 @@ export default function Details1({ product }) {
                       <p className="caption">
                         Categories:
                         <Link
-                          to={`/shop-default`}
+                          to={`/shop-fullwidth`}
                           className="link text-secondary"
                         >
                           Consumer Electronics
@@ -66,7 +66,7 @@ export default function Details1({ product }) {
                         </li>
                         <li className="d-flex">
                           <Link
-                            to={`/shop-default`}
+                            to={`/shop-fullwidth`}
                             className="caption text-secondary link"
                           >
                             View shop

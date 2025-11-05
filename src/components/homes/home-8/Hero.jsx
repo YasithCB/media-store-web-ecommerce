@@ -28,7 +28,7 @@ export default function Hero() {
                   Let power flow through you
                 </p>
                 <p className="font-5 text-cl-5 text-xl">
-                  <Link to={`/shop-default`} className="link">
+                  <Link to={`/shop-fullwidth`} className="link">
                     Dell G5 <br />
                     Gaming Laptop
                   </Link>

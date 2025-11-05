@@ -14,7 +14,7 @@ export default function Product3() {
       <div className="container">
         <div className="banner-image-product hover-img">
           <Link
-            to={`/shop-default`}
+            to={`/shop-fullwidth`}
             className="image img-2 img-style overflow-visible relative"
           >
             <img
@@ -32,7 +32,7 @@ export default function Product3() {
           <div className="content">
             <div className="box-title">
               <h1 className="fw-normal">
-                <Link to={`/shop-default`} className="link text-white">
+                <Link to={`/shop-fullwidth`} className="link text-white">
                   GameConsole <br className="d-none d-xl-block" />
                   Destiny Special Edition
                 </Link>
@@ -46,7 +46,7 @@ export default function Product3() {
             </div>
             <div className="box-btn">
               <Link
-                to={`/shop-default`}
+                to={`/shop-fullwidth`}
                 className="tf-btn-icon type-2 style-white"
               >
                 <i className="icon-circle-chevron-right" />

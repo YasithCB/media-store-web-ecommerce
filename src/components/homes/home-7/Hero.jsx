@@ -21,7 +21,7 @@ export default function Hero() {
           <div className="content w-auto">
             <div className="box-title">
               <h1 className="fw-normal">
-                <Link to={`/shop-default`} className="link font-5 text-white">
+                <Link to={`/shop-fullwidth`} className="link font-5 text-white">
                   Room-Filling Sound
                 </Link>
               </h1>
@@ -34,7 +34,7 @@ export default function Hero() {
                 <span>$</span>3.490
               </h1>
               <Link
-                to={`/shop-default`}
+                to={`/shop-fullwidth`}
                 className="tf-btn style-3 hover-link-icon bg-primary"
               >
                 <span className="caption fw-bold text-uppercase">Shop now</span>

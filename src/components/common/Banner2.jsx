@@ -35,7 +35,7 @@ export default function Banner2() {
         >
           <SwiperSlide className="swiper-slide">
             <Link
-              to={`/shop-default`}
+              to={`/shop-fullwidth`}
               className="banner-image-product-2 type-sp-2 hover-img d-block"
             >
               <div className="item-image img-style overflow-visible position2">
@@ -72,7 +72,7 @@ export default function Banner2() {
 
           <SwiperSlide className="swiper-slide">
             <Link
-              to={`/shop-default`}
+              to={`/shop-fullwidth`}
               className="banner-image-product-2 style-2 type-sp-2 hover-img d-block"
             >
               <div className="item-image img-style overflow-visible position3">

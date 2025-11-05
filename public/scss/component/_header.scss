@@ -100,7 +100,7 @@ header {
 
 .tf-header {
   .logo-site {
-    max-width: 185px;
+    max-width: 90px;
     width: 100%;
   }
 
@@ -790,11 +790,11 @@ header {
   }
 
   .logo-site {
-    position: absolute;
+    position: relative;
     top: 20px;
     left: 20px;
     z-index: 100;
-    max-width: 130px;
+    max-width: 100px;
   }
 
   .mb-body {
@@ -837,7 +837,6 @@ header {
   }
 
   .mb-canvas-content {
-    padding-top: 70px;
     min-width: 100%;
     max-width: min(90%, 320px);
     grid-auto-rows: minmax(0, 1fr) auto;
@@ -922,12 +921,12 @@ header {
 
     &.active {
       .mb-menu-link {
-        color: var(--primary);
+        color: var(--third);
 
         .btn-open-sub {
           &::after,
           &::before {
-            background-color: var(--primary);
+            background-color: var(--third);
           }
         }
       }

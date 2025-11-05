@@ -22,7 +22,7 @@ export default function Products3() {
           <h3 className="text-third-2 fw-semibold font-2">$84.700</h3>
           <div className="box-btn">
             <Link
-              to={`/shop-default`}
+              to={`/shop-fullwidth`}
               className="tf-btn-icon style-white d-inline-flex"
             >
               <i className="icon-circle-chevron-right" />

@@ -394,7 +394,7 @@ export function Checkout() {
                                     <Link
                                         className="tf-btn mt-2 mb-3 text-white"
                                         style={{width: "fit-content"}}
-                                        to={'/shop-default'}>
+                                        to={'/shop-fullwidth'}>
                                         Explore Products
                                     </Link>
                                 </div>

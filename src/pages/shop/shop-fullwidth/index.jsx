@@ -83,8 +83,6 @@ export default function ShopFullwidthPage() {
             }
 
             setData(result.data);
-            console.log(`${id} : results ::::::::::`)
-            console.log(result.data)
         } catch (error) {
             console.error("Error fetching data:", error);
         }

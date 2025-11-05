@@ -48,7 +48,7 @@ export default function Products1() {
               </div>
               <div className="box-bottom">
                 <Link
-                  to={`/shop-default`}
+                  to={`/shop-fullwidth`}
                   className="link h3 mb-0 lh-xl-49 text-white"
                 >
                   Redmi <span className="fw-2">Note 9</span>

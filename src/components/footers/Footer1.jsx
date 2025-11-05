@@ -163,37 +163,37 @@ export default function Footer1({ fullWidth = false }) {
                   <div className="tf-collapse-content">
                     <ul className="ft-menu-list">
                       <li>
-                        <Link to={`/shop-default`} className="link">
+                        <Link to={`/shop-fullwidth`} className="link">
                           Laptops &amp; Computers
                         </Link>
                       </li>
                       <li>
-                        <Link to={`/shop-default`} className="link">
+                        <Link to={`/shop-fullwidth`} className="link">
                           Cameras &amp; Photography
                         </Link>
                       </li>
                       <li>
-                        <Link to={`/shop-default`} className="link">
+                        <Link to={`/shop-fullwidth`} className="link">
                           Smart Phones &amp; Tablets
                         </Link>
                       </li>
                       <li>
-                        <Link to={`/shop-default`} className="link">
+                        <Link to={`/shop-fullwidth`} className="link">
                           Video Games &amp; Consoles
                         </Link>
                       </li>
                       <li>
-                        <Link to={`/shop-default`} className="link">
+                        <Link to={`/shop-fullwidth`} className="link">
                           TV &amp; Audio
                         </Link>
                       </li>
                       <li>
-                        <Link to={`/shop-default`} className="link">
+                        <Link to={`/shop-fullwidth`} className="link">
                           Gadgets
                         </Link>
                       </li>
                       <li>
-                        <Link to={`/shop-default`} className="link">
+                        <Link to={`/shop-fullwidth`} className="link">
                           Waterproof Headphones
                         </Link>
                       </li>

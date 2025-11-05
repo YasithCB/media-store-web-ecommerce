@@ -184,7 +184,7 @@ export default function Wishlist() {
                             <a
                                 className="tf-btn mt-2 mb-3 text-white"
                                 style={{width: "fit-content"}}
-                                href="/shop-default"
+                                href="/shop-fullwidth"
                             >
                                 Explore Products
                             </a>

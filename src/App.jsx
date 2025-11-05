@@ -167,7 +167,7 @@ function App() {
 
               <Route path="shop/:id/:title" element={<ShopFullwidthPage />} />
               <Route path="shop" element={<ShopFullwidthPage />} />
-                {/*<Route path="shop-default" element={<ShopDefaultPage />} />*/}
+                {/*<Route path="shop-fullwidth" element={<ShopDefaultPage />} />*/}
               <Route
                 path="shop-right-sidebar"
                 element={<ShopRightSidebarPage />}
@@ -246,7 +246,7 @@ function App() {
           <Compare />
           <MobileMenu />
           <ScrollTop />
-          <Toolbar />
+          {/*<Toolbar />*/}
           <Search />
           <NewsLetter />
           <AddParallax />

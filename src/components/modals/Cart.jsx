@@ -94,7 +94,7 @@ export default function Cart() {
               Your cart is currently empty <br />
               Let up help you find the perfect item
             </h6>
-            <Link to={`/shop-default`} className="tf-btn btn-gray w-100">
+            <Link to={`/shop-fullwidth`} className="tf-btn btn-gray w-100">
               <span className="text-white">Show All Shop</span>
             </Link>
           </div>

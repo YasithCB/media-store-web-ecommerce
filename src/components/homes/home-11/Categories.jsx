@@ -53,7 +53,7 @@ export default function Categories() {
           {items2.map((item, index) => (
             <SwiperSlide className="swiper-slide" key={index}>
               <div className="wg-cls hover-img type-abs">
-                <Link to={`/shop-default`} className="img-style d-block">
+                <Link to={`/shop-fullwidth`} className="img-style d-block">
                   <img alt="" src={item.imgSrc} width={700} height={224} />
                 </Link>
                 <div className="content">

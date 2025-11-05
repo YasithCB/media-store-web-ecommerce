@@ -27,7 +27,7 @@ export default function Details8({postDetails}) {
                                         <div className="infor-heading">
                                             <p className="caption">
                                                 <Link
-                                                    to={`/shop-default`}
+                                                    to={`/shop-fullwidth`}
                                                     className="link text-secondary"
                                                 >
                                                     {`${postDetails.category_title}> ${postDetails.subcategory_title}`}

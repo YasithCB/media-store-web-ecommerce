@@ -47,13 +47,13 @@ export default function Categories({ parentClass = "" }) {
               <SwiperSlide className="swiper-slide" key={index}>
                 <div className="wg-cls-2 hover-img">
                   <Link
-                    to={`/shop-default`}
+                    to={`/shop-fullwidth`}
                     className="image img-style-2 overflow-visible"
                   >
                     <span className="tf-overlay" />
                     <img src={item.imgSrc} alt="" width={296} height={296} />
                   </Link>
-                  <Link to={`/shop-default`} className="link body-text-3">
+                  <Link to={`/shop-fullwidth`} className="link body-text-3">
                     {item.title}
                   </Link>
                 </div>

@@ -5,7 +5,7 @@ export default function Banner3() {
   return (
     <div>
       <Link
-        to={`/shop-default`}
+        to={`/shop-fullwidth`}
         className="image wow fadeInUp radius-8 overflow-hidden"
         data-wow-delay="0s"
       >

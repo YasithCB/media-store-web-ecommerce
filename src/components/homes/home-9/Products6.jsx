@@ -55,7 +55,7 @@ export default function Products6() {
               </div>
             </div>
             <Link
-              to={`/shop-default`}
+              to={`/shop-fullwidth`}
               className="img-item img-style overflow-visible"
             >
               <img

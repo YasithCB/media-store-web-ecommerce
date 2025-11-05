@@ -78,7 +78,7 @@ export default function Quickview() {
                             <div className="tf-product-info-content">
                                 <div className="infor-heading">
                                     <p className="caption">
-                                        Category: <Link to={`/shop-default`} className="link text-secondary">{quickViewItem.category_title || "N/A"}</Link>
+                                        Category: <Link to={`/shop-fullwidth`} className="link text-secondary">{quickViewItem.category_title || "N/A"}</Link>
                                     </p>
                                     <h5 className="product-info-name fw-semibold">
                                         <Link to={`/product-detail/${quickViewItem.id}`} className="link">{quickViewItem.title}</Link>

@@ -6,7 +6,7 @@ export default function Banner() {
     <section>
       <div className="container">
         <Link
-          to={`/shop-default`}
+          to={`/shop-fullwidth`}
           className="banner-image-product-2 style-3 hover-img d-block"
         >
           <div className="item-image item-1 img-style overflow-visible">

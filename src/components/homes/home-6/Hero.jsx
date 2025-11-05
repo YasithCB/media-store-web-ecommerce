@@ -30,7 +30,7 @@ export default function Hero() {
             </div>
             <div className="box-btn">
               <Link
-                to={`/shop-default`}
+                to={`/shop-fullwidth`}
                 className="tf-btn style-3 hover-link-icon bg-primary"
               >
                 <span className="caption fw-bold text-uppercase">Shop now</span>

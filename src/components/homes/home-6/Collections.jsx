@@ -38,7 +38,7 @@ export default function Collections() {
                 data-wow-delay={item.wowDelay}
               >
                 <Link
-                  to={`/shop-default`}
+                  to={`/shop-fullwidth`}
                   className="img-box img-style d-block"
                 >
                   <img
@@ -60,7 +60,7 @@ export default function Collections() {
                     <p className="product-title-2">{item.title3}</p>
                   </div>
                   <Link
-                    to={`/shop-default`}
+                    to={`/shop-fullwidth`}
                     className={`tf-btn-icon ${
                       item.whiteText ? "style-white" : ""
                     }`}

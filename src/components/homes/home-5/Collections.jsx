@@ -22,7 +22,7 @@ export default function Collections() {
                   Let power flow through you
                 </p>
                 <h2 className="fw-normal">
-                  <Link to={`/shop-default`} className="link font-5">
+                  <Link to={`/shop-fullwidth`} className="link font-5">
                     Amazfit GTS 3 <br />
                     Smartwatch
                   </Link>
@@ -35,7 +35,7 @@ export default function Collections() {
             </div>
             <div className="box-btn">
               <Link
-                to={`/shop-default`}
+                to={`/shop-fullwidth`}
                 className="tf-btn style-3 hover-link-icon"
               >
                 <span className="caption fw-bold text-uppercase">
@@ -49,7 +49,7 @@ export default function Collections() {
       </div>
       <div className="grid-item1">
         <div className="cls-category style-abs hover-img">
-          <Link to={`/shop-default`} className="img-box img-style d-block">
+          <Link to={`/shop-fullwidth`} className="img-box img-style d-block">
             <img
               src="/images/collection/cls-category-5.jpg"
               alt=""
@@ -70,7 +70,7 @@ export default function Collections() {
                 on the cameras
               </p>
             </div>
-            <Link to={`/shop-default`} className="tf-btn-icon style-white">
+            <Link to={`/shop-fullwidth`} className="tf-btn-icon style-white">
               <i className="icon-circle-chevron-right" />
               <span>Shop now</span>
             </Link>
@@ -83,7 +83,7 @@ export default function Collections() {
       </div>
       <div className="grid-item3">
         <div className="cls-category style-abs hover-img">
-          <Link to={`/shop-default`} className="img-box img-style d-block">
+          <Link to={`/shop-fullwidth`} className="img-box img-style d-block">
             <img
               src="/images/collection/cls-category-6.jpg"
               alt=""
@@ -104,7 +104,7 @@ export default function Collections() {
                 on the cameras
               </p>
             </div>
-            <Link to={`/shop-default`} className="tf-btn-icon style-white">
+            <Link to={`/shop-fullwidth`} className="tf-btn-icon style-white">
               <i className="icon-circle-chevron-right" />
               <span>Shop now</span>
             </Link>

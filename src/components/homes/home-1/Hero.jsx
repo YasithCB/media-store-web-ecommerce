@@ -71,7 +71,7 @@ export default function Hero() {
                       </ul>
                       <div className="cls-category style-abs abs-2 hover-img">
                         <Link
-                          to={`/shop-default`}
+                          to={`/shop-fullwidth`}
                           className="img-box img-style d-block"
                         >
                           <img
@@ -91,7 +91,7 @@ export default function Hero() {
                           </div>
                           <div className="box-btn">
                             <Link
-                              to={`/shop-default`}
+                              to={`/shop-fullwidth`}
                               className="tf-btn btn-line-white text-main d-inline-flex"
                             >
                               <span>Shop now</span>
@@ -384,7 +384,7 @@ export default function Hero() {
                   <div className="d-grid gap-10">
                     <h2 className="fw-normal">
                       <Link
-                        to={`/shop-default`}
+                        to={`/shop-fullwidth`}
                         className="link font-5 text-white"
                       >
                         The New <br />
@@ -404,7 +404,7 @@ export default function Hero() {
                 </div>
                 <div className="box-btn">
                   <Link
-                    to={`/shop-default`}
+                    to={`/shop-fullwidth`}
                     className="tf-btn-icon type-2 style-white"
                   >
                     <i className="icon-circle-chevron-right" />
@@ -413,7 +413,7 @@ export default function Hero() {
                 </div>
               </div>
               <Link
-                to={`/shop-default`}
+                to={`/shop-fullwidth`}
                 className="img-style img-item overflow-visible"
               >
                 <img
@@ -428,7 +428,7 @@ export default function Hero() {
           </div>
           <div className="wrap-item-3">
             <div className="cls-category style-abs hover-img">
-              <Link to={`/shop-default`} className="img-box img-style d-block">
+              <Link to={`/shop-fullwidth`} className="img-box img-style d-block">
                 <img
                   src="/images/collection/cls-category-5.jpg"
                   alt=""
@@ -449,7 +449,7 @@ export default function Hero() {
                     on the cameras
                   </p>
                 </div>
-                <Link to={`/shop-default`} className="tf-btn-icon style-white">
+                <Link to={`/shop-fullwidth`} className="tf-btn-icon style-white">
                   <i className="icon-circle-chevron-right" />
                   <span>Shop now</span>
                 </Link>
@@ -460,7 +460,7 @@ export default function Hero() {
               </div>
             </div>
             <div className="cls-category style-abs hover-img">
-              <Link to={`/shop-default`} className="img-box img-style d-block">
+              <Link to={`/shop-fullwidth`} className="img-box img-style d-block">
                 <img
                   src="/images/collection/cls-category-6.jpg"
                   alt=""
@@ -481,7 +481,7 @@ export default function Hero() {
                     on the cameras
                   </p>
                 </div>
-                <Link to={`/shop-default`} className="tf-btn-icon style-white">
+                <Link to={`/shop-fullwidth`} className="tf-btn-icon style-white">
                   <i className="icon-circle-chevron-right" />
                   <span>Shop now</span>
                 </Link>

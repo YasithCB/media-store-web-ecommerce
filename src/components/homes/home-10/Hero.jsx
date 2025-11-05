@@ -47,7 +47,7 @@ export default function Hero() {
               </p>
               <div className="box-btn">
                 <Link
-                  to={`/shop-default`}
+                  to={`/shop-fullwidth`}
                   className="tf-btn d-inline-flex hover-link-icon bg-primary btn-large-4"
                 >
                   <i className="icon-circle-chevron-right link-icon text-white" />

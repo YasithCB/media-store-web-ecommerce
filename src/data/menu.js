@@ -111,7 +111,7 @@ export const shopPages = [
     id: 1,
     heading: "SHOP LAYOUT",
     items: [
-      { id: 1, href: "/shop-default", text: "Shop Default" },
+      { id: 1, href: "/shop-fullwidth", text: "Shop Default" },
       { id: 2, href: "/shop-right-sidebar", text: "Shop Right Sidebar" },
       { id: 3, href: "/shop-fullwidth", text: "Shop Full Width" },
       { id: 4, href: "/shop-cart", text: "Shop Cart" },

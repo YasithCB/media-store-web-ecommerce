@@ -48,7 +48,7 @@ export default function Products6() {
               </div>
               <div className="box-bottom">
                 <Link
-                  to={`/shop-default`}
+                  to={`/shop-fullwidth`}
                   className="link h3 mb-0 lh-xl-49 text-white"
                 >
                   Headset &amp; <br />

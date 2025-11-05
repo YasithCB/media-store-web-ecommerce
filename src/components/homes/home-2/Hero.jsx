@@ -29,7 +29,7 @@ export default function Hero() {
         <div className="banner-product flex-xl-nowrap justify-content-center">
           <div className="product-wrap hover-img flex-md-nowrap justify-content-center">
             <Link
-              to={`/shop-default`}
+              to={`/shop-fullwidth`}
               className="d-inline-flex item-product img-style"
             >
               <img
@@ -47,7 +47,7 @@ export default function Hero() {
                 </p>
                 <h1 className="name">
                   <Link
-                    to={`/shop-default`}
+                    to={`/shop-fullwidth`}
                     className="text-white text-uppercase link"
                   >
                     Camera &amp; <br />
@@ -73,74 +73,77 @@ export default function Hero() {
                   </Link>
               </div>
 
-              {data.slice(0, 2).map((product) => (
-                  <div
-                      className={`card-product style-row row-small-2 bg-white radius-8`}
-                      key={product.id}
-              >
-                <div className="card-product-wrapper">
-                  <Link
-                    to={`/product-detail/${product.id}`}
-                    className="product-img"
-                  >
-                    <img
-                      className="img-product lazyload"
-                      src={getImageUrl(product.photos?.[0] || "")}
-                      alt="image-product"
-                      width={product.width}
-                      height={product.height}
-                    />
-                    <img
-                      className="img-hover lazyload"
-                      src={product.imgHover}
-                      alt="image-product"
-                      width={product.hoverWidth || product.width}
-                      height={product.hoverHeight || product.height}
-                    />
-                  </Link>
-                </div>
-                <div className="card-product-info">
-                  <div className="box-title">
-                    <div className="bg-white relative z-5">
-                      <p className="caption text-main-2 font-2">
-                        {product.category}
-                      </p>
-                      <Link
-                        to={`/product-detail/${product.id}`}
-                        className="name-product body-md-2 fw-semibold text-secondary link"
+              <div className='d-none d-lg-block'>
+                  {data.slice(0, 2).map((product) => (
+                      <div
+                          className={`card-product style-row row-small-2 mb-1 bg-white radius-8`}
+                          key={product.id}
                       >
-                        {product.title}
-                      </Link>
-                    </div>
-                    <div className="group-btn">
-                      <p className="price-wrap fw-medium">
+                          <div className="card-product-wrapper">
+                              <Link
+                                  to={`/product-detail/${product.id}`}
+                                  className="product-img"
+                              >
+                                  <img
+                                      className="img-product lazyload"
+                                      src={getImageUrl(product.photos?.[0] || "")}
+                                      alt="image-product"
+                                      width={product.width}
+                                      height={product.height}
+                                  />
+                                  <img
+                                      className="img-hover lazyload"
+                                      src={product.imgHover}
+                                      alt="image-product"
+                                      width={product.hoverWidth || product.width}
+                                      height={product.hoverHeight || product.height}
+                                  />
+                              </Link>
+                          </div>
+                          <div className="card-product-info">
+                              <div className="box-title">
+                                  <div className="bg-white relative z-5">
+                                      <p className="caption text-main-2 font-2">
+                                          {product.category}
+                                      </p>
+                                      <Link
+                                          to={`/product-detail/${product.id}`}
+                                          className="name-product body-md-2 fw-semibold text-secondary link"
+                                      >
+                                          {product.title}
+                                      </Link>
+                                  </div>
+                                  <div className="group-btn">
+                                      <p className="price-wrap fw-medium">
                         <span className="new-price price-text fw-medium">
                           {product.price != null && !isNaN(product.price)
                               ? parseFloat(product.price).toFixed(2)
                               : "N/A"}
                         </span>
-                        <span className="old-price body-md-2 text-main-2">
+                                          <span className="old-price body-md-2 text-main-2">
                            {product.price != null && !isNaN(product.price)
                                ? parseFloat(product.price).toFixed(2)
                                : "N/A"}
                         </span>
-                      </p>
-                      <ul className="list-product-btn flex-row">
-                        <li>
-                          <AddToCart productId={product.id} />
-                        </li>
-                        <li className="wishlist">
-                          <AddToWishlist productId={product.id} productCategory={product.category_title}/>
-                        </li>
-                        <li>
-                          <AddToCompare productId={product.id} />
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                                      </p>
+                                      <ul className="list-product-btn flex-row">
+                                          <li>
+                                              <AddToCart productId={product.id}/>
+                                          </li>
+                                          <li className="wishlist">
+                                              <AddToWishlist productId={product.id}
+                                                             productCategory={product.category_title}/>
+                                          </li>
+                                          <li>
+                                              <AddToCompare productId={product.id}/>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  ))}
               </div>
-            ))}
           </div>
         </div>
       </div>
