@@ -68,9 +68,6 @@ export default function MyOrders() {
     // Safely handle empty or undefined myOrders
     const orderList = Array.isArray(myOrders?.data) ? myOrders.data : [];
 
-    console.log('orderList');
-    console.log(orderList);
-
     return (
         <div className="tf-sp-2">
             <div className="container">

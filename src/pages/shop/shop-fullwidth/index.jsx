@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Header4 from "@/components/headers/Header4";
 import RecentProducts from "@/components/common/RecentProducts";
 import Features2 from "@/components/common/Features2";
 import Footer1 from "@/components/footers/Footer1";
@@ -7,8 +6,6 @@ import {Link, useLocation, useParams} from "react-router-dom";
 import Products3 from "@/components/products/Products3";
 
 import MetaComponent from "@/components/common/MetaComponent";
-import {allProducts} from "@/data/products.js";
-import {useEquipmentBySubCategoryId, useEquipmentsAll} from "@/hooks/useEquipments.js";
 import {
     getAllEquipments,
     getBrandNewEquipments,
