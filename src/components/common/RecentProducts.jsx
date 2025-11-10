@@ -1,4 +1,3 @@
-import { products5 } from "@/data/products";
 import React, {useEffect, useState} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
@@ -6,10 +5,8 @@ import { Link } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import AddToCart from "./AddToCart";
 import AddToWishlist from "./AddToWishlist";
-import AddToQuickView from "./AddToQuickView";
 import AddToCompare from "./AddToCompare";
 import {getFirstPhoto, getImageUrl, getRecentlyViewed} from "@/utlis/util.js";
-import LoadingDots from "@/components/custom/loadingDots.jsx";
 
 export default function RecentProducts({
   parentClass = "tf-sp-2",
