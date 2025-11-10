@@ -123,7 +123,6 @@ export function Checkout() {
         return null; // ✅ all good
     };
 
-
     const handlePlaceOrder = async () => {
         const validationError = validateCheckoutForm();
         if (validationError) {
@@ -425,8 +424,8 @@ export function Checkout() {
                                 <li>
                                     <span className="body-md-2 fw-semibold">Total</span>
                                     <span className="body-md-2 fw-semibold text-third">
-                    {totalPrice.toFixed(2)} AED
-                  </span>
+                                        {totalPrice.toFixed(2)} AED
+                                    </span>
                                 </li>
                             </ul>
                         </div>

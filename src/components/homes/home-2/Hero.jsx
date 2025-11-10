@@ -13,9 +13,11 @@ import MainItem1 from '/images/item/camera-4.png'
 import {useEquipmentsTopRated} from "@/hooks/useEquipments.js";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
 import {getImageUrl} from "@/utlis/util.js";
+import {useContextElement} from "@/context/Context.jsx";
 
 export default function Hero() {
     const { data, loading, error } = useEquipmentsTopRated();
+    const { currentUser } = useContextElement();
 
     if (loading) return <LoadingDots />;
     if (error) return <p>Error: {error}</p>;
@@ -65,12 +67,19 @@ export default function Hero() {
           {/* right col */}
           <div className="other-item flex-xl-column flex-md-row">
               <div className="d-grid">
-                  <Link to={`/add-post`} className="body-small link">
+                  { currentUser ?
+                      <Link to={`/add-post`} className="body-small link">
+                          <button className="btn bg-primary text-secondary fw-semibold w-100">
+                              <PackagePlus />
+                              {" "}Add Your post for FREE
+                          </button>
+                      </Link>
+                      :
                       <button className="btn bg-primary text-secondary fw-semibold w-100">
                           <PackagePlus />
-                          {" "}Add Your post for FREE
+                          {" "}Login to Add Your post for FREE
                       </button>
-                  </Link>
+                  }
               </div>
 
               <div className='d-none d-lg-block'>

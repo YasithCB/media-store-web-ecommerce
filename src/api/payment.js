@@ -20,8 +20,6 @@ export const verifyTapPayment = async (tapId) => {
  * @returns {Promise<object>} - Response from backend
  */
 export const createCharge = async (payload) => {
-    console.log('payload');
-    console.log(payload);
     try {
         // Your backend endpoint will call Tap API with secret key
         return await fetchWrapper("/payments/create-charge", {
