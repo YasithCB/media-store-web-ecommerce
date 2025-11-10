@@ -1,5 +1,5 @@
 import React from "react";
-import "src/components/custom/loadingDots.sass";
+import "./loadingDots.sass";
 
 const LoadingDots = ({className = ''}) => {
     return (
