@@ -1225,8 +1225,8 @@
 
     &:hover,
     &.active {
-      background-color: var(--gray-5);
-      color: var(--primary);
+      background-color: var(--secondary);
+      color: var(--white);
       border-color: var(--gray-5);
     }
   }

@@ -213,7 +213,7 @@ export default function MyPosts() {
                             <Link
                                 className="tf-btn mt-2 mb-3 text-white"
                                 style={{ width: "fit-content" }}
-                                to="/create-post"
+                                to="/add-post"
                             >
                                 Add Post
                             </Link>

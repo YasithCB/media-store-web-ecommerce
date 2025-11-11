@@ -4,7 +4,6 @@ import {signup} from "@/api/auth.js";
 import facebookIcon from '../../../public/icons/social/fb.svg'
 import googleIcon from '../../../public/icons/social/google.svg'
 import {createDealer} from "@/api/dealers.js";
-import {useNavigate} from "react-router-dom";
 
 // Define subcategories
 const dealerSubcategories = {
@@ -24,9 +23,7 @@ const dealerSubcategories = {
 
 };
 
-export default function Register() {
-    const navigate = useNavigate();
-
+export default function RegisterModal({setShowRegister, setShowLogin}) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -122,14 +119,9 @@ export default function Register() {
                 });
 
                 res = await createDealer(dealerFormData);
-                console.log(`Registering as Dealer response : ${res}`)
             } else {
                 res = await signup({name, email, phone, password});
-                console.log(`Registering as User response : ${res}`)
             }
-
-            console.log('resp : register')
-            console.log(res)
 
             if (res.status === 'success') {
                 // show message instead of auto-login
@@ -171,13 +163,21 @@ export default function Register() {
     };
 
     return (
-        <div className="modal modalCentered fade modal-log" id="register">
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-          <span
-              className="icon icon-close btn-hide-popup"
-              data-bs-dismiss="modal"
-          />
+        <div
+            className="modal fade show modalCentered"
+            style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
+            onClick={() => setShowRegister(false)}
+        >
+            <div
+                className="modal-dialog modal-dialog-centered"
+                onClick={(e) => e.stopPropagation()}
+            >
+                <div className="modal-content p-4">
+                      <span
+                          className="icon icon-close btn-hide-popup"
+                          onClick={() => setShowRegister(false)}
+                          style={{ cursor: "pointer", position: "absolute", top: 10, right: 10 }}
+                      />
                     <div className="modal-log-wrap list-file-delete">
                         <h5 className="title fw-semibold">Sign Up</h5>
 
@@ -430,9 +430,21 @@ export default function Register() {
                                         {success && <p className="text-success mt-2">{success}</p>}
                                     </div>
 
-                                    <button type="submit" className="tf-btn w-100 text-white" disabled={loading}>
+                                    <button type="submit" className="tf-btn w-100" disabled={loading}>
                                         {loading ? "Registering..." : "Register Dealer"}
                                     </button>
+
+                                    <p className="body-text-3 text-center">
+                                        Already have an account?
+                                        <span onClick={()=> {
+                                            setShowRegister(false)
+                                            setShowLogin(true)
+                                        }}
+                                              data-bs-toggle="modal" className="fw-bold ms-2 cs-pointer"
+                                        >
+                                            Sign in
+                                        </span>
+                                    </p>
                                 </form>
                             )
                             :
@@ -488,15 +500,20 @@ export default function Register() {
                                         {success && <p className="text-success">{success}</p>}
                                     </div>
 
-                                    <button type="submit" className="tf-btn w-100 text-white" disabled={loading}>
+                                    <button type="submit" className="tf-btn w-100" disabled={loading}>
                                         {loading ? "Signing up..." : "Sign Up"}
                                     </button>
 
                                     <p className="body-text-3 text-center">
                                         Already have an account?
-                                        <a href="#log" data-bs-toggle="modal" className="fw-bold ms-2">
+                                        <span onClick={()=> {
+                                                            setShowRegister(false)
+                                                            setShowLogin(true)
+                                                        }}
+                                              data-bs-toggle="modal" className="fw-bold ms-2 cs-pointer"
+                                        >
                                             Sign in
-                                        </a>
+                                        </span>
                                     </p>
                                 </form>
                             )
@@ -505,12 +522,12 @@ export default function Register() {
 
 
                         <div className="orther-log text-center">
-                            <span className="br-line bg-gray-5"/>
+                            <span className="br-line bg-gray-5 my-3"/>
                             <p className="caption text-main-2">Or login with</p>
                         </div>
 
-                        <ul className="list-log">
-                            <li>
+                        <ul className="list-log d-flex gap-1">
+                            <li className='col'>
                                 <a href="#" className="tf-btn-primary btn-line w-100 social-btn">
                                     <img
                                         src={facebookIcon}
@@ -520,7 +537,7 @@ export default function Register() {
                                     <span className="body-md-2 fw-semibold ms-2">Facebook</span>
                                 </a>
                             </li>
-                            <li>
+                            <li className='col'>
                                 <a href="#" className="tf-btn-primary btn-line w-100 social-btn">
                                     <img
                                         src={googleIcon}

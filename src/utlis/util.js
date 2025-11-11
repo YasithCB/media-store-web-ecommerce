@@ -1,6 +1,18 @@
 export const getImageUrl = (path) => {
     if (!path) return `${import.meta.env.VITE_API_BASE_URL}/uploads/default-image.png`;
 
+    // If it's a blob URL or File object
+    if (typeof path !== "string") {
+        // If it's a File object, create a temporary URL
+        if (path instanceof File) {
+            return URL.createObjectURL(path);
+        }
+        // Otherwise, fallback
+        return `${import.meta.env.VITE_API_BASE_URL}/uploads/default-image.png`;
+    }
+
+    if (path.startsWith("blob:")) return path;
+
     // Normalize path
     let cleanPath = path.replace(/\\/g, "/"); // convert backslashes
     if (cleanPath.startsWith("/")) cleanPath = cleanPath.slice(1); // remove leading slash

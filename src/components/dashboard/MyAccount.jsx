@@ -1,35 +1,278 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import {useContextElement} from "@/context/Context.jsx";
+import {toast} from "react-toastify";
+import {getImageUrl} from "@/utlis/util.js";
+
 export default function MyAccount() {
-  return (
-    <div className="my-account-content account-dashboard">
-      <div className="mb_60">
-        <h3 className="fw-semibold mb-20">Hello Themesflat</h3>
-        <p>
-          From your account dashboard you can view your
-          <Link
-            className="text-secondary link fw-medium"
-            to={`/my-account-orders`}
-          >
-            recent orders
-          </Link>
-          , manage your
-          <Link
-            className="text-secondary link fw-medium"
-            to={`/my-account-address`}
-          >
-            shipping and billing address
-          </Link>
-          , and
-          <Link
-            className="text-secondary link fw-medium"
-            to={`/my-account-edit`}
-          >
-            edit your password and account details{" "}
-          </Link>
-          .
-        </p>
-      </div>
-    </div>
-  );
+    const { currentUser, setCurrentUser } = useContextElement();
+    const [editing, setEditing] = useState(false);
+    const [formData, setFormData] = useState(currentUser || {});
+    const [loading, setLoading] = useState(false);
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const [logoFile, setLogoFile] = useState(null);
+
+    console.log('currentUser')
+    console.log(currentUser)
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const createFormData = (data) => {
+        const formData = new FormData();
+
+        Object.entries(data).forEach(([key, value]) => {
+            if (value === null || value === undefined) return; // skip null/undefined
+
+            // Skip logo and photos for now
+            if (key === "logo" || key === "photos") return;
+
+            // handle arrays or objects
+            else if (typeof value === "object") {
+                formData.append(key, JSON.stringify(value));
+            }
+            // handle simple fields
+            else {
+                formData.append(key, value);
+            }
+        });
+
+        // Only append new logo if user selected a file
+        if (logoFile instanceof File) {
+            formData.append("logo", logoFile);
+        }
+
+        return formData;
+    };
+
+    const handleSave = async () => {
+        setLoading(true);
+        try {
+            // Usage:
+            const formDataToSend = createFormData(currentUser);
+
+            let response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/dealer/${currentUser.id}`, {
+                method: "PUT",
+                body: formDataToSend, // do NOT set headers
+            });
+
+            setCurrentUser(formData);
+            toast.success("Profile updated successfully!");
+            setEditing(false);
+        } catch (err) {
+            console.log(err)
+            toast.error("Failed to update profile");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="my-account-content account-dashboard">
+          <div className="mb_60">
+              <h3 className="fw-semibold mb-20">
+                  Hello {currentUser?.name || currentUser?.title || "Guest"}
+              </h3>
+
+              <div className="card-body p-4">
+                  <div className="mb-3 text-center">
+                      <div className="text-center mb-4 position-relative">
+                          <input
+                              type="file"
+                              id="profileImageInput"
+                              accept="image/*"
+                              style={{ display: "none" }}
+                              onChange={(e) => {
+                                  const file=e.target.files[0]
+                                  setLogoFile(file)
+                                  if (file) {
+                                      setPreviewUrl(URL.createObjectURL(file))
+                                      setFormData((prev) => ({ ...prev, logo: file }));
+                                  }
+                              }}
+                          />
+
+                          <img
+                              src={getImageUrl(previewUrl || currentUser?.logo || "/default-avatar.png")}
+                              alt="Profile"
+                              width={200}
+                              height={200}
+                              style={{
+                                  borderRadius: "10%",
+                                  objectFit: "cover",
+                                  border: "2px solid #ddd",
+                                  cursor: editing ? "pointer" : "default",
+                              }}
+                              onClick={() => editing && document.getElementById("profileImageInput").click()}
+                          />
+
+                          {editing && (
+                              <div
+                                  className="position-absolute bottom-0 start-50 translate-middle-x bg-dark text-white py-1 px-3 rounded-3 small"
+                                  style={{ cursor: "pointer" }}
+                                  onClick={() => document.getElementById("profileImageInput").click()}
+                              >
+                                  Change Photo
+                              </div>
+                          )}
+                      </div>
+
+                  </div>
+
+                  <div className="mb-3">
+                      <label className="form-label fw-semibold">Name</label>
+                      <input
+                          type="text"
+                          className="form-control"
+                          name="title"
+                          value={formData.title}
+                          onChange={handleChange}
+                          disabled={!editing}
+                      />
+                  </div>
+
+                  <div className="mb-3">
+                      <label className="form-label fw-semibold">Email</label>
+                      <input
+                          type="email"
+                          className="form-control"
+                          name="email"
+                          value={formData.email || ""}
+                          onChange={handleChange}
+                          disabled={!editing}
+                      />
+                  </div>
+
+                  <div className="mb-3">
+                      <label className="form-label fw-semibold">Phone</label>
+                      <input
+                          type="text"
+                          className="form-control"
+                          name="phone"
+                          value={formData.phone || ""}
+                          onChange={handleChange}
+                          disabled={!editing}
+                      />
+                  </div>
+
+                  {formData.address && (
+                      <div className="mb-3">
+                          <label className="form-label fw-semibold">Address</label>
+                          <input
+                              type="text"
+                              className="form-control"
+                              name="address"
+                              value={formData.address || ""}
+                              onChange={handleChange}
+                              disabled={!editing}
+                          />
+                      </div>
+                  )}
+
+                  {formData.city && (
+                      <div className="mb-3">
+                          <label className="form-label fw-semibold">City</label>
+                          <input
+                              type="text"
+                              className="form-control"
+                              name="city"
+                              value={formData.city || ""}
+                              onChange={handleChange}
+                              disabled={!editing}
+                          />
+                      </div>
+                  )}
+
+                  {formData.country && (
+                      <div className="mb-3">
+                          <label className="form-label fw-semibold">Country</label>
+                          <input
+                              type="text"
+                              className="form-control"
+                              name="country"
+                              value={formData.country || ""}
+                              onChange={handleChange}
+                              disabled={!editing}
+                          />
+                      </div>
+                  )}
+
+                  {formData.established_year && (
+                      <div className="mb-3">
+                          <label className="form-label fw-semibold">Established Year</label>
+                          <input
+                              type="text"
+                              className="form-control"
+                              name="established_year"
+                              value={formData.established_year || ""}
+                              onChange={handleChange}
+                              disabled={!editing}
+                          />
+                      </div>
+                  )}
+
+                  {formData.website_url && (
+                      <div className="mb-3">
+                          <label className="form-label fw-semibold">Website URL</label>
+                          <input
+                              type="text"
+                              className="form-control"
+                              name="website_url"
+                              value={formData.website_url || ""}
+                              onChange={handleChange}
+                              disabled={!editing}
+                          />
+                      </div>
+                  )}
+
+                  {formData.whatsapp && (
+                      <div className="mb-3">
+                          <label className="form-label fw-semibold">Whatsapp</label>
+                          <input
+                              type="text"
+                              className="form-control"
+                              name="whatsapp"
+                              value={formData.whatsapp || ""}
+                              onChange={handleChange}
+                              disabled={!editing}
+                          />
+                      </div>
+                  )}
+
+                  <div className="d-flex justify-content-between mt-4">
+                      {!editing ? (
+                          <button
+                              className="btn btn-dark w-100 me-2"
+                              onClick={() => setEditing(true)}
+                          >
+                              Edit Profile
+                          </button>
+                      ) : (
+                          <>
+                              <button
+                                  className="btn tf-btn w-100 me-2"
+                                  onClick={handleSave}
+                                  disabled={loading}
+                              >
+                                  {loading ? "Saving..." : "Save Changes"}
+                              </button>
+                              <button
+                                  className="btn tf-btn-dark w-100"
+                                  onClick={() => {
+                                      setEditing(false);
+                                      setFormData(currentUser);
+                                  }}
+                              >
+                                  Cancel
+                              </button>
+                          </>
+                      )}
+                  </div>
+              </div>
+
+          </div>
+        </div>
+      );
 }

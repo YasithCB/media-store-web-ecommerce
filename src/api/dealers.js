@@ -50,7 +50,6 @@ export const createDealer= async (data) => {
     });
 };
 
-
 export const getTopRatedDealers = async () => {
     return fetchWrapper("/dealer/top-rated");
 };

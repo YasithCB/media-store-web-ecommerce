@@ -64,6 +64,9 @@ export default function Wishlist() {
             </div>
         )
 
+    console.log('wishList')
+    console.log(wishList)
+
     return (
         <div className="tf-sp-2">
             <div className="container">
@@ -182,7 +185,7 @@ export default function Wishlist() {
                                 wishlist!{" "}
                             </div>
                             <a
-                                className="tf-btn mt-2 mb-3 text-white"
+                                className="tf-btn mt-2 mb-3 "
                                 style={{width: "fit-content"}}
                                 href="/shop-fullwidth"
                             >

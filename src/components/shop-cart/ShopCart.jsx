@@ -185,7 +185,7 @@ export default function ShopCart() {
                   Your Cart is empty. Start adding favorite products to cart!{" "}
                 </div>
                 <Link
-                  className="tf-btn mt-2 mb-3 text-white"
+                  className="tf-btn mt-2 mb-3"
                   style={{ width: "fit-content" }}
                   to={"/shop-fullwidth"}>
                   Explore Products

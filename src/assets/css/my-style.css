@@ -250,7 +250,9 @@
 }
 /* remove button */
 
-.dark-btn
+.hover-red:hover{
+    color: #dc3545;
+}
 /* buttons */
 
 

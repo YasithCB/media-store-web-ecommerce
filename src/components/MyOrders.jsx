@@ -121,12 +121,12 @@ export default function MyOrders() {
                                     </td>
                                     <td className="wishlist-item_price">
                                         <p className="price-wrap fw-medium flex-nowrap">
-                        <span className="new-price price-text fw-medium mb-0">
-                          {item.product?.price != null && !isNaN(item.product?.price)
-                              ? parseFloat(item.product.price).toFixed(2)
-                              : "N/A"}{" "}
-                            AED
-                        </span>
+                                            <span className="new-price price-text fw-medium mb-0">
+                                              {item.product?.price != null && !isNaN(item.product?.price)
+                                                  ? parseFloat(item.product.price).toFixed(2)
+                                                  : "N/A"}{" "}
+                                                AED
+                                            </span>
                                         </p>
                                     </td>
                                     <td className="wishlist-item_stock">
@@ -161,7 +161,7 @@ export default function MyOrders() {
                                 You haven’t placed any orders yet. Start shopping to create your first order!
                             </div>
                             <Link
-                                className="tf-btn mt-2 mb-3 text-white"
+                                className="tf-btn mt-2 mb-3"
                                 style={{ width: "fit-content" }}
                                 to="/shop-fullwidth"
                             >

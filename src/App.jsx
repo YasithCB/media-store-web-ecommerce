@@ -7,13 +7,11 @@ import { useEffect } from "react";
 import WOW from "@/utlis/wow";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Cart from "@/components/modals/Cart";
-import Login from "@/components/modals/Login";
-import Register from "@/components/modals/Register";
+import Register from "@/components/modals/RegisterModal.jsx";
 import ScrollTop from "@/components/common/ScrollTop";
 import Quickview from "@/components/modals/Quickview";
 import Compare from "@/components/modals/Compare";
 import MobileMenu from "@/components/modals/MobileMenu";
-import Toolbar from "@/components/modals/Toolbar";
 import Search from "@/components/modals/Search";
 import AddParallax from "@/utlis/AddParallax";
 import NewsLetter from "@/components/modals/NewsLetter";
@@ -239,8 +237,7 @@ function App() {
             </Route>
           </Routes>
 
-          <Login />
-          <Register />
+          {/*<Login />*/}
           <Cart />
           <Quickview />
           <Compare />

@@ -5,16 +5,19 @@ import Header4 from "@/components/headers/Header4";
 import React from "react";
 import { Link } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
+import Topbar1 from "@/components/headers/Topbar1.jsx";
+import Header2 from "@/components/headers/Header2.jsx";
 
 const metadata = {
-  title: "My Account Orders || MediaStore - MultiMedia eCommerce Website",
+  title: "My Orders || MediaStore",
   description: "MediaStore - MultiMedia eCommerce Website",
 };
 export default function MyAccountOrdersPage() {
   return (
     <>
       <MetaComponent meta={metadata} />
-      <Header4 />
+        <Topbar1 parentClass="tf-topbar"/>
+        <Header2/>
       <div className="tf-sp-1 pb-0">
         <div className="container">
           <ul className="breakcrumbs">
