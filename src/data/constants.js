@@ -39,3 +39,60 @@ export const CATEGORIES_LIST = [
         ],
     },
 ];
+
+export const COUNTRY_CITY_LIST = {
+    "Saudi Arabia": [
+        "Riyadh",
+        "Jeddah",
+        "Mecca",
+        "Medina",
+        "Dammam",
+        "Dhahran",
+        "Al Khobar",
+        "Taif",
+        "Hail",
+        "Yanbu",
+        "Gizan"
+    ],
+    "United Arab Emirates": [
+        "Abu Dhabi",
+        "Dubai",
+        "Sharjah",
+        "Ajman",
+        "Umm Al Quwain",
+        "Ras Al Khaimah",
+        "Fujairah",
+        "Al Ain"
+    ],
+    "Qatar": [
+        "Doha",
+        "Al Khor",
+        "Al Rayyan",
+        "Al Wakrah",
+        "Umm Salal",
+        "Madīnat ʿĪsá"
+    ],
+    "Kuwait": [
+        "Kuwait City",
+        "Al Ahmadi",
+        "Hawalli",
+        "Al Farwaniyah",
+        "Al Jahra"
+    ],
+    "Oman": [
+        "Muscat",
+        "Salalah",
+        "Sohar",
+        "Nizwa",
+        "Sur",
+        "Dhofar"
+    ],
+    "Bahrain": [
+        "Manama",
+        "Riffa",
+        "Muharraq",
+        "Hamala",
+        "Amwaj Islands",
+        "Isa Town"
+    ]
+};

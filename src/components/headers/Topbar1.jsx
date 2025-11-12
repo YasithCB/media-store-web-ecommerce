@@ -15,7 +15,6 @@ export default function Topbar1({parentClass = "tf-topbar line-bt"}) {
 
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
-    const [showDealerProfile, setShowDealerProfile] = useState(false);
     const [showForgot, setShowForgot] = useState(false);
 
     const navigate = useNavigate();
@@ -48,8 +47,8 @@ export default function Topbar1({parentClass = "tf-topbar line-bt"}) {
             // Example: if your API returns token or user data
             if (res?.['status'] === "success") {
                 // Store user object / token
-                localStorage.setItem("user", JSON.stringify(res['data']['user']));
-                localStorage.setItem("auth_token", res['data']['token']);
+                localStorage.setItem("media_store_user", JSON.stringify(res['data']['user']));
+                localStorage.setItem("media_store_auth_token", res['data']['token']);
 
                 // ✅ set global values
                 setCurrentUser(res['data']['user']); // keep it as an object

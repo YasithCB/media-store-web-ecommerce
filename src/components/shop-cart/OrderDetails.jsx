@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {charge, saveOrder} from "@/api/payment.js";
 import {useContextElement} from "@/context/Context.jsx";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
+import {toast} from "react-toastify";
 
 export function OrderDetails() {
     const {currentUser, cartProducts, clearCart} = useContextElement();
@@ -19,7 +20,7 @@ export function OrderDetails() {
                 const res = await charge(chargeId); // call backend
                 setPaymentDetails(res.data); // from backend’s success response
             } catch (error) {
-                alert("Failed to fetch payment details: " + error.message);
+                toast.error("Failed to fetch payment details: " + error.message);
             } finally {
                 setLoading(false);
             }
@@ -64,7 +65,7 @@ export function OrderDetails() {
                 }
 
             } catch (err) {
-                alert("Failed to fetch/save payment details: " + err.message);
+                toast.error("Failed to fetch/save payment details: " + err.message);
             } finally {
                 setLoading(false);
             }

@@ -11,6 +11,7 @@ import {
 } from "@/api/cart.js";
 import {getOrdersByUser} from "@/api/payment.js";
 import {getPostsByUserId} from "@/api/posts.js";
+import {toast} from "react-toastify";
 
 const dataContext = React.createContext();
 
@@ -19,7 +20,7 @@ export default function Context({children}) {
     const [cartProducts, setCartProducts] = useState([]);
 
     const [wishList, setWishList] = useState(() => {
-        const stored = JSON.parse(localStorage.getItem("wishlist"));
+        const stored = JSON.parse(localStorage.getItem("media_store_wishlist"));
         return Array.isArray(stored) ? stored : [];
     });
 
@@ -124,7 +125,7 @@ export default function Context({children}) {
 
 
     const removeFromWishlist = async (postId, postCategory) => {
-        if (!currentUser) return alert("Please log in first.");
+        if (!currentUser) return toast.info("Please log in first.");
 
         // Optimistic update: remove from local state immediately
         setWishList((prev) =>
@@ -181,7 +182,7 @@ export default function Context({children}) {
                     : item
             );
             setCartProducts(updated);
-            localStorage.setItem("cartList", JSON.stringify(updated));
+            localStorage.setItem("media_store_cartList", JSON.stringify(updated));
 
             // Optional backend update
             if (currentUser) {
@@ -198,7 +199,7 @@ export default function Context({children}) {
             const newItem = {...product, quantity: qty};
             const updated = [...cartProducts, newItem];
             setCartProducts(updated);
-            localStorage.setItem("cartList", JSON.stringify(updated));
+            localStorage.setItem("media_store_cartList", JSON.stringify(updated));
 
             // Optional backend add
             if (currentUser) {
@@ -222,7 +223,7 @@ export default function Context({children}) {
                 // Optimistic update: remove from local state immediately
                 setCartProducts((prev) => prev.filter((item) => item.id !== productId));
                 localStorage.setItem(
-                    "cartList",
+                    "media_store_cartList",
                     JSON.stringify(cartProducts.filter((item) => item.id !== productId))
                 );
             } catch (err) {
@@ -243,7 +244,7 @@ export default function Context({children}) {
 
         // Clear local state and localStorage
         setCartProducts([]);
-        localStorage.setItem("cartList", JSON.stringify([]));
+        localStorage.setItem("media_store_cartList", JSON.stringify([]));
     };
 
 
@@ -255,27 +256,27 @@ export default function Context({children}) {
 
     // LocalStorage sync — CART & WISHLIST
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem("cartList"));
+        const storedCart = JSON.parse(localStorage.getItem("media_store_cartList"));
         if (storedCart?.length) setCartProducts(storedCart);
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("cartList", JSON.stringify(cartProducts));
+        localStorage.setItem("media_store_cartList", JSON.stringify(cartProducts));
     }, [cartProducts]);
 
     useEffect(() => {
-        const storedWish = JSON.parse(localStorage.getItem("wishlist"));
+        const storedWish = JSON.parse(localStorage.getItem("media_store_wishlist"));
         if (storedWish?.length) setWishList(storedWish);
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("wishlist", JSON.stringify(wishList));
+        localStorage.setItem("media_store_wishlist", JSON.stringify(wishList));
     }, [wishList]);
 
     // 🧠 AUTH — load from localStorage once
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        const token = localStorage.getItem("auth_token");
+        const user = JSON.parse(localStorage.getItem("media_store_user"));
+        const token = localStorage.getItem("media_store_auth_token");
         if (user && token) {
             setCurrentUser(user);
             setAuthToken(token);
@@ -285,11 +286,13 @@ export default function Context({children}) {
     // 🧠 AUTH — update localStorage when auth changes
     useEffect(() => {
         if (currentUser && authToken) {
-            localStorage.setItem("user", JSON.stringify(currentUser));
-            localStorage.setItem("auth_token", authToken);
+            localStorage.setItem("media_store_user", JSON.stringify(currentUser));
+            localStorage.setItem("media_store_auth_token", authToken);
         } else {
-            localStorage.removeItem("user");
-            localStorage.removeItem("auth_token");
+            localStorage.removeItem("media_store_user");
+            localStorage.removeItem("media_store_auth_token");
+            localStorage.removeItem("media_store_wishlist");
+            localStorage.removeItem("media_store_cartList");
         }
     }, [currentUser, authToken]);
 

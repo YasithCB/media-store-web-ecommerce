@@ -1,6 +1,7 @@
 import { useContextElement } from "@/context/Context";
 import { useEffect, useState } from "react";
 import { addToCartAPI } from "@/api/cart.js";
+import {toast} from "react-toastify";
 
 export default function AddToCart({ productId, productCategory, tooltipClass = "" }) {
     const { addProductToCart, isAddedToCartProducts, fetchCartFromDB, currentUser } = useContextElement();
@@ -12,7 +13,7 @@ export default function AddToCart({ productId, productCategory, tooltipClass = "
     }, [isAddedToCartProducts, productId]);
 
     const handleToggleCart = async () => {
-        if (!currentUser) return alert("Please log in first.");
+        if (!currentUser) return toast.info("Please log in first.");
 
         try {
             const res = await addToCartAPI(currentUser.id, productId, productCategory);

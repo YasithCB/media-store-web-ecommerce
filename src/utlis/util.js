@@ -32,7 +32,7 @@ export const getFirstPhoto = (photos) => {
 
 // utils/recentlyViewe
 export const getRecentlyViewed = () => {
-    const data = localStorage.getItem("recentlyViewed") || "[]";
+    const data = localStorage.getItem("media_store_recentlyViewed") || "[]";
     return JSON.parse(data);
 };
 
@@ -50,7 +50,7 @@ export const addRecentlyViewed = (product) => {
     // Keep only last 10 items
     if (products.length > 10) products = products.slice(0, 10);
 
-    localStorage.setItem("recentlyViewed", JSON.stringify(products));
+    localStorage.setItem("media_store_recentlyViewed", JSON.stringify(products));
 };
 
 

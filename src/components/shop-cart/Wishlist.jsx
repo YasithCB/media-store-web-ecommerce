@@ -139,7 +139,7 @@ export default function Wishlist() {
                                                 if (!productInCart) {
                                                     const newItem = {...product, quantity: 1};
                                                     setCartProducts((prev) => [...prev, newItem]);
-                                                    localStorage.setItem("cartList", JSON.stringify([...cartProducts, newItem]));
+                                                    localStorage.setItem("media_store_cartList", JSON.stringify([...cartProducts, newItem]));
                                                 } else {
                                                     // Optional: increment quantity
                                                     const updated = cartProducts.map((item) =>
@@ -149,7 +149,7 @@ export default function Wishlist() {
                                                         } : item
                                                     );
                                                     setCartProducts(updated);
-                                                    localStorage.setItem("cartList", JSON.stringify(updated));
+                                                    localStorage.setItem("media_store_cartList", JSON.stringify(updated));
                                                 }
 
                                                 // Call API asynchronously, no need to await here

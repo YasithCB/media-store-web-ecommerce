@@ -13,7 +13,7 @@ import {
     getRentEquipments,
     getUsedEquipments
 } from "@/api/equipments.js";
-import {getDealerByName, getTopRatedDealers} from "@/api/dealers.js";
+import {getAllDealers, getDealerByName, getTopRatedDealers} from "@/api/dealers.js";
 import {getAllJobs, getJobsByName, getJobsBySubCategoryId, getJobsHiring} from "@/api/jobs.js";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
 import {getAllStudios, getStudioByName} from "@/api/studio.js";
@@ -58,7 +58,7 @@ export default function ShopFullwidthPage() {
             } else if (id === "audio-sound") {
                 result = await getEquipmentById(4);
             } else if (id === "top-dealers") {
-                result = await getTopRatedDealers();
+                result = await getAllDealers();
             } else if (id === "equipments") {
                 result = await getAllEquipments();
             } else if (id === "used-items") {

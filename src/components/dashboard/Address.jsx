@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {toast} from "react-toastify";
 
 export default function Address() {
   const [showAddAddressForm, setShowAddAddressForm] = useState(false);
@@ -99,7 +100,7 @@ export default function Address() {
       !newAddress.zipCode ||
       !newAddress.phone
     ) {
-      alert("Please fill in all required fields.");
+        toast.info("Please fill in all required fields.");
       return;
     }
 
@@ -148,7 +149,7 @@ export default function Address() {
       !editAddressData.zipCode ||
       !editAddressData.phone
     ) {
-      alert("Please fill in all required fields for the edited address.");
+        toast.info("Please fill in all required fields for the edited address.");
       return;
     }
 

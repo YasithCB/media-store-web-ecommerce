@@ -16,7 +16,7 @@ export const createDealer= async (data) => {
         "email","password", "phone", "whatsapp", "website_url",
         "address_line1", "address_line2", "city", "country",
         "services_starting_from", "rating", "reviews_count", "verified",
-        "established_year", "featured"
+        "established_year", "featured", 'subcategory_title'
     ]) {
         if (data[key] !== undefined && data[key] !== null) {
             formData.append(key, data[key]);

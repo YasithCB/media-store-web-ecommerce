@@ -22,7 +22,7 @@ export default function RecentProducts({
 
 
     const handleClearRecents = () => {
-        localStorage.removeItem("recentlyViewed"); // clear localStorage
+        localStorage.removeItem("media_store_recentlyViewed"); // clear localStorage
         setRecentlyViewedList([]) // update state if you store in React state
     };
 

@@ -2,6 +2,7 @@ import { useContextElement } from "@/context/Context";
 import { addToWishList, removeFromWishList } from "@/api/wishlist.js";
 import { useState, useEffect } from "react";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
+import {toast} from "react-toastify";
 
 export default function AddToWishlist({ productId, productCategory, tooltipClass = "" }) {
     const { currentUser, wishList, setWishList } = useContextElement();
@@ -16,7 +17,7 @@ export default function AddToWishlist({ productId, productCategory, tooltipClass
 
     const handleToggleWishlist = async () => {
         if (!currentUser) {
-            return alert("Please log in first.");
+            return toast.info("Please log in first.");
         }
 
         setLoading(true);
