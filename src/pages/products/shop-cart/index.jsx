@@ -36,7 +36,6 @@ export default function ShopCartPage() {
         </div>
       </div>
       <ShopCart />
-      <Testimonials />
       <RecentProducts />
       <Features2 />
       <Footer1 />

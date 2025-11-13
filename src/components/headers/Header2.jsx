@@ -83,45 +83,39 @@ export default function Header2() {
                 {/* MOBILE VIEW */}
                 <ul className="nav-icon justify-content-xl-center d-xl-none">
                   <li className="nav-account">
-                    <a
-                      href="#log"
-                      data-bs-toggle="modal"
+                    <Link
+                      to="/my-account"
                       className="link nav-icon-item"
                     >
                       <span>
                          <User />
                       </span>
                       <p className="body-small">Sign in</p>
-                    </a>
+                    </Link>
                   </li>
 
                     <li className="nav-cart">
-                        <a
-                            href="/wishlist"
-                            data-bs-toggle="offcanvas"
-                            className="link nav-icon-item"
-                        >
-                      <span>
-                        <Star />
-                      </span>
+                        <Link to="/wishlist" className="link nav-icon-item">
+                            <span>
+                              <Star />
+                            </span>
                             <p className="body-small">Wishlist:</p>
-                        </a>
-
+                        </Link>
                     </li>
 
-                  <li className="nav-cart">
-                    <a
-                      href="#shoppingCart"
-                      data-bs-toggle="offcanvas"
-                      className="link nav-icon-item"
-                    >
-                      <span>
-                         <ShoppingCart />
-                      </span>
-                      <p className="body-small">Your cart:</p>
-                    </a>
 
-                  </li>
+                    <li className="nav-cart">
+                        <Link
+                            to="/shop-cart"   // Fixed typo: shoppingCar → shoppingCart
+                            className="link nav-icon-item"
+                        >
+                            <span>
+                              <ShoppingCart />
+                            </span>
+                            <p className="body-small">Your cart:</p>
+                        </Link>
+                    </li>
+
                     <li className="d-flex align-items-center d-xl-none">
                         <a
                             href="#mobileMenu"

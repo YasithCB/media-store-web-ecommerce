@@ -1,30 +1,31 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Award, Blocks, Briefcase, RefreshCcw, Key, Sparkles, Clapperboard, Store, Printer, Headphones, Search, UserSearch, MapPinHouse  } from "lucide-react";
+import {Link, useLocation} from "react-router-dom";
+import {
+    Award,
+    Blocks,
+    Briefcase,
+    RefreshCcw,
+    Key,
+    Sparkles,
+    Clapperboard,
+    Store,
+    Printer,
+    Headphones,
+    Search,
+    UserSearch,
+    MapPinHouse
+} from "lucide-react";
 
 import LanguageSelect from "../common/LanguageSelect";
 import CurrencySelect from "../common/CurrencySelect";
 
-import {
-    blogMenuItems,
-    demoItems,
-    othersPages,
-    shopPages,
-} from "@/data/menu";
-
 export default function MobileMenu() {
-    const { pathname } = useLocation();
+    const location = useLocation();
+    const pathname = location.pathname;
 
-    const isMenuActive = (link) => {
-        return link.href?.split("/")[1] === pathname.split("/")[1];
-    };
-
-    const isMenuParentActive = (menu) => {
-        return menu.some((elm) => isMenuActive(elm));
-    };
-
-    const isMenuParentActive2 = (menu) => {
-        return menu.some((elm) => isMenuParentActive(elm.items));
+    const isMenuActive = (path, pathname) => {
+        if (!pathname) return false; // safeguard
+        return pathname.split("/")[1] === path.split("/")[1];
     };
 
     return (
@@ -37,7 +38,7 @@ export default function MobileMenu() {
             {/* Logo Section */}
             <div className="text-center my-4">
                 <Link to={`/`}>
-                    <img alt="Logo" src="/images/logo/logo.webp" width={100} />
+                    <img alt="Logo" src="/images/logo/logo.webp" width={100}/>
                 </Link>
             </div>
 
@@ -57,7 +58,7 @@ export default function MobileMenu() {
                                         Menu
                                     </a>
                                 </li>
-                                <li className="br-line type-vertical bg-line h23" />
+                                <li className="br-line type-vertical bg-line h23"/>
                                 <li className="nav-tab-item" role="presentation">
                                     <a
                                         href="#category"
@@ -90,80 +91,40 @@ export default function MobileMenu() {
                                             />
                                         </fieldset>
                                         <button type="submit" className="button-submit">
-                                            <i className="icon-search" />
+                                            <i className="icon-search"/>
                                         </button>
                                     </form>
 
                                     {/* Navigation Items */}
                                     <ul className="nav-ul-mb" id="wrapper-menu-navigation">
-                                        <li
-                                            className={`nav-mb-item ${isMenuParentActive(demoItems) ? "active" : ""}`}
-                                        >
-                                            <a
-                                                href="/"
-                                                className="collapsed mb-menu-link"
-                                                data-bs-toggle="collapse"
-                                                aria-expanded="true"
-                                                aria-controls="dropdown-menu-home"
-                                            >
+                                        <li className={`nav-mb-item ${isMenuActive("/", pathname) ? "active" : ""}`}>
+                                            <Link to="/" className="mb-menu-link">
                                                 <span>Home</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
-                                        <li
-                                            className={`nav-mb-item ${isMenuParentActive2(shopPages) ? "active" : ""}`}
-                                        >
-                                            <a
-                                                href="/shop-fullwidth"
-                                                className="collapsed mb-menu-link"
-                                                data-bs-toggle="collapse"
-                                                aria-expanded="true"
-                                                aria-controls="dropdown-menu-shop"
-                                            >
+                                        <li className={`nav-mb-item ${isMenuActive("/shop-fullwidth", pathname) ? "active" : ""}`}>
+                                            <Link to="/shop-fullwidth" className="mb-menu-link">
                                                 <span>Shop</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
-                                        <li
-                                            className={`nav-mb-item ${isMenuParentActive(blogMenuItems) ? "active" : ""}`}
-                                        >
-                                            <a
-                                                href="/blog-grid"
-                                                className="collapsed mb-menu-link"
-                                                data-bs-toggle="collapse"
-                                                aria-expanded="true"
-                                                aria-controls="dropdown-menu-blog"
-                                            >
+                                        <li className={`nav-mb-item ${isMenuActive("/blog-grid", pathname) ? "active" : ""}`}>
+                                            <Link to="/blog-grid" className="mb-menu-link">
                                                 <span>Blog</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
-                                        <li
-                                            className={`nav-mb-item ${isMenuParentActive(othersPages) ? "active" : ""}`}
-                                        >
-                                            <a
-                                                href="/about"
-                                                className="collapsed mb-menu-link"
-                                                data-bs-toggle="collapse"
-                                                aria-expanded="true"
-                                                aria-controls="dropdown-menu-page"
-                                            >
+                                        <li className={`nav-mb-item ${isMenuActive("/about", pathname) ? "active" : ""}`}>
+                                            <Link to="/about" className="mb-menu-link">
                                                 <span>About</span>
-                                            </a>
+                                            </Link>
                                         </li>
 
-                                        <li
-                                            className={`nav-mb-item ${isMenuParentActive(othersPages) ? "active" : ""}`}
-                                        >
-                                            <a
-                                                href="/contact"
-                                                className="collapsed mb-menu-link"
-                                                data-bs-toggle="collapse"
-                                                aria-expanded="true"
-                                                aria-controls="dropdown-menu-page"
-                                            >
+                                        <li className={`nav-mb-item ${isMenuActive("/contact", pathname) ? "active" : ""}`}>
+                                            <Link to="/contact" className="mb-menu-link">
                                                 <span>Contact</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -239,7 +200,8 @@ export default function MobileMenu() {
                                           </span>
                                             <p className="mb-0 d-flex flex-column">
                                                 <strong>Email:</strong>{" "}
-                                                <a href="mailto:info@mediastore.com" className="text-decoration-none fw-medium">
+                                                <a href="mailto:info@mediastore.com"
+                                                   className="text-decoration-none fw-medium">
                                                     info@mediastore.com
                                                 </a>
                                             </p>
@@ -259,7 +221,7 @@ export default function MobileMenu() {
                                                 href="/shop/top-dealers/Top Dealers"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Award size={20} className="me-2" />
+                                                <Award size={20} className="me-2"/>
                                                 <span>Top Dealers</span>
                                             </a>
                                         </li>
@@ -269,7 +231,7 @@ export default function MobileMenu() {
                                                 href="/shop/equipments/Equipments & Machinery"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Blocks size={20} className="me-2" />
+                                                <Blocks size={20} className="me-2"/>
                                                 <span>Equipments & Machinery</span>
                                             </a>
                                         </li>
@@ -279,7 +241,7 @@ export default function MobileMenu() {
                                                 href="/shop/all-jobs/All Jobs"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Briefcase size={20} className="me-2" />
+                                                <Briefcase size={20} className="me-2"/>
                                                 <span>All Jobs</span>
                                             </a>
                                         </li>
@@ -289,7 +251,7 @@ export default function MobileMenu() {
                                                 href="/shop/used-items/Used Items"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <RefreshCcw size={20} className="me-2" />
+                                                <RefreshCcw size={20} className="me-2"/>
                                                 <span>Used Items</span>
                                             </a>
                                         </li>
@@ -299,7 +261,7 @@ export default function MobileMenu() {
                                                 href="/shop/rent-items/Rent Items"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Key size={20} className="me-2" />
+                                                <Key size={20} className="me-2"/>
                                                 <span>Rent Items</span>
                                             </a>
                                         </li>
@@ -309,7 +271,7 @@ export default function MobileMenu() {
                                                 href="/shop/brand-new-items/Brand New Items"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Sparkles size={20} className="me-2" />
+                                                <Sparkles size={20} className="me-2"/>
                                                 <span>Brand New Items</span>
                                             </a>
                                         </li>
@@ -319,7 +281,7 @@ export default function MobileMenu() {
                                                 href="/shop/video-camera/Video & Camera Equipments"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Clapperboard size={20} className="me-2" />
+                                                <Clapperboard size={20} className="me-2"/>
                                                 <span>Video & Camera Equipments</span>
                                             </a>
                                         </li>
@@ -329,7 +291,7 @@ export default function MobileMenu() {
                                                 href="/shop/audio-sound/Audio & Sound Equipments"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Headphones size={20} className="me-2" />
+                                                <Headphones size={20} className="me-2"/>
                                                 <span>Audio & Sound Equipments</span>
                                             </a>
                                         </li>
@@ -339,7 +301,7 @@ export default function MobileMenu() {
                                                 href="/shop/printing-machinery/Printing Machinery"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Printer size={20} className="me-2" />
+                                                <Printer size={20} className="me-2"/>
                                                 <span>Printing Machinery</span>
                                             </a>
                                         </li>
@@ -349,7 +311,7 @@ export default function MobileMenu() {
                                                 href="/shop/job-seeking/Job Seeking"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Search size={20} className="me-2" />
+                                                <Search size={20} className="me-2"/>
                                                 <span>Job Seeking</span>
                                             </a>
                                         </li>
@@ -359,7 +321,7 @@ export default function MobileMenu() {
                                                 href="/shop/job-hiring/Job Hiring"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <UserSearch size={20} className="me-2" />
+                                                <UserSearch size={20} className="me-2"/>
                                                 <span>Job Hiring</span>
                                             </a>
                                         </li>
@@ -369,7 +331,7 @@ export default function MobileMenu() {
                                                 href="/shop/companies-directory/Companies Directory"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <MapPinHouse size={20} className="me-2" />
+                                                <MapPinHouse size={20} className="me-2"/>
                                                 <span>Companies Directory</span>
                                             </a>
                                         </li>
@@ -379,27 +341,13 @@ export default function MobileMenu() {
                                                 href="/shop/service-providers/Service Providers"
                                                 className="mb-menu-link d-flex align-items-center"
                                             >
-                                                <Store size={20} className="me-2" />
+                                                <Store size={20} className="me-2"/>
                                                 <span>Service Providers</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-
-
-                        </div>
-                    </div>
-                </div>
-
-                {/* Bottom Section */}
-                <div className="mb-bottom mt-4">
-                    <div className="bottom-bar-language bar-lang d-flex justify-content-between">
-                        <div className="tf-curs">
-                            <CurrencySelect />
-                        </div>
-                        <div className="tf-lans">
-                            <LanguageSelect parentClassName="image-select center style-default type-lan" />
                         </div>
                     </div>
                 </div>
