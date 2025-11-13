@@ -18,9 +18,6 @@ export default function CompareTable() {
         );
     }
 
-    console.log('compareItem')
-    console.log(compareItem)
-
     return (
         <div className="tf-sp-2">
             <div className="container">

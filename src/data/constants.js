@@ -1,3 +1,4 @@
+
 // Define categories and subcategories
 export const CATEGORIES_LIST = [
     {

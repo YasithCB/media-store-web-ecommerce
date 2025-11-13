@@ -237,8 +237,6 @@ function App() {
             </Route>
           </Routes>
 
-          {/*<Login />*/}
-          <Cart />
           <Quickview />
           <Compare />
           <MobileMenu />

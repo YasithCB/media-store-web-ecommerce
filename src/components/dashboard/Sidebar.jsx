@@ -2,8 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 const navItems = [
   { label: "Account Details", href: "/my-account", isActive: true },
-  { label: "Address", href: "/my-account-address" },
-  { label: "Orders", href: "/my-account-orders" },
+  { label: "Orders", href: "/my-orders" },
   { label: "Wishlist", href: "/wishlist" },
 ];
 export default function Sidebar() {

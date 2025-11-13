@@ -309,6 +309,21 @@ h6,
     font-size: 20px;
     line-height: 22px;
 }
+/* Mobile devices: adjust font size */
+@media (max-width: 768px) {
+  .price-wrap span {
+    font-size: 12px;
+    line-height: 13px;
+  }
+  .name-product {
+    font-size: 13px !important;
+    line-height: 15px !important;
+  }
+  .box-infor-detail p {
+    font-size: 11px !important;
+    line-height: 12px !important;
+  }
+}
 
 .price-text-2 {
     font-size: 19px;
@@ -1082,6 +1097,12 @@ a {
 .tf-sp-1 {
     padding-top: 20px;
     padding-bottom: 50px;
+}
+/* Mobile devices */
+@media (max-width: 768px) {
+  .tf-sp-1 {
+    padding-bottom: 20px;
+  }
 }
 
 .tf-sp-2 {

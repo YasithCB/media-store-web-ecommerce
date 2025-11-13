@@ -195,69 +195,74 @@ export default function Products3({itemList, title}) {
         <div className="container-full">
           <div className="tf-product-view-content wrapper-control-shop ">
             <div className="content-area">
-              <div className="tf-shop-control flex-wrap gap-10">
-                <div className="d-flex align-items-center gap-10">
-                  <a
-                    href="#filterShop2"
-                    className="tf-btn-filter"
-                    data-bs-toggle="offcanvas"
-                    aria-controls="mobileMenu"
-                  >
-                    <span className="icon icon-filter">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={20}
-                        height={20}
-                        fill="#121212"
-                        viewBox="0 0 256 256"
-                      >
-                        <path d="M176,80a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H184A8,8,0,0,1,176,80ZM40,88H144v16a8,8,0,0,0,16,0V56a8,8,0,0,0-16,0V72H40a8,8,0,0,0,0,16Zm176,80H120a8,8,0,0,0,0,16h96a8,8,0,0,0,0-16ZM88,144a8,8,0,0,0-8,8v16H40a8,8,0,0,0,0,16H80v16a8,8,0,0,0,16,0V152A8,8,0,0,0,88,144Z"></path>
-                      </svg>
-                    </span>
-                    <span className="body-md-2 fw-medium">Filter</span>
-                  </a>
+              <div className="tf-shop-control flex-wrap gap-10 p-0 p-lg-4">
+                <div className="d-flex align-items-center gap-10 ">
+
+                  {/* TODO | FILTER */}
+                  {/*<a*/}
+                  {/*  href="#filterShop2"*/}
+                  {/*  className="tf-btn-filter"*/}
+                  {/*  data-bs-toggle="offcanvas"*/}
+                  {/*  aria-controls="mobileMenu"*/}
+                  {/*>*/}
+                  {/*  <span className="icon icon-filter">*/}
+                  {/*    <svg*/}
+                  {/*      xmlns="http://www.w3.org/2000/svg"*/}
+                  {/*      width={20}*/}
+                  {/*      height={20}*/}
+                  {/*      fill="#121212"*/}
+                  {/*      viewBox="0 0 256 256"*/}
+                  {/*    >*/}
+                  {/*      <path d="M176,80a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H184A8,8,0,0,1,176,80ZM40,88H144v16a8,8,0,0,0,16,0V56a8,8,0,0,0-16,0V72H40a8,8,0,0,0,0,16Zm176,80H120a8,8,0,0,0,0,16h96a8,8,0,0,0,0-16ZM88,144a8,8,0,0,0-8,8v16H40a8,8,0,0,0,0,16H80v16a8,8,0,0,0,16,0V152A8,8,0,0,0,88,144Z"></path>*/}
+                  {/*    </svg>*/}
+                  {/*  </span>*/}
+                  {/*  <span className="body-md-2 fw-medium">Filter</span>*/}
+                  {/*</a>*/}
+
                   <p className="body-text-3 d-none d-lg-block">
                     1-16 of {itemList.length} results for "
                     <span className="title-sidebar fw-bold">{title}</span>"
                   </p>
                 </div>
 
-                <div className="tf-control-view flat-title-tab-product flex-wrap">
-                  <LayoutHandler />
-                  <ShowLength />
-                  <div
-                    className="tf-dropdown-sort tf-sort type-sort-by"
-                    data-bs-toggle="dropdown"
-                  >
-                    <div className="btn-select w-100">
-                      <i className="icon-sort" />
-                      <p className="body-text-3 w-100">
-                        Sort by:{" "}
-                        <span className="text-sort-value">{sortingOption}</span>
-                      </p>
-                      <i className="icon-arrow-down fs-10" />
-                    </div>
-                    <div className="dropdown-menu">
-                      {[
-                        "Default",
-                        "Title Ascending",
-                        "Title Descending",
-                        "Price Ascending",
-                        "Price Descending",
-                      ].map((elm, i) => (
-                        <div
-                          key={i}
-                          className={`select-item ${
-                            sortingOption == elm ? "active" : ""
-                          }`}
-                          onClick={() => allProps.setSortingOption(elm)}
-                        >
-                          <span className="text-value-item">{elm}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                {/* todo | layout handler */}
+                {/*<div className="tf-control-view flat-title-tab-product flex-wrap">*/}
+                {/*  <LayoutHandler />*/}
+                {/*  <ShowLength />*/}
+                {/*  <div*/}
+                {/*    className="tf-dropdown-sort tf-sort type-sort-by"*/}
+                {/*    data-bs-toggle="dropdown"*/}
+                {/*  >*/}
+                {/*    <div className="btn-select w-100">*/}
+                {/*      <i className="icon-sort" />*/}
+                {/*      <p className="body-text-3 w-100">*/}
+                {/*        Sort by:{" "}*/}
+                {/*        <span className="text-sort-value">{sortingOption}</span>*/}
+                {/*      </p>*/}
+                {/*      <i className="icon-arrow-down fs-10" />*/}
+                {/*    </div>*/}
+                {/*    <div className="dropdown-menu">*/}
+                {/*      {[*/}
+                {/*        "Default",*/}
+                {/*        "Title Ascending",*/}
+                {/*        "Title Descending",*/}
+                {/*        "Price Ascending",*/}
+                {/*        "Price Descending",*/}
+                {/*      ].map((elm, i) => (*/}
+                {/*        <div*/}
+                {/*          key={i}*/}
+                {/*          className={`select-item ${*/}
+                {/*            sortingOption == elm ? "active" : ""*/}
+                {/*          }`}*/}
+                {/*          onClick={() => allProps.setSortingOption(elm)}*/}
+                {/*        >*/}
+                {/*          <span className="text-value-item">{elm}</span>*/}
+                {/*        </div>*/}
+                {/*      ))}*/}
+                {/*    </div>*/}
+                {/*  </div>*/}
+                {/*</div>*/}
+
               </div>
 
               {price[0] != 0 ||
@@ -345,7 +350,7 @@ export default function Products3({itemList, title}) {
 
               <div className="gridLayout-wrapper gridLayout-fullWidth">
                 <div
-                  className="tf-grid-layout xxl-col-5 lg-col-4 md-col-3 sm-col-2 flat-grid-product wrapper-shop layout-tabgrid-1"
+                  className="d-flex row flat-grid-product gap-0 wrapper-shop layout-tabgrid-1"
                   id="gridLayout"
                 >
                   {itemList.map((item, i) => {

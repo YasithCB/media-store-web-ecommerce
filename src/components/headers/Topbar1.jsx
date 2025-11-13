@@ -36,10 +36,8 @@ export default function Topbar1({parentClass = "tf-topbar line-bt"}) {
             let res;
             // logic based on selected role
             if (role === "dealer") {
-                console.log("Logging in as Dealer", { email, password });
                 res = await login({ email, password }, role);
             } else {
-                console.log("Logging in as User", { email, password });
                 res = await login({ email, password }, role);
             }
 
@@ -135,7 +133,6 @@ export default function Topbar1({parentClass = "tf-topbar line-bt"}) {
                                         className='ms-2 hover-red cs-pointer'
                                         size={18}
                                         onClick={() => {
-                                            console.log('click')
                                             Swal.fire({
                                                 title: 'Logout?',
                                                 text: "Do you want to sign out from your account?",

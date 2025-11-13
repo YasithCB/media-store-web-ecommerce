@@ -76,7 +76,7 @@ export default function Products2({
           }}
           className="swiper tf-sw-products"
           breakpoints={{
-            0: { slidesPerView: 1 },
+            0: { slidesPerView: 2 },
             575: {
               slidesPerView: 2,
             },
@@ -94,12 +94,13 @@ export default function Products2({
           {slides.map((item) => (
             <SwiperSlide key={item.id} className="swiper-slide">
               <ul
-                className="product-list-wrap wow fadeInUp"
+                className="product-list-wrap wow d-flex row fadeInUp"
                 data-wow-delay={item.wowDelay}
               >
                 {item.products.map((product) => (
                   <li key={product.id}>
                     <div className="card-product style-row row-small-2">
+
                       <div className="card-product-wrapper">
                         <Link
                           to={`/product-detail/${product.id}`}
@@ -121,6 +122,7 @@ export default function Products2({
                           />
                         </Link>
                       </div>
+
                       <div className="card-product-info">
                         <div className="box-title">
                           <div className="bg-white relative z-5">
@@ -167,7 +169,7 @@ export default function Products2({
 
                             <ul className="list-product-btn flex-row">
                               <li>
-                                <AddToCart productId={product.id} />
+                                <AddToCart productId={product.id} productCategory={product.category_title} />
                               </li>
                               <li className="wishlist">
                                 <AddToWishlist productId={product.id} productCategory={product.category_title}/>
@@ -179,6 +181,7 @@ export default function Products2({
                           </div>
                         </div>
                       </div>
+
                     </div>
                   </li>
                 ))}

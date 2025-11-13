@@ -24,6 +24,7 @@ const metadata = {
     title: "Shop | MediaStore",
     description: "MediaStore - MultiMedia eCommerce Website",
 };
+
 export default function ShopFullwidthPage() {
     const {id, title} = useParams();
     const [data, setData] = useState(null);
@@ -44,8 +45,6 @@ export default function ShopFullwidthPage() {
         } else if (category === "Studios") {
             result = await getStudioByName(searchText);
         }
-        console.log(`searched data result : ${searchText} - ${category}`)
-        console.log(result.data)
         setData(result.data)
     }
 

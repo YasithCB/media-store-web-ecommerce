@@ -5,7 +5,6 @@ export default function AddToQuickview({ product, tooltipClass = "" }) {
 
     const handleQuickView = () => {
         setQuickViewItem(product);
-        console.log(quickViewItem)
     };
 
     return (

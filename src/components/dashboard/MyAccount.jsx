@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useContextElement} from "@/context/Context.jsx";
 import {toast} from "react-toastify";
 import {getImageUrl} from "@/utlis/util.js";
+import LoadingDots from "@/components/custom/loadingDots.jsx";
 
 export default function MyAccount() {
     const { currentUser, setCurrentUser } = useContextElement();
@@ -10,10 +11,17 @@ export default function MyAccount() {
     const [loading, setLoading] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [logoFile, setLogoFile] = useState(null);
+    const [role, setRole] = useState('')
 
-    console.log('currentUser')
-    console.log(currentUser)
+    useEffect(() => {
+        if (!currentUser) return
 
+        if (currentUser.id.startsWith("u")) {
+            setRole('user')
+        } else if (currentUser.id.startsWith("d")) {
+            setRole('dealer')
+        }
+    }, [currentUser]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,12 +59,21 @@ export default function MyAccount() {
         setLoading(true);
         try {
             // Usage:
-            const formDataToSend = createFormData(currentUser);
+            let formDataToSend = await createFormData(currentUser);
 
-            let response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/dealer/${currentUser.id}`, {
-                method: "PUT",
-                body: formDataToSend, // do NOT set headers
-            });
+            let response;
+
+            if (role === 'dealer') {
+                response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/dealer/${currentUser.id}`, {
+                    method: "PUT",
+                    body: formDataToSend, // do NOT set headers
+                });
+            }else {
+                response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/${currentUser.id}`, {
+                    method: "PUT",
+                    body: formDataToSend, // do NOT set headers
+                });
+            }
 
             setCurrentUser(formData);
             toast.success("Profile updated successfully!");
@@ -69,69 +86,75 @@ export default function MyAccount() {
         }
     };
 
+    if(!currentUser) return <LoadingDots/>
+
     return (
         <div className="my-account-content account-dashboard">
           <div className="mb_60">
               <h3 className="fw-semibold mb-20">
-                  Hello {currentUser?.name || currentUser?.title || "Guest"}
+                  Hello {role === 'user' ? currentUser?.name : currentUser?.title}
               </h3>
 
               <div className="card-body p-4">
-                  <div className="mb-3 text-center">
-                      <div className="text-center mb-4 position-relative">
-                          <input
-                              type="file"
-                              id="profileImageInput"
-                              accept="image/*"
-                              style={{ display: "none" }}
-                              onChange={(e) => {
-                                  const file=e.target.files[0]
-                                  setLogoFile(file)
-                                  if (file) {
-                                      setPreviewUrl(URL.createObjectURL(file))
-                                      setFormData((prev) => ({ ...prev, logo: file }));
-                                  }
-                              }}
-                          />
+                  { role === 'dealer' &&
+                      <div className="mb-3 text-center">
+                          <div className="text-center mb-4 position-relative">
+                              <input
+                                  type="file"
+                                  id="profileImageInput"
+                                  accept="image/*"
+                                  style={{ display: "none" }}
+                                  onChange={(e) => {
+                                      const file=e.target.files[0]
+                                      setLogoFile(file)
+                                      if (file) {
+                                          setPreviewUrl(URL.createObjectURL(file))
+                                          setFormData((prev) => ({ ...prev, logo: file }));
+                                      }
+                                  }}
+                              />
 
-                          <img
-                              src={getImageUrl(previewUrl || currentUser?.logo || "/default-avatar.png")}
-                              alt="Profile"
-                              width={200}
-                              height={200}
-                              style={{
-                                  borderRadius: "10%",
-                                  objectFit: "cover",
-                                  border: "2px solid #ddd",
-                                  cursor: editing ? "pointer" : "default",
-                              }}
-                              onClick={() => editing && document.getElementById("profileImageInput").click()}
-                          />
+                              <img
+                                  src={getImageUrl( previewUrl || currentUser?.logo || "/default-avatar.png")}
+                                  alt="Profile"
+                                  width={200}
+                                  height={200}
+                                  style={{
+                                      borderRadius: "10%",
+                                      objectFit: "cover",
+                                      border: "2px solid #ddd",
+                                      cursor: editing ? "pointer" : "default",
+                                  }}
+                                  onClick={() => editing && document.getElementById("profileImageInput").click()}
+                              />
 
-                          {editing && (
-                              <div
-                                  className="position-absolute bottom-0 start-50 translate-middle-x bg-dark text-white py-1 px-3 rounded-3 small"
-                                  style={{ cursor: "pointer" }}
-                                  onClick={() => document.getElementById("profileImageInput").click()}
-                              >
-                                  Change Photo
-                              </div>
-                          )}
+                              {editing && (
+                                  <div
+                                      className="position-absolute bottom-0 start-50 translate-middle-x bg-dark text-white py-1 px-3 rounded-3 small"
+                                      style={{ cursor: "pointer" }}
+                                      onClick={() => document.getElementById("profileImageInput").click()}
+                                  >
+                                      Change Photo
+                                  </div>
+                              )}
+                          </div>
                       </div>
-
-                  </div>
+                  }
 
                   <div className="mb-3">
-                      <label className="form-label fw-semibold">Name</label>
+                      <label className="form-label fw-semibold">
+                          {role === "user" ? "Name" : "Title"}
+                      </label>
                       <input
                           type="text"
                           className="form-control"
-                          name="title"
-                          value={formData.title}
+                          name={role === "user" ? "name" : "title"}
+                          value={role === "user" ? formData.name || "" : formData.title || ""}
                           onChange={handleChange}
                           disabled={!editing}
                       />
                   </div>
+
 
                   <div className="mb-3">
                       <label className="form-label fw-semibold">Email</label>

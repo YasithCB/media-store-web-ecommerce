@@ -132,28 +132,6 @@ export default function Products4() {
                         height={dealer.height}
                       />
                     </Link>
-                    <ul className="list-product-btn">
-                      <li>
-                        <AddToCart
-                          tooltipClass="tooltip-left"
-                          productId={dealer.id}
-                        />
-                      </li>
-                      <li className="d-none d-sm-block wishlist">
-                        <AddToWishlist
-                          tooltipClass="tooltip-left"
-                          productId={dealer.id}
-                          productCategory={dealer.category_title}
-                        />
-                      </li>
-
-                      <li className="d-none d-sm-block">
-                        <AddToCompare
-                          productId={dealer.id}
-                          tooltipClass="tooltip-left"
-                        />
-                      </li>
-                    </ul>
                   </div>
                   <div className="card-product-info">
                     <div className="box-title">

@@ -19,7 +19,7 @@ export default function JobCard({ item }) {
     } = useContextElement();
 
     return (
-        <div className="card-product">
+        <div className="card-product col-6 col-md-4 col-lg-3 col-xl-2 mb-5">
             <div className="card-product-wrapper">
                 <Link to={`/product-detail/${item.id}`} className="product-img">
                     <img
@@ -40,9 +40,6 @@ export default function JobCard({ item }) {
                     />
                 </Link>
                 <ul className="list-product-btn top-0 end-0">
-                    <li>
-                        <AddToCart productId={item.id} tooltipClass="tooltip-left" />
-                    </li>
                     <li className="wishlist">
                         <AddToWishlist productId={item.id} productCategory={item.category_title} tooltipClass="tooltip-left" />
                     </li>

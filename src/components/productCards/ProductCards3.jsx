@@ -19,7 +19,7 @@ export default function ProductCards3({ item }) {
   } = useContextElement();
 
   return (
-    <div className="card-product">
+    <div className="card-product col-6 col-md-4 col-lg-3 col-xl-2 mb-5">
       <div className="card-product-wrapper">
         <Link to={`/product-detail/${item.id}`} className="product-img">
           <img
@@ -39,9 +39,10 @@ export default function ProductCards3({ item }) {
             height={500}
           />
         </Link>
+
         <ul className="list-product-btn top-0 end-0">
           <li>
-            <AddToCart productId={item.id} tooltipClass="tooltip-left" />
+            <AddToCart productId={item.id} productCategory={item.category_title} tooltipClass="tooltip-left" />
           </li>
           <li className="wishlist">
             <AddToWishlist productId={item.id} productCategory={item.category_title} tooltipClass="tooltip-left" />
@@ -53,6 +54,7 @@ export default function ProductCards3({ item }) {
             />
           </li>
         </ul>
+
         {item.hotSale && (
           <div className="box-sale-wrap pst-default">
             <p className="small-text">Sale</p>
@@ -60,10 +62,11 @@ export default function ProductCards3({ item }) {
           </div>
         )}
       </div>
+
       <div className="card-product-info">
         <div className="box-title">
+
           <div>
-            <p className="product-tag caption text-main-2 d-none">Headphone</p>
             <Link
               to={`/product-detail/${item.id}`}
               className="name-product body-md-2 fw-semibold text-secondary link"
@@ -86,10 +89,11 @@ export default function ProductCards3({ item }) {
             )}
           </p>
         </div>
+
         <div className="box-infor-detail">
-          <ul className="list-computer-memory">
+          <ul className="d-none d-lg-flex list-computer-memory">
             <li>
-              <p className="caption">{item.address_line1}</p>
+              <p className="caption">{item.city}</p>
             </li>
               {item.is_used === 1 && (
                   <li>
@@ -102,6 +106,7 @@ export default function ProductCards3({ item }) {
                   </li>
               )}
           </ul>
+
           <ul className="list-infor-fearture">
             <li>
               <p className="caption name-feature">Brand:</p>
@@ -116,16 +121,20 @@ export default function ProductCards3({ item }) {
               <p className="caption property">{item.item_condition}</p>
             </li>
           </ul>
+
+            {/* RATING */}
             { item.rating &&
                 <div className="star-review flex-wrap">
                     <StarRating rating={item.rating} />
                     <p className="caption text-main-2">{item.rating} ({Math.floor(Math.random() * 51) + 50})</p>
                 </div>
             }
+
+          {/* COMPARE */}
           <a
             href="#compare"
             data-bs-toggle="offcanvas"
-            className="tf-btn-icon style-2"
+            className="tf-btn-icon style-2 d-none d-lg-block"
             onClick={() => addToCompareItem(item.id)}
           >
             <svg
@@ -148,6 +157,7 @@ export default function ProductCards3({ item }) {
               {isAddedToCompareItem(item.id) ? "Compared" : "Compare"}
             </span>
           </a>
+
         </div>
       </div>
       <div className="card-product-btn">

@@ -2,7 +2,6 @@ import { useContextElement } from "@/context/Context";
 
 import { Link } from "react-router-dom";
 import React from "react";
-import AddToCart from "../common/AddToCart";
 import AddToWishlist from "../common/AddToWishlist";
 import AddToQuickview from "../common/AddToQuickview";
 import { getImageUrl} from "@/utlis/util.js";
@@ -19,7 +18,7 @@ export default function DealerCard({ item }) {
     } = useContextElement();
 
     return (
-        <div className="card-product">
+        <div className="card-product col-6 col-md-4 col-lg-3 col-xl-2 mb-5">
             <div className="card-product-wrapper">
                 <Link to={`/dealer-detail/${item.id}`} className="product-img">
                     <img
@@ -40,9 +39,6 @@ export default function DealerCard({ item }) {
                     />
                 </Link>
                 <ul className="list-product-btn top-0 end-0">
-                    <li>
-                        <AddToCart productId={item.id} tooltipClass="tooltip-left" />
-                    </li>
                     <li className="wishlist">
                         <AddToWishlist productId={item.id} productCategory={item.category_title} tooltipClass="tooltip-left" />
                     </li>
@@ -60,6 +56,7 @@ export default function DealerCard({ item }) {
                     </div>
                 )}
             </div>
+
             <div className="card-product-info">
                 <div className="box-title">
                     <div>
@@ -79,8 +76,9 @@ export default function DealerCard({ item }) {
                         </span>
                     </p>
                 </div>
+
                 <div className="box-infor-detail">
-                    <ul className="list-computer-memory">
+                    <ul className="list-computer-memory d-none d-lg-flex">
                         {item.tags.map((item, index) => (
                             <li key={index}>
                                 <p className="caption">{item}</p>
@@ -101,16 +99,20 @@ export default function DealerCard({ item }) {
                             <p className="caption property">{item.established_year}</p>
                         </li>
                     </ul>
+
+                    {/* RATING */}
                     { item.rating &&
                         <div className="star-review flex-wrap">
                             <StarRating rating={item.rating} />
                             <p className="caption text-main-2">{item.rating} ({Math.floor(Math.random() * 51) + 50})</p>
                         </div>
                     }
+
+                    {/* COMPARE */}
                     <a
                         href="#compare"
                         data-bs-toggle="offcanvas"
-                        className="tf-btn-icon style-2"
+                        className="tf-btn-icon style-2 d-none d-lg-block"
                         onClick={() => addToCompareItem(item.id)}
                     >
                         <svg

@@ -96,7 +96,6 @@ export function Checkout() {
                 },
                 onError: (data) => console.log('onError', data),
                 onSuccess: async (data) => {
-                    console.log('OnSuccess', data)
                     setTokenId(data.id)
                 },
                 onChangeSaveCardLater: (isSaveCardSelected) => {

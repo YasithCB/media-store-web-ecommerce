@@ -64,9 +64,6 @@ export default function Wishlist() {
             </div>
         )
 
-    console.log('wishList')
-    console.log(wishList)
-
     return (
         <div className="tf-sp-2">
             <div className="container">

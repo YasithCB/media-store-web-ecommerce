@@ -28,7 +28,6 @@ export default function AddToCart({ productId, productCategory, tooltipClass = "
 
     return (
         <a
-            href="#shoppingCart"
             data-bs-toggle="offcanvas"
             onClick={(e) => {
                 e.preventDefault();

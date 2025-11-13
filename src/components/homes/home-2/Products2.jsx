@@ -48,9 +48,6 @@ export default function Products2() {
     setActiveTab(tabName);
   };
 
-    console.log('Tab filtered')
-    console.log(filtered)
-
   return (
     <div className="tf-sp-2 flat-animate-tab">
       <div className="container">

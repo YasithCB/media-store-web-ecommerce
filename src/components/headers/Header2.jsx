@@ -58,9 +58,8 @@ export default function Header2() {
                     </Link>
                   </li>
                   <li className="d-none d-xl-block">
-                    <a
-                      href="#shoppingCart"
-                      data-bs-toggle="offcanvas"
+                    <Link
+                      to="/shop-cart"
                       className="nav-icon-item"
                     >
                       <span className="icon position-relative">
@@ -77,7 +76,7 @@ export default function Header2() {
                           <CartTotal />
                         </h6>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
 

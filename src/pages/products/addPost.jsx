@@ -161,7 +161,6 @@ export default function AddPostPage() {
 
             // Success
             const data = await response.json();
-            console.log("✅ Uploaded successfully:", data);
             SmartToast.success("Post Created successfully!!");
             navigate('/')
         } catch (error) {

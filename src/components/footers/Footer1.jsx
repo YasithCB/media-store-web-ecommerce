@@ -40,6 +40,7 @@ export default function Footer1({ fullWidth = false }) {
       e.target.reset(); // Reset the form
     }
   };
+
   useEffect(() => {
     const headings = document.querySelectorAll(".footer-heading-mobile");
 
