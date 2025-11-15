@@ -34,3 +34,19 @@ export function resetPassword(data, role) {
         body: JSON.stringify(data),
     });
 }
+
+// send OTP
+export function sendOtp(data) {
+    return fetchWrapper(`/auth/send-otp`, {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
+}
+
+// verify OTP
+export function verifyOtp(data) {
+    return fetchWrapper(`/auth/verify-otp`, {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
+}

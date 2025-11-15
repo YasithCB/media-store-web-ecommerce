@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {signup} from "@/api/auth.js";
+import {sendOtp, signup, verifyOtp} from "@/api/auth.js";
 
 import facebookIcon from '../../../public/icons/social/fb.svg'
 import googleIcon from '../../../public/icons/social/google.svg'
@@ -26,18 +26,24 @@ const dealerSubcategories = {
 };
 
 export default function RegisterModal({setShowRegister, setShowLogin}) {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [phone, setPhone] = useState("");
+    // OTP VERIFY DATA
+    const [emailOtp, setEmailOtp] = useState("");
+    const [phoneOtp, setPhoneOtp] = useState("");
 
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [emailVerified, setEmailVerified] = useState(false);
+    const [phoneVerified, setPhoneVerified] = useState(false);
 
-    const [role, setRole] = useState("user"); // <-- "user" or "dealer"
+    const [otpSent, setOtpSent] = useState(false);
 
+    // USER FORM DATA
+    const [userFormData, setUserFormData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        phone: "",
+    });
+
+    // DEALER FORM DATA
     const [dealerFormData, setDealerFormData] = useState({
         name: "",
         email: "",
@@ -60,13 +66,84 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
         established_year: '',
         logo: null,
     });
+
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    // OTHER DATA
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const [role, setRole] = useState("user"); // <-- "user" or "dealer"
+
     const [serviceInput, setServiceInput] = useState("");
     const [tagInput, setTagInput] = useState("");
 
+    const handleSendOtp = async () => {
+        const form = role === "user" ? userFormData : dealerFormData;
+
+        if (!form.email || !form.phone) {
+            toast.error("Please enter email and phone first.");
+            return;
+        }
+
+        try {
+            const res = await sendOtp({
+                email: form.email,
+                phone: form.phone,
+                role, // optional if backend needs role
+            });
+
+            if (res.status === "success") {
+                toast.success("OTP sent successfully!");
+                setOtpSent(true);
+            } else {
+                toast.error(res.message || "Failed to send OTP");
+            }
+        } catch (err) {
+            toast.error("Failed to send OTP");
+        }
+    };
+
+
+    const handleVerifyOtp = async () => {
+        if (!emailOtp || !phoneOtp) {
+            toast.error("Please enter both OTPs");
+            return;
+        }
+
+        // pick correct form data depending on role
+        const form = role === "dealer" ? dealerFormData : userFormData;
+
+        try {
+            const res = await verifyOtp({
+                email: form.email,
+                phone: form.phone,
+                emailOtp,
+                phoneOtp,
+            });
+
+            if (res.status === "success") {
+                setEmailVerified(true);
+                setPhoneVerified(true);
+                toast.success("OTP Verified");
+            } else {
+                toast.error(res.message);
+            }
+        } catch (err) {
+            toast.error("OTP verification failed");
+        }
+    };
+
     // Handle input change
     const handleChange = (e) => {
-        const {name, value} = e.target;
-        setDealerFormData((prev) => ({...prev, [name]: value}));
+        const { name, value } = e.target;
+
+        if (role === "dealer") {
+            setDealerFormData((prev) => ({ ...prev, [name]: value }));
+        } else {
+            setUserFormData((prev) => ({ ...prev, [name]: value }));
+        }
     };
 
     const handleChangeCountry = (e) => {
@@ -252,7 +329,7 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                         {role === "dealer" ?
                             (
                                 // dealer register
-                                <form onSubmit={handleSignUp} className="form-log">
+                                <form onSubmit={handleSignUp} className="form-log pb-3">
                                     <div className="form-content">
 
                                         {/* Dealer Name */}
@@ -567,35 +644,26 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                         {success && <p className="text-success mt-2">{success}</p>}
                                     </div>
 
-                                    <button type="submit" className="tf-btn w-100" disabled={loading}>
-                                        {loading ? "Registering..." : "Register Dealer"}
-                                    </button>
-
-                                    <p className="body-text-3 text-center">
-                                        Already have an account?
-                                        <span onClick={()=> {
-                                            setShowRegister(false)
-                                            setShowLogin(true)
-                                        }}
-                                              data-bs-toggle="modal" className="fw-bold ms-2 cs-pointer"
-                                        >
-                                            Sign in
-                                        </span>
-                                    </p>
+                                    { emailVerified && phoneVerified &&
+                                        <button type="submit" className="tf-btn w-100" disabled={loading}>
+                                            {loading ? "Registering..." : "Register Dealer"}
+                                        </button>
+                                    }
                                 </form>
                             )
                             :
                             (
                                 // user register
-                                <form onSubmit={handleSignUp} className="form-log">
+                                <form onSubmit={handleSignUp} className="form-log pb-3">
                                     <div className="form-content">
                                         <fieldset>
                                             <label className="fw-semibold body-md-2">Name *</label>
                                             <input
                                                 type="text"
                                                 placeholder="Your name"
-                                                value={name}
-                                                onChange={(e) => setName(e.target.value)}
+                                                name='name'
+                                                value={userFormData.name}
+                                                onChange={handleChange}
                                                 required
                                             />
                                         </fieldset>
@@ -605,8 +673,9 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                             <input
                                                 type="email"
                                                 placeholder="Your email"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
+                                                name='email'
+                                                value={userFormData.email}
+                                                onChange={handleChange}
                                                 required
                                             />
                                         </fieldset>
@@ -616,8 +685,9 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                             <input
                                                 type="password"
                                                 placeholder="Enter your password"
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
+                                                name='password'
+                                                value={userFormData.password}
+                                                onChange={handleChange}
                                                 required
                                             />
                                         </fieldset>
@@ -641,8 +711,9 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                             <input
                                                 type="text"
                                                 placeholder="Your phone number"
-                                                value={phone}
-                                                onChange={(e) => setPhone(e.target.value)}
+                                                name='phone'
+                                                value={userFormData.phone}
+                                                onChange={handleChange}
                                                 required
                                             />
                                         </fieldset>
@@ -651,32 +722,82 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                         {success && <p className="text-success">{success}</p>}
                                     </div>
 
-                                    <button type="submit" className="tf-btn w-100" disabled={loading}>
-                                        {loading ? "Signing up..." : "Sign Up"}
-                                    </button>
-
-                                    <p className="body-text-3 text-center">
-                                        Already have an account?
-                                        <span onClick={()=> {
-                                                            setShowRegister(false)
-                                                            setShowLogin(true)
-                                                        }}
-                                              data-bs-toggle="modal" className="fw-bold ms-2 cs-pointer"
-                                        >
-                                            Sign in
-                                        </span>
-                                    </p>
+                                    { emailVerified && phoneVerified &&
+                                        <button type="submit" className="tf-btn w-100" disabled={loading}>
+                                            {loading ? "Signing up..." : "Sign Up"}
+                                        </button>
+                                    }
                                 </form>
                             )
-
                         }
 
+                        {!otpSent && (
+                            <button
+                                type="button"
+                                className="tf-btn w-100 my-2"
+                                onClick={handleSendOtp}
+                            >
+                                Send Verification OTP
+                            </button>
+                        )}
+
+                        {/* OTP VERIFY DETAILS */}
+                        {otpSent && !emailVerified && (
+                            <fieldset>
+                                <label>Email OTP</label>
+                                <input
+                                    className="modern-input"
+                                    type="text"
+                                    placeholder="Enter email OTP"
+                                    value={emailOtp}
+                                    onChange={(e) => setEmailOtp(e.target.value)}
+                                />
+                            </fieldset>
+                        )}
+
+                        {otpSent && !phoneVerified && (
+                            <fieldset>
+                                <label>Phone OTP</label>
+                                <input
+                                    className="modern-input"
+                                    type="text"
+                                    placeholder="Enter phone OTP"
+                                    value={phoneOtp}
+                                    onChange={(e) => setPhoneOtp(e.target.value)}
+                                />
+                            </fieldset>
+                        )}
+
+                        {otpSent && (!emailVerified || !phoneVerified) && (
+                            <button
+                                type="button"
+                                className="tf-btn w-100 my-2"
+                                onClick={handleVerifyOtp}
+                            >
+                                Verify OTP
+                            </button>
+                        )}
+
+
+                        {/* ALREADY HAVE ACCOUNT ? */}
+                        <p className="body-text-3 text-center">
+                            Already have an account?
+                            <span onClick={()=> {
+                                setShowRegister(false)
+                                setShowLogin(true)
+                            }}
+                                  data-bs-toggle="modal" className="fw-bold ms-2 cs-pointer"
+                            >
+                                            Sign in
+                                        </span>
+                        </p>
 
                         <div className="orther-log text-center">
                             <span className="br-line bg-gray-5 my-3"/>
                             <p className="caption text-main-2">Or login with</p>
                         </div>
 
+                        {/* SOCIAL LOGIN */}
                         <ul className="list-log d-flex gap-1">
                             <li className='col'>
                                 <a href="#" className="tf-btn-primary btn-line w-100 social-btn">
