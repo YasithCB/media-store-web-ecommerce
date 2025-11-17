@@ -64,6 +64,8 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
         tags: [],
         services_starting_from: '',
         established_year: '',
+        license_no: '',
+        license_exp_date: '',
         logo: null,
     });
 
@@ -86,13 +88,13 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
             toast.error("Please enter email and phone first.");
             return;
         }
+        setLoading(true)
 
         try {
             const res = await sendOtp({
                 email: form.email,
                 phone: form.phone,
-                role, // optional if backend needs role
-            });
+            }, role);
 
             if (res.status === "success") {
                 toast.success("OTP sent successfully!");
@@ -101,14 +103,20 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                 toast.error(res.message || "Failed to send OTP");
             }
         } catch (err) {
-            toast.error("Failed to send OTP");
+            toast.error(err.message);
+        } finally {
+            setLoading(false);
         }
     };
 
 
     const handleVerifyOtp = async () => {
-        if (!emailOtp || !phoneOtp) {
-            toast.error("Please enter both OTPs");
+        // if (!emailOtp || !phoneOtp) {
+        //     toast.error("Please enter both OTPs");
+        //     return;
+        // }
+        if (!emailOtp) {
+            toast.error("Please enter OTP First");
             return;
         }
 
@@ -126,7 +134,7 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
             if (res.status === "success") {
                 setEmailVerified(true);
                 setPhoneVerified(true);
-                toast.success("OTP Verified");
+                toast.success("OTP Verified. Register Now!");
             } else {
                 toast.error(res.message);
             }
@@ -137,12 +145,12 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
 
     // Handle input change
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
 
         if (role === "dealer") {
-            setDealerFormData((prev) => ({ ...prev, [name]: value }));
+            setDealerFormData((prev) => ({...prev, [name]: value}));
         } else {
-            setUserFormData((prev) => ({ ...prev, [name]: value }));
+            setUserFormData((prev) => ({...prev, [name]: value}));
         }
     };
 
@@ -216,11 +224,15 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
         setError("");
         setSuccess("");
 
-        if (password !== confirmPassword) {
-            toast.error("Passwords do not match");
+        if (role === 'dealer') {
+            if (dealerFormData.password !== confirmPassword) {
+                toast.error("Passwords do not match");
+            }
+        }else if (role === 'user') {
+            if (userFormData.password !== confirmPassword) {
+                toast.error("Passwords do not match");
+            }
         }
-
-        dealerFormData.password = password;
 
         try {
             let res;
@@ -242,17 +254,17 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
 
                 res = await createDealer(dealerFormData);
             } else {
-                res = await signup({name, email, phone, password});
+                res = await signup({
+                    name: userFormData.name,
+                    email: userFormData.email,
+                    phone: userFormData.phone,
+                    password: userFormData.password
+                });
             }
 
+            setConfirmPassword('')
             if (res.status === 'success') {
                 // show message instead of auto-login
-                setName("");
-                setEmail("");
-                setPassword("");
-                setPhone("");
-                setConfirmPassword('')
-
                 toast.success('Registration successful! You can now log in')
 
                 setDealerFormData({
@@ -275,7 +287,15 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                     tags: [],
                     services_starting_from: '',
                     established_year: '',
+                    license_no: '',
+                    license_exp_date: '',
                     logo: null,
+                })
+                setUserFormData({
+                        name: "",
+                        email: "",
+                        password: "",
+                        phone: "",
                 })
 
             } else {
@@ -292,7 +312,7 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
     return (
         <div
             className="modal fade show modalCentered"
-            style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
+            style={{display: "block", backgroundColor: "rgba(0,0,0,0.5)"}}
             onClick={() => setShowRegister(false)}
         >
             <div
@@ -303,7 +323,7 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                       <span
                           className="icon icon-close btn-hide-popup"
                           onClick={() => setShowRegister(false)}
-                          style={{ cursor: "pointer", position: "absolute", top: 10, right: 10 }}
+                          style={{cursor: "pointer", position: "absolute", top: 10, right: 10}}
                       />
                     <div className="modal-log-wrap list-file-delete">
                         <h5 className="title fw-semibold mb-4 text-uppercase">Sign Up</h5>
@@ -402,8 +422,8 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                                 type="password"
                                                 placeholder="Enter password"
                                                 name="password"
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
+                                                value={dealerFormData.password}
+                                                onChange={handleChange}
                                                 required
                                             />
                                         </fieldset>
@@ -560,7 +580,7 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                                 className="form-control modern-input"
                                                 placeholder="Type a service and press Enter"
                                                 value={serviceInput}
-                                                onChange={ (e)=>
+                                                onChange={(e) =>
                                                     setServiceInput(e.target.value)
                                                 }
                                                 onKeyDown={handleServiceKeyDown}
@@ -591,7 +611,7 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                                 className="form-control modern-input"
                                                 placeholder="Type a keywords and press Enter"
                                                 value={tagInput}
-                                                onChange={ (e)=>
+                                                onChange={(e) =>
                                                     setTagInput(e.target.value)
                                                 }
                                                 onKeyDown={handleTagKeyDown}
@@ -616,7 +636,8 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
 
                                         {/* SERVICES_STARTING_FROM */}
                                         <fieldset>
-                                            <label className="fw-semibold body-md-2">Services Starting From (AED)</label>
+                                            <label className="fw-semibold body-md-2">Services Starting From
+                                                (AED)</label>
                                             <input
                                                 className='modern-input'
                                                 type="number"
@@ -640,11 +661,37 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                             />
                                         </fieldset>
 
+                                        {/* LICENSE NO */}
+                                        <fieldset>
+                                            <label className="fw-semibold body-md-2">License Number</label>
+                                            <input
+                                                className='modern-input'
+                                                type="number"
+                                                placeholder="Enter License"
+                                                name="license_no"
+                                                value={dealerFormData.license_no}
+                                                onChange={handleChange}
+                                            />
+                                        </fieldset>
+
+                                        {/* LICENSE EXP DATE */}
+                                        <fieldset>
+                                            <label className="fw-semibold body-md-2">License Exp Date</label>
+                                            <input
+                                                className="modern-input"
+                                                type="date"
+                                                name="license_exp_date"
+                                                min={new Date().toISOString().split("T")[0]}   // <-- prevents past dates
+                                                value={dealerFormData.license_exp_date}
+                                                onChange={handleChange}
+                                            />
+                                        </fieldset>
+
                                         {error && <p className="text-danger mt-2">{error}</p>}
                                         {success && <p className="text-success mt-2">{success}</p>}
                                     </div>
 
-                                    { emailVerified && phoneVerified &&
+                                    {emailVerified && phoneVerified &&
                                         <button type="submit" className="tf-btn w-100" disabled={loading}>
                                             {loading ? "Registering..." : "Register Dealer"}
                                         </button>
@@ -722,7 +769,7 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                         {success && <p className="text-success">{success}</p>}
                                     </div>
 
-                                    { emailVerified && phoneVerified &&
+                                    {emailVerified && phoneVerified &&
                                         <button type="submit" className="tf-btn w-100" disabled={loading}>
                                             {loading ? "Signing up..." : "Sign Up"}
                                         </button>
@@ -737,36 +784,44 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                                 className="tf-btn w-100 my-2"
                                 onClick={handleSendOtp}
                             >
-                                Send Verification OTP
+                                {loading ? 'Sending.. Please Wait!' : 'Send Verification OTP'}
                             </button>
                         )}
 
-                        {/* OTP VERIFY DETAILS */}
+                        {/* VERIFICATION DETAILS */}
+                        {otpSent && !emailVerified &&
+                            <h6 className='text-center text-uppercase fw-bold my-3'>Verify Your Contact Data</h6>
+                        }
+
+                        {/* EMAIL OTP */}
                         {otpSent && !emailVerified && (
-                            <fieldset>
-                                <label>Email OTP</label>
+                            <fieldset className='d-flex flex-column gap-1 mb-2'>
+                                <label className="fw-semibold body-md-2">Email OTP</label>
                                 <input
-                                    className="modern-input"
-                                    type="text"
+                                    className='modern-input'
+                                    type="number"
                                     placeholder="Enter email OTP"
+                                    name="emailOtp"
                                     value={emailOtp}
                                     onChange={(e) => setEmailOtp(e.target.value)}
                                 />
                             </fieldset>
                         )}
 
-                        {otpSent && !phoneVerified && (
-                            <fieldset>
-                                <label>Phone OTP</label>
-                                <input
-                                    className="modern-input"
-                                    type="text"
-                                    placeholder="Enter phone OTP"
-                                    value={phoneOtp}
-                                    onChange={(e) => setPhoneOtp(e.target.value)}
-                                />
-                            </fieldset>
-                        )}
+                        {/* PHONE OTP */}
+                        {/*{otpSent && !phoneVerified && (*/}
+                        {/*    <fieldset className='d-flex flex-column gap-1'>*/}
+                        {/*        <label className="fw-semibold body-md-2">Phone OTP</label>*/}
+                        {/*        <input*/}
+                        {/*            className='modern-input'*/}
+                        {/*            type="number"*/}
+                        {/*            placeholder="Enter Phone OTP"*/}
+                        {/*            name="phoneOtp"*/}
+                        {/*            value={phoneOtp}*/}
+                        {/*            onChange={(e) => setPhoneOtp(e.target.value)}*/}
+                        {/*        />*/}
+                        {/*    </fieldset>*/}
+                        {/*)}*/}
 
                         {otpSent && (!emailVerified || !phoneVerified) && (
                             <button
@@ -782,7 +837,7 @@ export default function RegisterModal({setShowRegister, setShowLogin}) {
                         {/* ALREADY HAVE ACCOUNT ? */}
                         <p className="body-text-3 text-center">
                             Already have an account?
-                            <span onClick={()=> {
+                            <span onClick={() => {
                                 setShowRegister(false)
                                 setShowLogin(true)
                             }}

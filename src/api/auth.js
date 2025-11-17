@@ -36,8 +36,8 @@ export function resetPassword(data, role) {
 }
 
 // send OTP
-export function sendOtp(data) {
-    return fetchWrapper(`/auth/send-otp`, {
+export function sendOtp(data, role) {
+    return fetchWrapper(`/auth/send-otp/${role}`, {
         method: "POST",
         body: JSON.stringify(data),
     });
