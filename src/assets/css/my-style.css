@@ -75,6 +75,15 @@
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
 }
+.hover-card img {
+    transition: transform 0.3s ease; /* smooth scaling */
+}
+.hover-card:hover img {
+    transform: scale(1.075);
+    cursor: pointer;
+}
+
+
 
 /* Label */
 .custom-check .form-check-label {

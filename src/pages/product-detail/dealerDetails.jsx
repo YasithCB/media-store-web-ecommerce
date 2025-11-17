@@ -1,7 +1,5 @@
 import BrandsSlider from "@/components/common/BrandsSlider";
 import Footer1 from "@/components/footers/Footer1";
-import Header4 from "@/components/headers/Header4";
-import Description from "@/components/product-detail/Description";
 import Details8 from "@/components/product-detail/Details8";
 import RelatedProducts from "@/components/product-detail/Relatedproducts";
 import React from "react";
@@ -9,6 +7,8 @@ import {Link, useParams} from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import {useDealerById} from "@/hooks/useDealers.js";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
+import Header2 from "@/components/headers/Header2.jsx";
+import Topbar1 from "@/components/headers/Topbar1.jsx";
 
 const metadata = {
     title: "Product Details || MediaStore - MultiMedia eCommerce Website",
@@ -24,7 +24,8 @@ export default function DealerDetails() {
     return (
         <>
             <MetaComponent meta={metadata} />
-            <Header4 />
+            <Topbar1 parentClass="tf-topbar" />
+            <Header2 />
             <div className="tf-sp-1">
                 <div className="container">
                     <ul className="breakcrumbs">

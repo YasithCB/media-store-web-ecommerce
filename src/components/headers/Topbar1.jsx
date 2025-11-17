@@ -287,25 +287,6 @@ export default function Topbar1({parentClass = "tf-topbar line-bt"}) {
                                                         </p>
                                                     </form>
 
-                                                    <div className="orther-log text-center">
-                                                        <span className="br-line bg-gray-5 my-3" />
-                                                        <p className="caption text-main-2">Or login with</p>
-                                                    </div>
-
-                                                    <ul className="list-log d-flex gap-1">
-                                                        <li className='col'>
-                                                            <a href="#" className="tf-btn-primary btn-line w-100 social-btn">
-                                                                <img src={facebookIcon} alt="Facebook" style={{ width: 20, height: 20 }} />
-                                                                <span className="body-md-2 fw-semibold ms-2">Facebook</span>
-                                                            </a>
-                                                        </li>
-                                                        <li className='col'>
-                                                            <a href="#" className="tf-btn-primary btn-line w-100 social-btn">
-                                                                <img src={googleIcon} alt="Google" style={{ width: 20, height: 20 }} />
-                                                                <span className="body-md-2 fw-semibold ms-2">Google</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>

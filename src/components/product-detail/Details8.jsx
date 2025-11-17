@@ -13,13 +13,13 @@ export default function Details8({postDetails}) {
                             {/* Product Image */}
                             <div className="tf-product-media-wrap thumbs-default sticky-top">
                                 <div className="thumbs-slider">
-                                    <Slider8 imgList={postDetails.photos}/>
+                                    <Slider8 imgList={[postDetails.logo]}/>
                                 </div>
                             </div>
                             {/* /Product Image */}
                         </div>
                         <div className="col-md-6">
-                            {/* Product Infor */}
+                            {/* Product Info */}
                             <div className="tf-product-info-wrap position-relative">
                                 <div className="tf-zoom-main"/>
                                 <div className="tf-product-info-list other-image-zoom flex-xxl-nowrap">
