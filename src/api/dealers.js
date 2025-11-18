@@ -70,5 +70,19 @@ export const getDealerByName = async (name) => {
     return fetchWrapper(`/dealer/name/${name}`);
 };
 
+export const getOrdersByDealer = async (dealerId) => {
+    return fetchWrapper(`/dealer/orders-received/${dealerId}`);
+};
+
+export const markOrderReady = async (orderId) => {
+    return fetchWrapper(`/dealer/orders-received/ready/${orderId}`);
+};
+export const markOrderShipped = async (orderId) => {
+    return fetchWrapper(`/dealer/orders-received/shipped/${orderId}`);
+};
+export const markOrderDelivered = async (orderId) => {
+    return fetchWrapper(`/dealer/orders-received/delivered/${orderId}`);
+};
+
 export const getOnSaleDealers = async () =>
     fetchWrapper("/dealer/on-sale");

@@ -1,9 +1,51 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Slider8 from "./sliders/Slider8";
 import {Link} from "react-router-dom";
 import {Truck} from "lucide-react";
+import {useContextElement} from "@/context/Context.jsx";
+import {toast} from "react-toastify";
+import {addToCartAPI} from "@/api/cart.js";
 
 export default function Details8({postDetails}) {
+    const { addProductToCart, fetchCartFromDB, currentUser } = useContextElement();
+    const productId = postDetails.id;
+
+    const handleToggleCart = async () => {
+        if (!currentUser) return toast.info("Please log in first.");
+
+        try {
+            const res = await addToCartAPI(currentUser.id, productId, postDetails.category_title);
+            if (res) {
+                addProductToCart(productId); // update context state
+            }
+            await fetchCartFromDB(); // refresh cart from backend
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const decidePrice = () => {
+        if (!postDetails) return "";
+
+        switch (postDetails.category_id) {
+            case 1:
+                // return sale_price if exists, else price
+                return `${postDetails.sale_price ?? postDetails.price} AED`;
+
+            case 2:
+                return `${postDetails.salary} AED`;
+
+            case 3:
+                return `${postDetails.services_starting_from} AED`;
+
+            case 4:
+                return `${postDetails.price} AED/Hour`;
+
+            default:
+                return "N/A";
+        }
+    };
+
     return (
         <section>
             <div className="tf-main-product section-image-zoom mb-5 pb-5">
@@ -13,7 +55,7 @@ export default function Details8({postDetails}) {
                             {/* Product Image */}
                             <div className="tf-product-media-wrap thumbs-default sticky-top">
                                 <div className="thumbs-slider">
-                                    <Slider8 imgList={[postDetails.logo]}/>
+                                    <Slider8 imgList={postDetails.category_id === 1 || postDetails.category_id === 4 ? postDetails.photos : [postDetails.logo]}/>
                                 </div>
                             </div>
                             {/* /Product Image */}
@@ -102,7 +144,7 @@ export default function Details8({postDetails}) {
                                         <div className="infor-center">
                                             <div>
                                                 <div className="product-info-price">
-                                                    <h4 className="text-third">{postDetails.price} AED</h4>
+                                                    <h4 className="text-third">{decidePrice().toString()}</h4>
                                                 </div>
                                             </div>
                                             <ul className="product-fearture-list">
@@ -185,17 +227,18 @@ export default function Details8({postDetails}) {
                                         </div>
 
                                         <div className="product-box-btn">
-                                            <a
-                                                href="#shoppingCart"
+                                            <div
+                                                onClick={handleToggleCart}
                                                 data-bs-toggle="offcanvas"
-                                                className="tf-btn-primary"
+                                                className="tf-btn-primary cs-pointer"
                                             >
                                                 Add to cart
                                                 <i className="icon-cart-2"/>
-                                            </a>
+                                            </div>
                                             <Link
                                                 to={`/shop-cart`}
                                                 className="tf-btn-dark"
+                                                onClick={handleToggleCart}
                                             >
                                                 Buy now
                                             </Link>

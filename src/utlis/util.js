@@ -53,5 +53,39 @@ export const addRecentlyViewed = (product) => {
     localStorage.setItem("media_store_recentlyViewed", JSON.stringify(products));
 };
 
+export function formatDateTime(dateString) {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+
+    return date.toLocaleString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+    });
+}
+
+export const getStatusBadge = (status) => {
+    const normalized = status?.toUpperCase();
+
+    switch (normalized) {
+        case "PENDING":
+            return { bg: "rgba(255,165,0,0.15)", color: "#FF9500" }; // orange
+        case "READY":
+            return { bg: "rgba(255,220,0,0.15)", color: "#E7B100" }; // yellow
+        case "SHIPPED":
+            return { bg: "rgba(0,122,255,0.15)", color: "#007AFF" }; // blue
+        case "DELIVERED":
+            return { bg: "rgba(52,199,89,0.15)", color: "#34C759" }; // green
+        default:
+            return { bg: "rgba(128,128,128,0.15)", color: "#808080" }; // fallback grey
+    }
+};
+
+
+
 
 

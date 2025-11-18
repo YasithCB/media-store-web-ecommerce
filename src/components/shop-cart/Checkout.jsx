@@ -142,7 +142,7 @@ export function Checkout() {
             await window.CardSDK.tokenize();
 
             // ⏳ wait for 1 second before createCharge
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await new Promise(resolve => setTimeout(resolve, 8500));
 
             // now safely use tokenResponse.id
             const createChargeResp = await createCharge({
@@ -342,7 +342,7 @@ export function Checkout() {
                                         disabled={loading}
                                     >
                                         <span className="text-white">
-                                          {loading ? "Processing..." : "Place Order & Pay"}
+                                          {loading ? "Processing...Please Wait" : "Place Order & Pay"}
                                         </span>
                                     </button>
                                 </div>

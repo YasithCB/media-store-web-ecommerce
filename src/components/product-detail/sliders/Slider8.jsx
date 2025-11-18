@@ -9,9 +9,9 @@ export default function Slider8({imgList}) {
   const [swiperThumb, setSwiperThumb] = useState(null);
   const lightboxRef = useRef(null);
 
-    const list = typeof imgList === "string" ? JSON.parse(imgList) : imgList;
+  const list = typeof imgList === "string" ? JSON.parse(imgList) : imgList;
 
-    useEffect(() => {
+  useEffect(() => {
     // Initialize PhotoSwipeLightbox
     const lightbox = new PhotoSwipeLightbox({
       gallery: "#gallery-swiper-started",

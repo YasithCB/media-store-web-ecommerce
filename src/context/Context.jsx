@@ -34,6 +34,7 @@ export default function Context({children}) {
     // 👤 AUTH STATE
     const [currentUser, setCurrentUser] = useState(null);
     const [authToken, setAuthToken] = useState(null);
+    const [userRole, setUserRole] = useState(null);
 
     // MY ORDERS
     const [myOrders, setMyOrders] = useState([]);
@@ -277,9 +278,11 @@ export default function Context({children}) {
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("media_store_user"));
         const token = localStorage.getItem("media_store_auth_token");
+        const userRole = localStorage.getItem("media_store_user_role");
         if (user && token) {
             setCurrentUser(user);
             setAuthToken(token);
+            setUserRole(userRole);
         }
     }, []);
 
@@ -288,8 +291,10 @@ export default function Context({children}) {
         if (currentUser && authToken) {
             localStorage.setItem("media_store_user", JSON.stringify(currentUser));
             localStorage.setItem("media_store_auth_token", authToken);
+            localStorage.setItem("media_store_user_role", userRole);
         } else {
             localStorage.removeItem("media_store_user");
+            localStorage.removeItem("media_store_user_role");
             localStorage.removeItem("media_store_auth_token");
             localStorage.removeItem("media_store_wishlist");
             localStorage.removeItem("media_store_cartList");
@@ -299,6 +304,7 @@ export default function Context({children}) {
     const logout = () => {
         setCurrentUser(null);
         setAuthToken(null);
+        setUserRole('user');
     };
 
     // Combine all context data
@@ -348,6 +354,8 @@ export default function Context({children}) {
         // 👤 Auth
         currentUser,
         setCurrentUser,
+        userRole,
+        setUserRole,
         authToken,
         setAuthToken,
         logout,

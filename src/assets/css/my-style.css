@@ -281,3 +281,35 @@
     }
 }
 /* NAVBAR --------------------------------------------------------------------------------------------------- */
+
+/* CALL NOW BUTTON --------------------------------------------------------------------------------------------------- */
+.call-now-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 14px 18px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: pulse 1.6s infinite;
+    transition: transform 0.2s ease-in-out;
+    z-index: 9999;
+}
+
+.call-now-btn:hover {
+    transform: scale(1.05);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.07); }
+    100% { transform: scale(1); }
+}
+/* CALL NOW BUTTON --------------------------------------------------------------------------------------------------- */
+

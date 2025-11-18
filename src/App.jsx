@@ -52,6 +52,9 @@ import {SmartToastContainer} from "@/components/custom/ToastContainer.jsx";
 import MyOrdersPage from "@/pages/MyOrdersPage.jsx";
 import MyPostPage from "@/pages/MyPostsPage.jsx";
 import EditPostPage from "@/pages/EditPostPage.jsx";
+import DealerOrders from "@/components/dealer/DealerOrders.jsx";
+import DealerOrdersPage from "@/pages/dealer/DealerOrdersPage.jsx";
+import CallNowButton from "@/components/custom/CallNowButton.jsx";
 
 function App() {
   const { pathname } = useLocation();
@@ -176,6 +179,7 @@ function App() {
               <Route path="wishlist" element={<WishlistPage />} />
               <Route path="my-orders" element={<MyOrdersPage />} />
               <Route path="my-posts" element={<MyPostPage />} />
+              <Route path="dealer-orders" element={<DealerOrdersPage />} />
               <Route path="edit-post/:id" element={<EditPostPage />} />
               <Route path="checkout" element={<CheckoutPage />} />
               <Route path="add-post" element={<AddPostPage />} />
@@ -246,6 +250,7 @@ function App() {
           <NewsLetter />
           <AddParallax />
           <ScrollTopBehaviour />
+          <CallNowButton/>
         </Context>
       </div>
     </>

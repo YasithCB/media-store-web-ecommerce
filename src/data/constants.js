@@ -1,4 +1,6 @@
 
+export const CONTACT_CALL = '026350660'
+
 // Define categories and subcategories
 export const CATEGORIES_LIST = [
     {

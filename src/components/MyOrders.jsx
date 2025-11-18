@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useContextElement } from "@/context/Context";
-import { getImageUrl } from "@/utlis/util.js";
+import {getImageUrl, getStatusBadge} from "@/utlis/util.js";
 import LoadingDots from "@/components/custom/loadingDots.jsx";
 
 export default function MyOrders() {
@@ -121,11 +121,10 @@ export default function MyOrders() {
                                     </td>
                                     <td className="wishlist-item_price">
                                         <p className="price-wrap fw-medium flex-nowrap">
-                                            <span className="new-price price-text fw-medium mb-0">
+                                            <span className="fw-semibold mb-0">
                                               {item.product?.price != null && !isNaN(item.product?.price)
                                                   ? parseFloat(item.product.price).toFixed(2)
-                                                  : "N/A"}{" "}
-                                                AED
+                                                  : "N/A"}AED
                                             </span>
                                         </p>
                                     </td>
@@ -138,18 +137,28 @@ export default function MyOrders() {
                                     <td className="wishlist-item_stock">
                                         <span>{item.order_id}</span>
                                     </td>
-                                    <td className="wishlist-item_stock">
-                      <span
-                          className={`order-status ${
-                              item.status === "CAPTURED"
-                                  ? "text-success"
-                                  : item.status === "FAILED"
-                                      ? "text-danger"
-                                      : "text-warning"
-                          }`}
-                      >
-                        {item.status}
-                      </span>
+
+                                    {/* STATUS */}
+                                    <td className="wishlist-item_info">
+                                        {(() => {
+                                            const badge = getStatusBadge(item.order_status);
+                                            return (
+                                                <span
+                                                    style={{
+                                                        backgroundColor: badge.bg,
+                                                        color: badge.color,
+                                                        padding: "6px 14px",
+                                                        borderRadius: "12px",
+                                                        fontSize: "0.85rem",
+                                                        fontWeight: 600,
+                                                        display: "inline-block",
+                                                        textTransform: "capitalize"
+                                                    }}
+                                                >
+                                                    {item.order_status.replace(/_/g, " ")}
+                                                </span>
+                                            );
+                                        })()}
                                     </td>
                                 </tr>
                             ))}

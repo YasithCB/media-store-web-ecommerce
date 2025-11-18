@@ -11,7 +11,7 @@ import {login} from "@/api/auth.js";
 import RegisterModal from "@/components/modals/RegisterModal.jsx";
 
 export default function Topbar1({parentClass = "tf-topbar line-bt"}) {
-    const { currentUser,logout , setCurrentUser, setAuthToken} = useContextElement();
+    const { currentUser,logout , setCurrentUser, setAuthToken, userRole, setUserRole} = useContextElement();
 
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
@@ -47,10 +47,12 @@ export default function Topbar1({parentClass = "tf-topbar line-bt"}) {
                 // Store user object / token
                 localStorage.setItem("media_store_user", JSON.stringify(res['data']['user']));
                 localStorage.setItem("media_store_auth_token", res['data']['token']);
+                localStorage.setItem("media_store_user_role", res['data']['role']);
 
                 // ✅ set global values
                 setCurrentUser(res['data']['user']); // keep it as an object
                 setAuthToken(res['data']['token']);
+                setUserRole(res['data']['role']);
 
                 // Reload home page
                 window.location.href = "/";
@@ -111,12 +113,15 @@ export default function Topbar1({parentClass = "tf-topbar line-bt"}) {
                                         </div>
                                     </div>
 
-                                    <div className="tf-cur-item tf-currencies gap-0 cs-pointer" onClick={() => navigate("/my-orders")}>
-                                        <i className="fa-solid fa-bag-shopping text-cl-2 me-2"></i>
-                                        <div className="tf-curs">
-                                            <span className='body-small text-cl-2 hover-shine'>My Orders</span>
+                                    { userRole === "user" &&
+                                        <div className="tf-cur-item tf-currencies gap-0 cs-pointer"
+                                             onClick={() => navigate("/my-orders")}>
+                                            <i className="fa-solid fa-bag-shopping text-cl-2 me-2"></i>
+                                            <div className="tf-curs">
+                                                <span className='body-small text-cl-2 hover-shine'>My Orders</span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
 
                                     {/* MY PROFILE */}
                                     <div className="cs-pointer text-white d-flex gap-1 align-items-center hover-shine" onClick={() => navigate("/my-account")}>
